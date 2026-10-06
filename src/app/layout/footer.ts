@@ -14,7 +14,7 @@ import { Logo } from '../shared/logo';
       <div class="footer__brand">
         <app-logo [size]="44" [tile]="true" />
         <div>
-          <p class="footer__name">Amir Mohammad Iravani</p>
+          <p class="footer__name" translate="no">Amir Mohammad Iravani</p>
           <p class="footer__built">{{ ui.built }}</p>
         </div>
       </div>

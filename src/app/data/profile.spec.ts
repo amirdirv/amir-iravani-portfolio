@@ -32,7 +32,7 @@ describe('profile data', () => {
     const starts = EXPERIENCES.map((e) => e.start);
     expect([...starts].sort().reverse()).toEqual(starts);
     for (const e of EXPERIENCES) if (e.end) expect(e.end >= e.start, e.id).toBe(true);
-    expect(EXPERIENCES.filter((e) => !e.end).length).toBe(1);
+    expect(EXPERIENCES.filter((e) => !e.end).length).toBeGreaterThanOrEqual(1);
   });
 
   it('translates every role, summary and highlight list into all languages', () => {

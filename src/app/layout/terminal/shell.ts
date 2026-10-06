@@ -113,7 +113,11 @@ export function runShell(input: string, ctx: Context): ShellResult {
           out('# about.md', 'accent'),
           out('Started with game loops at 15 in Tehran → intern → CTO → agency co-founder'),
           out('→ sole front-end engineer of a B2B marketplace in Turin → startup MVPs at BIU.'),
-          out('MSc Computer Engineering @ Politecnico di Torino. Italian work permit, full-time.'),
+          out('Master’s studies in Computer Engineering @ Politecnico di Torino (2022–25).'),
+          out(
+            'Now: Digital Horizons IT programme @ ENAIP Piemonte. Italian work permit, full-time.',
+          ),
+          out('Activism: Associazione DIAR · Lion & Sun Front – Italy.'),
         ],
       };
 

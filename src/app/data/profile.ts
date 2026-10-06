@@ -71,6 +71,48 @@ export const SKILLS: readonly Skill[] = [
 /** Newest first. Dates and facts come from the Europass CV. */
 export const EXPERIENCES: readonly Experience[] = [
   {
+    id: 'digital-horizons',
+    company: 'ENAIP Piemonte · Digital Horizons',
+    companyUrl:
+      'https://www.enaip.piemonte.it/mod/Notizie/page/coesione_sociale/dettaglioNotizia/DIGITAL-HORIZONS__18889__144.html',
+    branch: 'turin',
+    start: '2026-09',
+    role: {
+      en: 'IT Trainee',
+      it: 'Allievo IT',
+      fa: 'کارآموز فناوری اطلاعات',
+    },
+    kind: {
+      en: 'Training & work contract',
+      it: 'Formazione e contratto di lavoro',
+      fa: 'دورهٔ آموزشی و قرارداد کاری',
+    },
+    city: { en: 'Turin, Italy', it: 'Torino, Italia', fa: 'تورین، ایتالیا' },
+    summary: {
+      en: 'Selected for Digital Horizons, a European IT training and job-placement programme run by International Rescue Committee Italia with ENAIP Piemonte, Powercoders and Agenzia Piemonte Lavoro, funded by the Villum Foundation (European VET 2024).',
+      it: 'Selezionato per Digital Horizons, programma europeo di formazione IT e inserimento lavorativo promosso da International Rescue Committee Italia con ENAIP Piemonte, Powercoders e Agenzia Piemonte Lavoro, finanziato dalla Fondazione Villum (European VET 2024).',
+      fa: 'پذیرفته‌شده در Digital Horizons، برنامهٔ اروپایی آموزش فناوری اطلاعات و اشتغال که International Rescue Committee ایتالیا با همکاری ENAIP پیه‌مونته، Powercoders و آژانس کار پیه‌مونته اجرا می‌کند و بنیاد Villum (برنامهٔ European VET 2024) تأمین مالی آن را بر عهده دارد.',
+    },
+    highlights: {
+      en: [
+        'Full-time intensive course at ENAIP Turin (via del Ridotto): five hours a day, Monday to Friday, September 2026 – spring 2027.',
+        'IT skills shaped around what Piedmont’s tech companies hire for, taught with Powercoders’ industry-led method.',
+        'Leads into a paid placement with an IT company in Piedmont.',
+      ],
+      it: [
+        'Corso intensivo full-time presso ENAIP Torino (via del Ridotto): cinque ore al giorno, dal lunedì al venerdì, da settembre 2026 alla primavera 2027.',
+        'Competenze IT costruite su ciò che cercano le aziende tech piemontesi, con il metodo Powercoders guidato dalle aziende.',
+        'Prosegue con un tirocinio retribuito in un’azienda IT del Piemonte.',
+      ],
+      fa: [
+        'دورهٔ فشردهٔ تمام‌وقت در ENAIP تورین (خیابان دل ریدوتو): روزی پنج ساعت، دوشنبه تا جمعه، از سپتامبر ۲۰۲۶ تا بهار ۲۰۲۷.',
+        'مهارت‌های فناوری اطلاعات متناسب با نیاز شرکت‌های فناوری پیه‌مونته، با روش صنعت‌محور Powercoders.',
+        'ادامهٔ مسیر با کارآموزی حقوق‌دار در یک شرکت فناوری اطلاعات در پیه‌مونته.',
+      ],
+    },
+    stack: ['javascript', 'typescript', 'html-css', 'git'],
+  },
+  {
     id: 'biu',
     company: 'Build It Up (BIU)',
     branch: 'turin',
@@ -347,12 +389,36 @@ export const PROJECTS: readonly Project[] = [
       fa: 'سکوی خبری مشارکتی با یک تحریریهٔ هوش مصنوعی که هرگز نمی‌خوابد.',
     },
     description: {
-      en: 'Persian-first, ten-language news site where readers submit, vote and discuss links while an autonomous agent drafts stories from 20 sources for human editors to approve from an installable PWA with push notifications. Built from zero: auth and roles, moderation, structured-data SEO, sitemaps and IndexNow.',
-      it: 'Sito di notizie in dieci lingue, con il persiano come lingua principale: i lettori propongono, votano e commentano link, mentre un agente autonomo scrive bozze da 20 fonti che gli editor approvano da una PWA installabile con notifiche push. Costruito da zero: autenticazione e ruoli, moderazione, SEO con dati strutturati, sitemap e IndexNow.',
-      fa: 'سایت خبری ده‌زبانه با محوریت فارسی؛ کاربران لینک ارسال می‌کنند، رأی می‌دهند و گفت‌وگو می‌کنند و یک عامل خودکار از ۲۰ منبع پیش‌نویس خبر می‌نویسد تا سردبیران از طریق یک PWA قابل‌نصب با اعلان پوش تأییدش کنند. ساخته‌شده از صفر: احراز هویت و نقش‌ها، مدیریت محتوا، سئو با دادهٔ ساختاریافته، سایت‌مپ و IndexNow.',
+      en: 'The news outlet of Associazione DIAR. Persian-first, ten-language news site where readers submit, vote and discuss links while an autonomous agent drafts stories from 20 sources for human editors to approve from an installable PWA with push notifications. Built from zero: auth and roles, moderation, structured-data SEO, sitemaps and IndexNow.',
+      it: 'La testata dell’Associazione DIAR. Sito di notizie in dieci lingue, con il persiano come lingua principale: i lettori propongono, votano e commentano link, mentre un agente autonomo scrive bozze da 20 fonti che gli editor approvano da una PWA installabile con notifiche push. Costruito da zero: autenticazione e ruoli, moderazione, SEO con dati strutturati, sitemap e IndexNow.',
+      fa: 'رسانهٔ خبری انجمن دیار. سایت خبری ده‌زبانه با محوریت فارسی؛ کاربران لینک ارسال می‌کنند، رأی می‌دهند و گفت‌وگو می‌کنند و یک عامل خودکار از ۲۰ منبع پیش‌نویس خبر می‌نویسد تا سردبیران از طریق یک PWA قابل‌نصب با اعلان پوش تأییدش کنند. ساخته‌شده از صفر: احراز هویت و نقش‌ها، مدیریت محتوا، سئو با دادهٔ ساختاریافته، سایت‌مپ و IndexNow.',
     },
     role: { en: 'Full-stack · solo', it: 'Full-stack · in autonomia', fa: 'فول‌استک · انفرادی' },
     stack: ['nextjs', 'react', 'typescript', 'node', 'sql'],
+  },
+  {
+    id: 'gharamatgate',
+    name: 'Gharamatgate',
+    year: '2025',
+    featured: true,
+    url: 'https://www.gharamatgate.com',
+    palette: ['#8B1E1E', '#C9A227'],
+    tagline: {
+      en: 'An open investigative archive of the Iran–US compensation cases.',
+      it: 'Un archivio investigativo aperto sui casi di risarcimento tra Iran e Stati Uniti.',
+      fa: 'آرشیو تحقیقی و آزاد پرونده‌های غرامت میان ایران و آمریکا.',
+    },
+    description: {
+      en: 'Persian-language research database that documents lawsuits, US court judgments and compensation payments involving the Islamic Republic — from the 1979 embassy hostage crisis and the Algiers Accords to today’s claims worth tens of billions of dollars. Searchable case files, topic categories and filters by person, year and organisation; independent and non-profit.',
+      it: 'Database di ricerca in persiano che documenta cause, sentenze dei tribunali statunitensi e risarcimenti che coinvolgono la Repubblica Islamica: dalla crisi degli ostaggi del 1979 e dagli Accordi di Algeri fino alle richieste odierne da decine di miliardi di dollari. Fascicoli consultabili, categorie tematiche e filtri per persona, anno e organizzazione; progetto indipendente e non-profit.',
+      fa: 'پایگاه دادهٔ پژوهشی فارسی که دعاوی، احکام دادگاه‌های آمریکا و پرداخت‌های غرامت مربوط به جمهوری اسلامی را مستند می‌کند؛ از گروگان‌گیری سفارت در ۱۹۷۹ و بیانیهٔ الجزایر تا ادعاهای امروزی به ارزش ده‌ها میلیارد دلار. پرونده‌های قابل جست‌وجو، دسته‌بندی موضوعی و فیلتر بر اساس فرد، سال و نهاد؛ مستقل و غیرانتفاعی.',
+    },
+    role: {
+      en: 'Site admin · developer · contributing writer',
+      it: 'Amministratore · sviluppatore · autore',
+      fa: 'مدیر سایت · برنامه‌نویس و توسعه‌دهنده · نویسنده',
+    },
+    stack: ['php', 'javascript', 'html-css', 'sql', 'ux'],
   },
   {
     id: 'tulero',
@@ -462,9 +528,9 @@ export const EDUCATION: readonly Education[] = [
   {
     id: 'polito',
     degree: {
-      en: 'MSc, Computer Engineering',
-      it: 'Laurea Magistrale in Ingegneria Informatica',
-      fa: 'کارشناسی ارشد مهندسی کامپیوتر',
+      en: 'Master’s studies in Computer Engineering',
+      it: 'Studi magistrali in Ingegneria Informatica',
+      fa: 'دورهٔ کارشناسی ارشد مهندسی کامپیوتر',
     },
     school: {
       en: 'Politecnico di Torino',
@@ -473,6 +539,7 @@ export const EDUCATION: readonly Education[] = [
     },
     city: { en: 'Turin, Italy', it: 'Torino, Italia', fa: 'تورین، ایتالیا' },
     start: '2022-09',
+    end: '2025-07',
     url: 'https://www.polito.it',
   },
   {
