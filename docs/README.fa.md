@@ -46,9 +46,7 @@ python tools/generate-assets.py path/to/photo.png
 
 ## انتشار
 
-هر بار که روی شاخهٔ `main` پوش کنید، GitHub Actions سایت را تست، بیلد و روی GitHub Pages منتشر می‌کند.
-
-**فقط یک بار لازم است:** در ریپازیتوری به **Settings → Pages** بروید و در قسمت **Source** گزینهٔ **GitHub Actions** را انتخاب کنید.
+هر بار که روی شاخهٔ `main` پوش کنید، GitHub Actions سایت را تست و بیلد می‌کند و نتیجه را در شاخهٔ `deploy` می‌گذارد. هاست هر ۵ دقیقه خودش از آن شاخه آپدیت می‌کشد و سایت روی **amir-iravani.it** به‌روز می‌شود. راه‌اندازی یک‌بارهٔ سرور در [DEPLOYMENT.md](DEPLOYMENT.md) است.
 
 </div>
 
@@ -59,10 +57,6 @@ git push
 ```
 
 <div dir="rtl">
-
-### دامنهٔ اختصاصی (amir-iravani.com)
-
-مراحل در [DEPLOYMENT.md](DEPLOYMENT.md) هست. خلاصه‌اش: فایل `public/CNAME` را با نام دامنه بسازید، رکوردهای DNS را تنظیم کنید و آدرس‌های داخل `src/index.html`، `robots.txt` و `sitemap.xml` را عوض کنید.
 
 ## میان‌برهای سایت
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amirdirv.github.io/amir-iravani-portfolio/sitemap.xml
+Sitemap: https://amir-iravani.it/sitemap.xml

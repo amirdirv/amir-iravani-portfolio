@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://amirdirv.github.io/amir-iravani-portfolio/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amirdirv.github.io/amir-iravani-portfolio/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://amirdirv.github.io/amir-iravani-portfolio/?lang=it" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://amirdirv.github.io/amir-iravani-portfolio/?lang=fa" />
+    <loc>https://amir-iravani.it/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/?lang=it" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/?lang=fa" />
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
