@@ -1,3 +1,12 @@
-<main class="container section">
-  <app-logo [size]="96" [animated]="true" />
+<a class="skip-link" href="#main">{{ i18n.ui().common.skip }}</a>
+
+<div class="backdrop" aria-hidden="true">
+  <div class="backdrop__aurora"></div>
+  <div class="backdrop__grid"></div>
+  <div class="backdrop__grain"></div>
+</div>
+
+<app-nav />
+
+<main id="main" tabindex="-1">
 </main>
