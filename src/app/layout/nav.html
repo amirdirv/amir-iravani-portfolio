@@ -1,0 +1,59 @@
+<div class="progress" [style.transform]="'scaleX(' + scroll.progress() + ')'" aria-hidden="true"></div>
+
+<nav class="bar container" [attr.aria-label]="i18n.ui().common.menu">
+  <a class="brand" href="#top" (click)="go('top', $event)">
+    <app-logo [size]="34" [animated]="true" />
+    <span class="brand__name">Amir&nbsp;Iravani</span>
+  </a>
+
+  <ul class="links" id="nav-links">
+    @for (link of links(); track link.id) {
+      <li>
+        <a
+          [href]="'#' + link.id"
+          [class.is-active]="scroll.active() === link.id"
+          [attr.aria-current]="scroll.active() === link.id ? 'true' : null"
+          (click)="go(link.id, $event)"
+          >{{ link.label }}</a
+        >
+      </li>
+    }
+  </ul>
+
+  <div class="tools">
+    <button class="kbd-btn" type="button" (click)="commands.openPalette()" [attr.aria-label]="i18n.ui().common.commandHint">
+      <app-icon name="command" [size]="16" />
+      <span class="kbd-btn__label mono">{{ modKey }} K</span>
+    </button>
+
+    <div class="langs" role="group" [attr.aria-label]="i18n.ui().common.language">
+      @for (l of langs; track l.code) {
+        <button
+          type="button"
+          [class.is-active]="i18n.lang() === l.code"
+          [attr.aria-pressed]="i18n.lang() === l.code"
+          [attr.lang]="l.code"
+          [title]="l.native"
+          (click)="i18n.set(l.code)"
+        >
+          {{ l.label }}
+        </button>
+      }
+    </div>
+
+    <button class="icon-btn" type="button" (click)="theme.toggle()" [attr.aria-label]="i18n.ui().common.theme">
+      <app-icon [name]="theme.theme() === 'dark' ? 'sun' : 'moon'" />
+    </button>
+
+    <button
+      class="icon-btn menu-btn"
+      type="button"
+      aria-controls="nav-links"
+      [attr.aria-expanded]="menuOpen()"
+      [attr.aria-label]="menuOpen() ? i18n.ui().common.close : i18n.ui().common.menu"
+      (click)="menuOpen.set(!menuOpen())"
+    >
+      <app-icon [name]="menuOpen() ? 'close' : 'menu'" />
+    </button>
+  </div>
+</nav>
