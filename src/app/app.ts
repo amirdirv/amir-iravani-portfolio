@@ -3,11 +3,12 @@ import { I18nService } from './core/i18n.service';
 import { ScrollService } from './core/scroll.service';
 import { ThemeService } from './core/theme.service';
 import { Nav } from './layout/nav';
+import { Hero } from './sections/hero/hero';
 
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Nav],
+  imports: [Nav, Hero],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

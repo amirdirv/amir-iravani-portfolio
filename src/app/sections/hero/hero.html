@@ -1,0 +1,65 @@
+@let ui = i18n.ui().hero;
+
+<section class="hero container" id="top" aria-labelledby="hero-title">
+  <div class="hero__copy">
+    <p class="hero__badge">
+      <span class="pulse" aria-hidden="true"></span>
+      {{ ui.available }}
+    </p>
+
+    <h1 class="hero__title" id="hero-title">
+      <span class="hero__hello">{{ ui.hello }}</span>
+      <span class="hero__name">
+        <span class="word">
+          @for (ch of letters().first; track $index) {
+            <span class="ch" [style.--i]="$index">{{ ch }}</span>
+          }
+        </span>
+        <span class="word gradient-text">
+          @for (ch of letters().last; track $index) {
+            <span class="ch" [style.--i]="$index + 4">{{ ch }}</span>
+          }
+        </span>
+      </span>
+    </h1>
+
+    <p class="hero__role mono" aria-live="off">
+      <span class="prompt" aria-hidden="true">&gt;</span>
+      <span class="typed">{{ typed() }}</span><span class="caret" aria-hidden="true"></span>
+      <span class="visually-hidden">{{ ui.roles.join(', ') }}</span>
+    </p>
+
+    <p class="hero__lead">{{ ui.lead }}</p>
+
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#projects" (click)="go('projects', $event)">
+        {{ ui.ctaWork }}
+        <app-icon name="arrow" [size]="18" class="flip-rtl" />
+      </a>
+      <a class="btn" href="#contact" (click)="go('contact', $event)">{{ ui.ctaContact }}</a>
+    </div>
+  </div>
+
+  <div class="hero__visual">
+    <div class="orbit" aria-hidden="true">
+      <span class="orbit__ring"></span>
+      <span class="orbit__ring orbit__ring--2"></span>
+    </div>
+    <app-particle-monogram />
+    <p class="hero__pun mono">{{ ui.pun }}</p>
+  </div>
+
+  <dl class="hero__stats">
+    @for (stat of statView(); track $index) {
+      <div class="stat">
+        <dt>{{ stat.label }}</dt>
+        <dd>{{ stat.value }}</dd>
+      </div>
+    }
+  </dl>
+
+  <a class="hero__scroll mono" href="#about" (click)="go('about', $event)">
+    {{ ui.scroll }}
+    <app-icon name="arrowDown" [size]="16" />
+  </a>
+</section>
