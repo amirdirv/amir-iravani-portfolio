@@ -1,0 +1,33 @@
+@let ui = i18n.ui().about;
+
+<section class="section container about" id="about" aria-labelledby="about-title">
+  <div class="about__head">
+    <p class="kicker" appReveal>{{ ui.kicker }}</p>
+    <h2 class="section-title" id="about-title" appReveal="80">{{ ui.title }}</h2>
+  </div>
+
+  <div class="about__grid">
+    <figure class="about__portrait" appReveal="120">
+      <app-halftone-portrait [src]="person.photo" [alt]="person.name" />
+      <figcaption class="mono">
+        <span class="dot" aria-hidden="true"></span>{{ ui.portraitHint }}
+      </figcaption>
+    </figure>
+
+    <div class="about__body">
+      @for (paragraph of ui.body; track $index) {
+        <p [appReveal]="160 + $index * 80" [class.lead]="$first">{{ paragraph }}</p>
+      }
+
+      <dl class="facts">
+        @for (fact of facts(); track fact.label) {
+          <div class="fact card" [appReveal]="$index * 70">
+            <app-icon [name]="fact.icon" [size]="20" />
+            <dt>{{ fact.label }}</dt>
+            <dd>{{ fact.value }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </div>
+</section>

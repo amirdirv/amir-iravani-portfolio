@@ -1,0 +1,118 @@
+:host {
+  display: block;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 6vw, 88px);
+  margin-top: clamp(40px, 6vw, 72px);
+  align-items: start;
+}
+
+.about__portrait {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  margin: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: calc(var(--radius) + 1px);
+    background: var(--grad-brand);
+    filter: blur(36px);
+    opacity: 0.35;
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--c-faint);
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-sun);
+  }
+}
+
+.about__body {
+  display: grid;
+  gap: 22px;
+  color: var(--c-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+
+  .lead {
+    color: var(--c-text);
+    font-size: clamp(1.15rem, 1.9vw, 1.45rem);
+    line-height: 1.5;
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0 0;
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px 14px;
+  padding: 18px;
+  transition: border-color 0.3s, transform 0.4s var(--ease-out);
+
+  &:hover {
+    border-color: var(--c-line-strong);
+    transform: translateY(-2px);
+  }
+
+  app-icon {
+    grid-row: span 2;
+    align-self: center;
+    color: var(--c-sun);
+  }
+
+  dt {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-faint);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--c-text);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 860px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__portrait {
+    position: relative;
+    top: 0;
+    width: min(100%, 340px);
+  }
+}
+
+@media (max-width: 520px) {
+  .facts {
+    grid-template-columns: 1fr;
+  }
+}
