@@ -86,20 +86,43 @@ export class CommandPalette {
       run: () => this.scroll.scrollTo(id),
     }));
     const actions: Command[] = [
-      { id: 'terminal', group: p.actions, label: p.openTerminal, icon: 'terminal', hint: '`', run: () => this.commands.openTerminal() },
-      { id: 'theme', group: p.actions, label: p.toggleTheme, icon: 'moon', run: () => this.theme.toggle() },
-      { id: 'copy', group: p.actions, label: p.copyEmail, icon: 'copy', run: () => void copyText(PERSON.email) },
-      { id: 'print', group: p.actions, label: p.print, icon: 'print', run: () => setTimeout(() => window.print(), 50) },
-      ...LANGS.filter((l) => l.code !== this.i18n.lang()).map(
-        (l): Command => ({
-          id: 'lang-' + l.code,
-          group: p.actions,
-          label: `${p.switchLang} ${l.native}`,
-          icon: 'globe',
-          hint: l.label,
-          run: () => this.i18n.set(l.code),
-        }),
-      ),
+      {
+        id: 'terminal',
+        group: p.actions,
+        label: p.openTerminal,
+        icon: 'terminal',
+        hint: '`',
+        run: () => this.commands.openTerminal(),
+      },
+      {
+        id: 'theme',
+        group: p.actions,
+        label: p.toggleTheme,
+        icon: 'moon',
+        run: () => this.theme.toggle(),
+      },
+      {
+        id: 'copy',
+        group: p.actions,
+        label: p.copyEmail,
+        icon: 'copy',
+        run: () => void copyText(PERSON.email),
+      },
+      {
+        id: 'print',
+        group: p.actions,
+        label: p.print,
+        icon: 'print',
+        run: () => setTimeout(() => window.print(), 50),
+      },
+      ...LANGS.filter((l) => l.code !== this.i18n.lang()).map((l): Command => ({
+        id: 'lang-' + l.code,
+        group: p.actions,
+        label: `${p.switchLang} ${l.native}`,
+        icon: 'globe',
+        hint: l.label,
+        run: () => this.i18n.set(l.code),
+      })),
     ];
     const links: Command[] = SOCIALS.map((s) => ({
       id: 'link-' + s.id,
@@ -124,7 +147,11 @@ export class CommandPalette {
 
   /** Results with a group header flag, so the template stays declarative. */
   protected readonly view = computed(() =>
-    this.results().map((c, i, list) => ({ c, i, header: i === 0 || list[i - 1]!.group !== c.group })),
+    this.results().map((c, i, list) => ({
+      c,
+      i,
+      header: i === 0 || list[i - 1]!.group !== c.group,
+    })),
   );
 
   private returnFocus: HTMLElement | null = null;
@@ -158,7 +185,9 @@ export class CommandPalette {
       const delta = event.key === 'ArrowDown' ? 1 : -1;
       this.cursor.update((c) => (c + delta + count) % count);
       queueMicrotask(() =>
-        this.dialog().nativeElement.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: 'nearest' }),
+        this.dialog()
+          .nativeElement.querySelector('[aria-selected="true"]')
+          ?.scrollIntoView({ block: 'nearest' }),
       );
     } else if (event.key === 'Enter') {
       event.preventDefault();

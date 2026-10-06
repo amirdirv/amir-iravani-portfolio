@@ -99,7 +99,9 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out);
 }
 
 :root[lang='fa'] body {
@@ -244,7 +246,10 @@ p {
   font-weight: 600;
   font-size: 15px;
   text-decoration: none;
-  transition: transform 0.25s var(--ease-out), border-color 0.25s, background-color 0.25s;
+  transition:
+    transform 0.25s var(--ease-out),
+    border-color 0.25s,
+    background-color 0.25s;
 
   &:hover {
     border-color: var(--c-text);
@@ -256,7 +261,9 @@ p {
     background: var(--grad-brand);
     background-size: 200% 100%;
     box-shadow: 0 10px 40px -10px var(--c-rose);
-    transition: transform 0.25s var(--ease-out), background-position 0.6s var(--ease-out);
+    transition:
+      transform 0.25s var(--ease-out),
+      background-position 0.6s var(--ease-out);
 
     &:hover {
       background-position: 100% 0;
@@ -288,7 +295,9 @@ p {
 .reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
 
   &.is-visible {
@@ -315,4 +324,3 @@ p {
     transform: none;
   }
 }
-

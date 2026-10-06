@@ -145,7 +145,18 @@ export const EXPERIENCES: readonly Experience[] = [
         'کار هم‌زمان با Angular، React و Vue روی بک‌اند Node.js و MongoDB.',
       ],
     },
-    stack: ['angular', 'react', 'vue', 'typescript', 'node', 'mongodb', 'rxjs', 'html-css', 'ux', 'git'],
+    stack: [
+      'angular',
+      'react',
+      'vue',
+      'typescript',
+      'node',
+      'mongodb',
+      'rxjs',
+      'html-css',
+      'ux',
+      'git',
+    ],
   },
   {
     id: 'bistoon',
@@ -359,7 +370,11 @@ export const PROJECTS: readonly Project[] = [
       it: 'Le officine italiane ordinano ricambi direttamente dalle piattaforme di distribuzione in tutto il Paese, senza intermediari. Da unico front-end engineer ho progettato e sviluppato il marketplace per gli acquirenti e la dashboard amministrativa.',
       fa: 'تعمیرگاه‌های ایتالیا قطعات را مستقیم از پلتفرم‌های توزیع سراسر کشور سفارش می‌دهند، بدون واسطه. به‌عنوان تنها مهندس فرانت‌اند، بازارگاه خریداران و داشبورد مدیریتی پشت آن را طراحی و پیاده‌سازی کردم.',
     },
-    role: { en: 'Sole front-end engineer', it: 'Unico front-end engineer', fa: 'تنها مهندس فرانت‌اند' },
+    role: {
+      en: 'Sole front-end engineer',
+      it: 'Unico front-end engineer',
+      fa: 'تنها مهندس فرانت‌اند',
+    },
     stack: ['angular', 'react', 'vue', 'node', 'mongodb'],
   },
   {
@@ -396,7 +411,11 @@ export const PROJECTS: readonly Project[] = [
       it: 'Una serie di progetti WooCommerce/PHP realizzati con Vira Tarfand Arad, l’agenzia che ho co-fondato: dal brief al design, fino a hosting e supporto.',
       fa: 'مجموعه‌ای از پروژه‌های WooCommerce/PHP که با ویرا ترفند آراد، آژانسی که هم‌بنیان‌گذارش بودم، تحویل شد؛ از بریف و طراحی تا میزبانی و پشتیبانی بلندمدت.',
     },
-    role: { en: 'Co-founder · tech lead', it: 'Co-fondatore · tech lead', fa: 'هم‌بنیان‌گذار · سرپرست فنی' },
+    role: {
+      en: 'Co-founder · tech lead',
+      it: 'Co-fondatore · tech lead',
+      fa: 'هم‌بنیان‌گذار · سرپرست فنی',
+    },
     stack: ['php', 'javascript', 'html-css', 'sql'],
   },
   {

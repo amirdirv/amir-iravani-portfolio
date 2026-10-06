@@ -201,7 +201,9 @@
 .commit {
   margin-top: calc(var(--dot-y) - 30px);
   padding: 18px clamp(18px, 3vw, 28px) 14px;
-  transition: border-color 0.3s, background-color 0.3s;
+  transition:
+    border-color 0.3s,
+    background-color 0.3s;
 
   &:hover {
     border-color: var(--c-line-strong);

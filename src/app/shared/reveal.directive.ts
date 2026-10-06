@@ -9,7 +9,10 @@ import { Directive, ElementRef, OnDestroy, afterNextRender, inject, input } from
   host: { class: 'reveal', '[style.--reveal-delay.ms]': 'delay()' },
 })
 export class Reveal implements OnDestroy {
-  readonly delay = input(0, { alias: 'appReveal', transform: (v: string | number) => Number(v) || 0 });
+  readonly delay = input(0, {
+    alias: 'appReveal',
+    transform: (v: string | number) => Number(v) || 0,
+  });
 
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
   private observer?: IntersectionObserver;

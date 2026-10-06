@@ -31,8 +31,14 @@ export function formatMonth(ym: YearMonth, lang: Lang): string {
 }
 
 /** "1 yr 8 mo" in the active language's short units. */
-export function formatDuration(months: number, units: { yr: string; mo: string }, num: (n: number) => string): string {
+export function formatDuration(
+  months: number,
+  units: { yr: string; mo: string },
+  num: (n: number) => string,
+): string {
   const y = Math.floor(months / 12);
   const m = months % 12;
-  return [y ? `${num(y)} ${units.yr}` : '', m ? `${num(m)} ${units.mo}` : ''].filter(Boolean).join(' ');
+  return [y ? `${num(y)} ${units.yr}` : '', m ? `${num(m)} ${units.mo}` : '']
+    .filter(Boolean)
+    .join(' ');
 }

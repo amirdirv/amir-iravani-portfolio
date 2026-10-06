@@ -9,6 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ThemeService } from '../../core/theme.service';
+import { prefersReducedMotion } from '../../core/motion';
 
 interface Particle {
   x: number;
@@ -25,9 +26,19 @@ interface Particle {
 
 /** The logo strokes in its 64-unit viewBox — kept in sync with `Logo` and favicon.svg. */
 const STROKES: [number, number][][] = [
-  [[14, 50], [31, 14], [48, 14]],
-  [[48, 14], [48, 50]],
-  [[22.5, 37], [48, 37]],
+  [
+    [14, 50],
+    [31, 14],
+    [48, 14],
+  ],
+  [
+    [48, 14],
+    [48, 50],
+  ],
+  [
+    [22.5, 37],
+    [48, 37],
+  ],
 ];
 const SUN = { x: 48, y: 14, r: 4.5 };
 const STROKE_W = 6;
@@ -46,7 +57,11 @@ function sampleMonogram(density: number): { x: number; y: number; sun: boolean }
       for (let s = 0; s <= steps; s++) {
         const t = s / steps;
         const offset = (Math.random() - 0.5) * STROKE_W;
-        points.push({ x: ax + (bx - ax) * t + nx * offset, y: ay + (by - ay) * t + ny * offset, sun: false });
+        points.push({
+          x: ax + (bx - ax) * t + nx * offset,
+          y: ay + (by - ay) * t + ny * offset,
+          sun: false,
+        });
       }
     }
   }
@@ -70,8 +85,17 @@ function sampleMonogram(density: number): { x: number; y: number; sun: boolean }
   host: { 'aria-hidden': 'true' },
   template: `<canvas #canvas></canvas>`,
   styles: `
-    :host { display: block; position: relative; width: 100%; aspect-ratio: 1; touch-action: pan-y; }
-    canvas { width: 100%; height: 100%; }
+    :host {
+      display: block;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      touch-action: pan-y;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
   `,
 })
 export class ParticleMonogram {
@@ -102,7 +126,7 @@ export class ParticleMonogram {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const win = window;
-    const reduced = win.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduced = prefersReducedMotion();
     this.readColors();
 
     const resize = () => {
@@ -200,7 +224,11 @@ export class ParticleMonogram {
     ctx.clearRect(0, 0, this.size, this.size);
     const { rose, violet, sun } = this.colors;
     for (const p of this.particles) {
-      ctx.fillStyle = p.sun ? sun : p.hue < 0.5 ? mix(rose, violet, p.hue / 0.5) : mix(violet, sun, (p.hue - 0.5) / 0.5);
+      ctx.fillStyle = p.sun
+        ? sun
+        : p.hue < 0.5
+          ? mix(rose, violet, p.hue / 0.5)
+          : mix(violet, sun, (p.hue - 0.5) / 0.5);
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
@@ -209,7 +237,8 @@ export class ParticleMonogram {
 
   private readColors(): void {
     const style = getComputedStyle(document.documentElement);
-    const read = (name: string, fallback: string) => style.getPropertyValue(name).trim() || fallback;
+    const read = (name: string, fallback: string) =>
+      style.getPropertyValue(name).trim() || fallback;
     this.colors = {
       rose: read('--c-rose', '#ff2e63'),
       violet: read('--c-violet', '#8b5cf6'),
@@ -230,7 +259,8 @@ function mix(a: string, b: string, t: number): string {
     const pa = parseInt(a.slice(1), 16);
     const pb = parseInt(b.slice(1), 16);
     const k = step / 24;
-    const ch = (shift: number) => Math.round(((pa >> shift) & 255) * (1 - k) + ((pb >> shift) & 255) * k);
+    const ch = (shift: number) =>
+      Math.round(((pa >> shift) & 255) * (1 - k) + ((pb >> shift) & 255) * k);
     out = `rgb(${ch(16)} ${ch(8)} ${ch(0)})`;
     mixCache.set(key, out);
   }

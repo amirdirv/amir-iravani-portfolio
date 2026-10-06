@@ -29,7 +29,9 @@ interface Edge {
 const GROUPS: readonly SkillGroup[] = ['frontend', 'language', 'backend', 'tooling'];
 
 /** Every (skill → role) pair is an edge; derived once from the CV data. */
-const EDGES: readonly Edge[] = EXPERIENCES.flatMap((e) => e.stack.map((skill) => ({ skill, role: e.id })));
+const EDGES: readonly Edge[] = EXPERIENCES.flatMap((e) =>
+  e.stack.map((skill) => ({ skill, role: e.id })),
+);
 
 /**
  * The skills section as a reactive dependency graph — the same mental model
@@ -67,7 +69,11 @@ export class SignalGraph {
       language: ui.groupLanguage,
       tooling: ui.groupTooling,
     };
-    return GROUPS.map((g) => ({ id: g, label: labels[g], skills: SKILLS.filter((s) => s.group === g) }));
+    return GROUPS.map((g) => ({
+      id: g,
+      label: labels[g],
+      skills: SKILLS.filter((s) => s.group === g),
+    }));
   });
 
   protected readonly litSkills = computed(() => {

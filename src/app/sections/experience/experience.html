@@ -65,7 +65,11 @@
 
                 <p class="commit__summary">{{ i18n.t(job.summary) }}</p>
 
-                <div class="commit__more" [id]="'job-' + job.id" [attr.aria-hidden]="!expanded().has(job.id)">
+                <div
+                  class="commit__more"
+                  [id]="'job-' + job.id"
+                  [attr.aria-hidden]="!expanded().has(job.id)"
+                >
                   <div>
                     <ul class="highlights">
                       @for (h of job.highlights[i18n.lang()]; track $index) {

@@ -18,7 +18,19 @@ import { SignalGraph } from './sections/skills/signal-graph';
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Nav, Hero, About, SignalGraph, ExperienceSection, Projects, EducationSection, Contact, Footer, CommandPalette, Terminal],
+  imports: [
+    Nav,
+    Hero,
+    About,
+    SignalGraph,
+    ExperienceSection,
+    Projects,
+    EducationSection,
+    Contact,
+    Footer,
+    CommandPalette,
+    Terminal,
+  ],
   host: { '(document:keydown)': 'onKeydown($event)' },
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -42,8 +54,11 @@ export class App {
       else this.commands.openPalette();
       return;
     }
-    const target = event.target as HTMLElement | null;
-    const typing = !!target?.closest('input, textarea, select, [contenteditable="true"]');
+    // The target can be the document itself (nothing focused), which has no `closest`.
+    const target = event.target;
+    const typing =
+      target instanceof Element &&
+      !!target.closest('input, textarea, select, [contenteditable="true"]');
     if (typing || event.metaKey || event.ctrlKey || event.altKey) return;
     if (event.key === '`' || event.code === 'Backquote') {
       event.preventDefault();

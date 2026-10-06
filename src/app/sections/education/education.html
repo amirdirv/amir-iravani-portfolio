@@ -31,7 +31,9 @@
           <li class="lang">
             <div class="lang__head">
               <strong>{{ i18n.t(language.name) }}</strong>
-              <span class="mono level">{{ language.level === 'native' ? ui.native : language.level }}</span>
+              <span class="mono level">{{
+                language.level === 'native' ? ui.native : language.level
+              }}</span>
             </div>
             <div
               class="meter"

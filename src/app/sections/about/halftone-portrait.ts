@@ -26,15 +26,46 @@ import { ThemeService } from '../../core/theme.service';
   `,
   styles: `
     :host {
-      position: relative; display: block; aspect-ratio: 1; overflow: hidden;
-      border-radius: var(--radius); background: var(--c-bg-2); outline-offset: 4px;
+      position: relative;
+      display: block;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--c-bg-2);
+      outline-offset: 4px;
     }
-    img, canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    img { opacity: 0; filter: grayscale(0.2) contrast(1.05); transform: scale(1.06);
-      transition: opacity 0.7s var(--ease-out), transform 1.2s var(--ease-out); }
-    canvas { transition: opacity 0.7s var(--ease-out), transform 1.2s var(--ease-out); }
-    :host(:hover) img, :host(:focus-visible) img, :host(:not(.is-ready)) img { opacity: 1; transform: none; }
-    :host(:hover) canvas, :host(:focus-visible) canvas { opacity: 0; transform: scale(1.04); }
+    img,
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    img {
+      opacity: 0;
+      filter: grayscale(0.2) contrast(1.05);
+      transform: scale(1.06);
+      transition:
+        opacity 0.7s var(--ease-out),
+        transform 1.2s var(--ease-out);
+    }
+    canvas {
+      transition:
+        opacity 0.7s var(--ease-out),
+        transform 1.2s var(--ease-out);
+    }
+    :host(:hover) img,
+    :host(:focus-visible) img,
+    :host(:not(.is-ready)) img {
+      opacity: 1;
+      transform: none;
+    }
+    :host(:hover) canvas,
+    :host(:focus-visible) canvas {
+      opacity: 0;
+      transform: scale(1.04);
+    }
   `,
 })
 export class HalftonePortrait {

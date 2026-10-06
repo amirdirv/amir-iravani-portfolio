@@ -9,7 +9,9 @@
   color: #e6e4f0;
   font-family: var(--f-mono);
   font-size: 14px;
-  box-shadow: var(--shadow-lg), 0 0 80px -20px var(--c-glow);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 80px -20px var(--c-glow);
   overflow: hidden;
 
   &[open] {

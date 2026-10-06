@@ -1,6 +1,13 @@
 import { DOCUMENT, Injectable, inject, signal } from '@angular/core';
 
-export const SECTION_IDS = ['about', 'skills', 'experience', 'projects', 'education', 'contact'] as const;
+export const SECTION_IDS = [
+  'about',
+  'skills',
+  'experience',
+  'projects',
+  'education',
+  'contact',
+] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
 /**
@@ -33,7 +40,9 @@ export class ScrollService {
       this.progress.set(max > 0 ? Math.min(1, el.scrollTop / max) : 0);
       this.scrolled.set(el.scrollTop > 24);
     };
-    win.addEventListener('scroll', () => (frame ||= win.requestAnimationFrame(update)), { passive: true });
+    win.addEventListener('scroll', () => (frame ||= win.requestAnimationFrame(update)), {
+      passive: true,
+    });
     update();
 
     if (typeof IntersectionObserver === 'undefined') return;
