@@ -1,6 +1,12 @@
 @let ui = i18n.ui().palette;
 
-<dialog #dialog class="palette" [attr.aria-label]="i18n.ui().common.commandHint" (close)="onClosed()" (click)="backdropClick($event)">
+<dialog
+  #dialog
+  class="palette"
+  [attr.aria-label]="i18n.ui().common.commandHint"
+  (close)="onClosed()"
+  (click)="backdropClick($event)"
+>
   <div class="palette__box">
     <div class="palette__search">
       <app-icon name="command" [size]="18" />

@@ -3,7 +3,9 @@
   inset: 0 0 auto;
   z-index: 50;
   height: var(--nav-h);
-  transition: background-color 0.4s var(--ease-out), border-color 0.4s;
+  transition:
+    background-color 0.4s var(--ease-out),
+    border-color 0.4s;
   border-bottom: 1px solid transparent;
 }
 
@@ -101,7 +103,9 @@
   border-radius: 999px;
   background: var(--c-surface);
   color: var(--c-muted);
-  transition: color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 
   &:hover {
     color: var(--c-text);
@@ -130,7 +134,9 @@
     color: var(--c-muted);
     font-family: var(--f-mono);
     font-size: 12px;
-    transition: background-color 0.25s, color 0.25s;
+    transition:
+      background-color 0.25s,
+      color 0.25s;
 
     &.is-active {
       background: var(--c-text);
@@ -166,7 +172,10 @@
     transform: translateY(-8px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), visibility 0.3s;
+    transition:
+      opacity 0.3s var(--ease-out),
+      transform 0.3s var(--ease-out),
+      visibility 0.3s;
 
     :host(.is-open) & {
       opacity: 1;

@@ -1,4 +1,8 @@
-<div class="progress" [style.transform]="'scaleX(' + scroll.progress() + ')'" aria-hidden="true"></div>
+<div
+  class="progress"
+  [style.transform]="'scaleX(' + scroll.progress() + ')'"
+  aria-hidden="true"
+></div>
 
 <nav class="bar container" [attr.aria-label]="i18n.ui().common.menu">
   <a class="brand" href="#top" (click)="go('top', $event)">
@@ -21,7 +25,12 @@
   </ul>
 
   <div class="tools">
-    <button class="kbd-btn" type="button" (click)="commands.openPalette()" [attr.aria-label]="i18n.ui().common.commandHint">
+    <button
+      class="kbd-btn"
+      type="button"
+      (click)="commands.openPalette()"
+      [attr.aria-label]="i18n.ui().common.commandHint"
+    >
       <app-icon name="command" [size]="16" />
       <span class="kbd-btn__label mono">{{ modKey }} K</span>
     </button>
@@ -41,7 +50,12 @@
       }
     </div>
 
-    <button class="icon-btn" type="button" (click)="theme.toggle()" [attr.aria-label]="i18n.ui().common.theme">
+    <button
+      class="icon-btn"
+      type="button"
+      (click)="theme.toggle()"
+      [attr.aria-label]="i18n.ui().common.theme"
+    >
       <app-icon [name]="theme.theme() === 'dark' ? 'sun' : 'moon'" />
     </button>
 

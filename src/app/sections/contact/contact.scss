@@ -60,7 +60,9 @@
     padding: 16px 4px;
     border-bottom: 1px solid var(--c-line);
     text-decoration: none;
-    transition: padding 0.3s var(--ease-out), color 0.3s;
+    transition:
+      padding 0.3s var(--ease-out),
+      color 0.3s;
 
     &:hover {
       padding-inline-start: 14px;
@@ -91,7 +93,9 @@
 
 .socials__arrow {
   color: var(--c-faint);
-  transition: transform 0.3s var(--ease-out), color 0.3s;
+  transition:
+    transform 0.3s var(--ease-out),
+    color 0.3s;
 }
 
 .form {
@@ -152,7 +156,9 @@
     background: var(--c-bg-2);
     font-size: 16px;
     resize: vertical;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
 
     &:focus {
       outline: none;

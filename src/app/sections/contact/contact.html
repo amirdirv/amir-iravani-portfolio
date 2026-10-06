@@ -39,7 +39,14 @@
 
     <label class="field">
       <span>{{ ui.name }}</span>
-      <input type="text" name="name" autocomplete="name" required [ngModel]="name()" (ngModelChange)="name.set($event)" />
+      <input
+        type="text"
+        name="name"
+        autocomplete="name"
+        required
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
     </label>
     <label class="field">
       <span>{{ ui.company }}</span>
@@ -53,7 +60,13 @@
     </label>
     <label class="field">
       <span>{{ ui.message }}</span>
-      <textarea name="message" rows="5" required [ngModel]="message()" (ngModelChange)="message.set($event)"></textarea>
+      <textarea
+        name="message"
+        rows="5"
+        required
+        [ngModel]="message()"
+        (ngModelChange)="message.set($event)"
+      ></textarea>
     </label>
 
     @if (error()) {

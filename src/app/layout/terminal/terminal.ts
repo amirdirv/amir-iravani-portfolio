@@ -94,7 +94,8 @@ export class Terminal {
       if (event.key === 'ArrowUp') {
         this.historyIndex = this.historyIndex === -1 ? last : Math.max(0, this.historyIndex - 1);
       } else {
-        this.historyIndex = this.historyIndex === -1 || this.historyIndex >= last ? -1 : this.historyIndex + 1;
+        this.historyIndex =
+          this.historyIndex === -1 || this.historyIndex >= last ? -1 : this.historyIndex + 1;
       }
       this.value.set(this.historyIndex === -1 ? '' : this.history[this.historyIndex]!);
     } else if (event.key === 'l' && event.ctrlKey) {

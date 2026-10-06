@@ -50,18 +50,42 @@ function rng(seed: string): () => number {
       </g>
       <g fill="#fff">
         @for (dot of art().dots; track $index) {
-          <circle [attr.cx]="dot.x" [attr.cy]="dot.y" [attr.r]="dot.r" [attr.fill-opacity]="dot.o" />
+          <circle
+            [attr.cx]="dot.x"
+            [attr.cy]="dot.y"
+            [attr.r]="dot.r"
+            [attr.fill-opacity]="dot.o"
+          />
         }
       </g>
-      <circle [attr.cx]="art().sx" [attr.cy]="art().sy" r="46" [attr.fill]="'url(#' + id() + '-glow)'" />
+      <circle
+        [attr.cx]="art().sx"
+        [attr.cy]="art().sy"
+        r="46"
+        [attr.fill]="'url(#' + id() + '-glow)'"
+      />
       <circle [attr.cx]="art().sx" [attr.cy]="art().sy" r="9" fill="#fff" />
     </svg>
   `,
   styles: `
-    :host { display: block; overflow: hidden; }
-    svg { width: 100%; height: 100%; }
-    .arc { transform-box: view-box; animation: turn linear infinite; animation-play-state: var(--play, paused); }
-    @keyframes turn { to { transform: rotate(360deg); } }
+    :host {
+      display: block;
+      overflow: hidden;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    .arc {
+      transform-box: view-box;
+      animation: turn linear infinite;
+      animation-play-state: var(--play, paused);
+    }
+    @keyframes turn {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   `,
 })
 export class ProjectCover {

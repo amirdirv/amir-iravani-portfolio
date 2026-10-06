@@ -1,7 +1,15 @@
 import { formatMonth } from '../../core/dates';
 import { Lang } from '../../core/models';
 import { SECTION_IDS, SectionId } from '../../core/scroll.service';
-import { EDUCATION, EXPERIENCES, PERSON, PROJECTS, SKILLS, SOCIALS, SPOKEN_LANGUAGES } from '../../data/profile';
+import {
+  EDUCATION,
+  EXPERIENCES,
+  PERSON,
+  PROJECTS,
+  SKILLS,
+  SOCIALS,
+  SPOKEN_LANGUAGES,
+} from '../../data/profile';
 
 export type LineKind = 'out' | 'muted' | 'accent' | 'error' | 'success';
 
@@ -92,7 +100,9 @@ export function runShell(input: string, ctx: Context): ShellResult {
       return {
         lines: [
           out(PERSON.name, 'accent'),
-          out(`Front-end engineer · ${new Date().getFullYear() - PERSON.careerStart}+ years · ${PERSON.location[lang]}`),
+          out(
+            `Front-end engineer · ${new Date().getFullYear() - PERSON.careerStart}+ years · ${PERSON.location[lang]}`,
+          ),
           out('Angular first. React and Vue fluent. Obsessed with the details.', 'muted'),
         ],
       };
@@ -111,7 +121,11 @@ export function runShell(input: string, ctx: Context): ShellResult {
       const groups = ['frontend', 'language', 'backend', 'tooling'] as const;
       return {
         lines: groups.map((g) =>
-          out(`${pad(g, 11)}${SKILLS.filter((s) => s.group === g).map((s) => s.label).join(', ')}`),
+          out(
+            `${pad(g, 11)}${SKILLS.filter((s) => s.group === g)
+              .map((s) => s.label)
+              .join(', ')}`,
+          ),
         ),
       };
     }
@@ -138,13 +152,17 @@ export function runShell(input: string, ctx: Context): ShellResult {
     case 'education':
       return {
         lines: EDUCATION.map((e) =>
-          out(`${e.degree[lang]} — ${e.school[lang]} (${e.start.slice(0, 4)}–${e.end?.slice(0, 4) ?? 'now'})`),
+          out(
+            `${e.degree[lang]} — ${e.school[lang]} (${e.start.slice(0, 4)}–${e.end?.slice(0, 4) ?? 'now'})`,
+          ),
         ),
       };
 
     case 'languages':
       return {
-        lines: SPOKEN_LANGUAGES.map((l) => out(`${pad(l.name.en, 10)}${l.level === 'native' ? 'native' : l.level}`)),
+        lines: SPOKEN_LANGUAGES.map((l) =>
+          out(`${pad(l.name.en, 10)}${l.level === 'native' ? 'native' : l.level}`),
+        ),
       };
 
     case 'contact':
@@ -157,11 +175,19 @@ export function runShell(input: string, ctx: Context): ShellResult {
 
     case 'social':
     case 'ls':
-      if (cmd === 'ls' && arg) return { lines: [out(`ls: cannot access '${arg}': it's a portfolio, not a filesystem`, 'error')] };
+      if (cmd === 'ls' && arg)
+        return {
+          lines: [out(`ls: cannot access '${arg}': it's a portfolio, not a filesystem`, 'error')],
+        };
       return {
         lines:
           cmd === 'ls'
-            ? [out('about.md  skills.json  experience.log  projects/  contact.txt  cv.pdf', 'accent')]
+            ? [
+                out(
+                  'about.md  skills.json  experience.log  projects/  contact.txt  cv.pdf',
+                  'accent',
+                ),
+              ]
             : SOCIALS.map((s) => out(`${pad(s.label, 11)}${s.url}`, 'out', s.url)),
       };
 
@@ -170,7 +196,10 @@ export function runShell(input: string, ctx: Context): ShellResult {
       if (arg === 'skills.json') return runShell('skills', ctx);
       if (arg === 'experience.log') return runShell('experience', ctx);
       if (arg === 'contact.txt') return runShell('contact', ctx);
-      if (arg === 'cv.pdf') return { lines: [out('Binary file. Try the "Print as CV" button in the footer.', 'muted')] };
+      if (arg === 'cv.pdf')
+        return {
+          lines: [out('Binary file. Try the "Print as CV" button in the footer.', 'muted')],
+        };
       return { lines: [out(`cat: ${arg || '(missing file)'}: no such file`, 'error')] };
 
     case 'goto':
@@ -179,12 +208,17 @@ export function runShell(input: string, ctx: Context): ShellResult {
       if ((SECTION_IDS as readonly string[]).includes(section)) {
         return { lines: [out(`→ #${section}`, 'success')], effect: { type: 'goto', section } };
       }
-      return { lines: [out(`goto: unknown section '${arg}'. Try: ${SECTION_IDS.join(', ')}`, 'error')] };
+      return {
+        lines: [out(`goto: unknown section '${arg}'. Try: ${SECTION_IDS.join(', ')}`, 'error')],
+      };
     }
 
     case 'lang':
       if (arg === 'en' || arg === 'it' || arg === 'fa') {
-        return { lines: [out(`language → ${arg}`, 'success')], effect: { type: 'lang', lang: arg } };
+        return {
+          lines: [out(`language → ${arg}`, 'success')],
+          effect: { type: 'lang', lang: arg },
+        };
       }
       return { lines: [out('usage: lang <en|it|fa>', 'error')] };
 
@@ -193,7 +227,11 @@ export function runShell(input: string, ctx: Context): ShellResult {
 
     case 'open': {
       const social = SOCIALS.find((s) => s.id === arg.toLowerCase());
-      if (social) return { lines: [out(`opening ${social.url}`, 'success')], effect: { type: 'open', url: social.url } };
+      if (social)
+        return {
+          lines: [out(`opening ${social.url}`, 'success')],
+          effect: { type: 'open', url: social.url },
+        };
       return { lines: [out(`usage: open <${SOCIALS.map((s) => s.id).join('|')}>`, 'error')] };
     }
 
@@ -212,11 +250,21 @@ export function runShell(input: string, ctx: Context): ShellResult {
     case 'sudo':
       if (/hire/i.test(arg)) {
         return {
-          lines: [out('[sudo] permission granted. Excellent decision.', 'success'), out('Opening #contact …', 'muted')],
+          lines: [
+            out('[sudo] permission granted. Excellent decision.', 'success'),
+            out('Opening #contact …', 'muted'),
+          ],
           effect: { type: 'goto', section: 'contact' },
         };
       }
-      return { lines: [out('amir is not in the sudoers file. This incident will be reported. (try: sudo hire-amir)', 'error')] };
+      return {
+        lines: [
+          out(
+            'amir is not in the sudoers file. This incident will be reported. (try: sudo hire-amir)',
+            'error',
+          ),
+        ],
+      };
 
     case 'clear':
       return { lines: [], effect: { type: 'clear' } };

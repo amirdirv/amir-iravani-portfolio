@@ -34,9 +34,29 @@ function buildRows(): Row[] {
   const tehran = EXPERIENCES.filter((e) => e.branch === 'tehran');
   return [
     { key: 'head', kind: 'head', lane: 0, hash: 'HEAD', lines: ['bottom', 'none'] },
-    ...turin.map((job): Row => ({ key: job.id, kind: 'commit', lane: 0, hash: sha(job.id), lines: ['full', 'none'], job })),
-    { key: 'merge', kind: 'merge', lane: 0, hash: sha('merge' + MERGE_AT), lines: ['top', 'bottom'] },
-    ...tehran.map((job): Row => ({ key: job.id, kind: 'commit', lane: 1, hash: sha(job.id), lines: ['none', 'full'], job })),
+    ...turin.map((job): Row => ({
+      key: job.id,
+      kind: 'commit',
+      lane: 0,
+      hash: sha(job.id),
+      lines: ['full', 'none'],
+      job,
+    })),
+    {
+      key: 'merge',
+      kind: 'merge',
+      lane: 0,
+      hash: sha('merge' + MERGE_AT),
+      lines: ['top', 'bottom'],
+    },
+    ...tehran.map((job): Row => ({
+      key: job.id,
+      kind: 'commit',
+      lane: 1,
+      hash: sha(job.id),
+      lines: ['none', 'full'],
+      job,
+    })),
     { key: 'init', kind: 'init', lane: 1, hash: sha('init'), lines: ['none', 'top'] },
   ];
 }
@@ -55,7 +75,9 @@ export class ExperienceSection {
   protected readonly expanded = signal(new Set(EXPERIENCES.slice(0, 2).map((e) => e.id)));
 
   protected readonly mergeDate = computed(() => formatMonth(MERGE_AT, this.i18n.lang()));
-  protected readonly initDate = computed(() => formatMonth(EXPERIENCES.at(-1)!.start, this.i18n.lang()));
+  protected readonly initDate = computed(() =>
+    formatMonth(EXPERIENCES.at(-1)!.start, this.i18n.lang()),
+  );
 
   protected toggle(id: string): void {
     this.expanded.update((set) => {

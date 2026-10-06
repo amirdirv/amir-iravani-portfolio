@@ -1,4 +1,5 @@
 import { Directive, ElementRef, inject, input } from '@angular/core';
+import { prefersReducedMotion } from '../core/motion';
 
 /**
  * Subtle 3D tilt + cursor spotlight. Writes CSS custom properties only
@@ -17,8 +18,7 @@ export class Tilt {
   readonly max = input(6, { alias: 'appTilt', transform: (v: string | number) => Number(v) || 6 });
 
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly reduced =
-    typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private readonly reduced = prefersReducedMotion();
 
   protected move(event: PointerEvent): void {
     if (event.pointerType !== 'mouse' || this.reduced) return;

@@ -9,6 +9,7 @@ import {
   signal,
 } from '@angular/core';
 import { I18nService } from '../../core/i18n.service';
+import { prefersReducedMotion } from '../../core/motion';
 import { ScrollService } from '../../core/scroll.service';
 import { EXPERIENCES, PERSON, SPOKEN_LANGUAGES } from '../../data/profile';
 import { Icon } from '../../shared/icon';
@@ -61,7 +62,7 @@ export class Hero {
 
   constructor() {
     afterNextRender(() => {
-      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduced = prefersReducedMotion();
       this.animateCounters(reduced);
       if (reduced) this.typed.set(this.i18n.ui().hero.roles[0] ?? '');
     });
@@ -69,7 +70,7 @@ export class Hero {
     // Restart the typewriter whenever the language changes.
     effect((onCleanup) => {
       const roles = this.i18n.ui().hero.roles;
-      if (typeof window === 'undefined' || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (typeof window === 'undefined' || prefersReducedMotion()) {
         this.typed.set(roles[0] ?? '');
         return;
       }

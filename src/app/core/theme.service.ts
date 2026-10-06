@@ -31,7 +31,9 @@ export class ThemeService {
   private initialTheme(): Theme {
     const saved = readStorage(STORAGE_KEY);
     if (saved === 'dark' || saved === 'light') return saved;
-    const prefersLight = this.document.defaultView?.matchMedia?.('(prefers-color-scheme: light)').matches;
+    const prefersLight = this.document.defaultView?.matchMedia?.(
+      '(prefers-color-scheme: light)',
+    ).matches;
     return prefersLight ? 'light' : 'dark';
   }
 }

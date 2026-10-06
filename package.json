@@ -1,12 +1,16 @@
 {
   "name": "amir-iravani-portfolio",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:pages": "ng build --base-href /amir-iravani-portfolio/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "format": "prettier --write \"src/**/*.{ts,html,scss,json}\" \"*.{json,md}\" \"docs/**/*.md\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss}\"",
+    "assets": "python tools/generate-assets.py"
   },
   "private": true,
   "packageManager": "npm@9.6.5",
@@ -28,5 +32,8 @@
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "vitest": "^5.0.0"
-  }
+  },
+  "description": "Portfolio of Amir Mohammad Iravani \u2014 Angular 22, zoneless, signals, EN/IT/FA.",
+  "author": "Amir Mohammad Iravani <amirmohammad76@yahoo.com>",
+  "license": "MIT"
 }
