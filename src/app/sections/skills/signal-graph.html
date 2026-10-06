@@ -1,0 +1,98 @@
+@let ui = i18n.ui().skills;
+
+<section class="section container" id="skills" aria-labelledby="skills-title">
+  <p class="kicker" appReveal>{{ ui.kicker }}</p>
+  <h2 class="section-title" id="skills-title" appReveal="80">
+    <span class="mono code">signal(</span>{{ ui.title }}<span class="mono code">)</span>
+  </h2>
+  <p class="section-lead" appReveal="140">{{ ui.lead }}</p>
+
+  <div class="graph card" #graph appReveal="200" (mouseleave)="hovered.set(null)">
+    <svg class="wires" [attr.viewBox]="'0 0 ' + box().w + ' ' + box().h" aria-hidden="true">
+      @for (wire of wires(); track wire.key) {
+        <path [attr.d]="wire.d" [class.lit]="wire.lit" [class.dim]="wire.dim" />
+      }
+    </svg>
+
+    <div class="col col--skills">
+      @for (group of groups(); track group.id) {
+        <div class="group" role="group" [attr.aria-label]="group.label">
+          <p class="group__label mono">{{ group.label }}</p>
+          <div class="group__nodes">
+            @for (skill of group.skills; track skill.id) {
+              <button
+                type="button"
+                [attr.data-node]="'s:' + skill.id"
+                [class]="'node node--skill ' + skillState(skill)"
+                [class.is-selected]="isSelected('skill', skill.id)"
+                [attr.aria-pressed]="isSelected('skill', skill.id)"
+                (mouseenter)="hovered.set({ kind: 'skill', id: skill.id })"
+                (focus)="hovered.set({ kind: 'skill', id: skill.id })"
+                (blur)="hovered.set(null)"
+                (click)="toggle('skill', skill.id)"
+              >
+                <span class="node__dot" [style.--w]="skill.weight" aria-hidden="true"></span>
+                {{ skill.label }}
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <ol class="col col--roles">
+      @for (role of experiences; track role.id) {
+        <li>
+          <button
+            type="button"
+            [attr.data-node]="'r:' + role.id"
+            [class]="'node node--role ' + roleState(role)"
+            [class.is-selected]="isSelected('role', role.id)"
+            [attr.aria-pressed]="isSelected('role', role.id)"
+            (mouseenter)="hovered.set({ kind: 'role', id: role.id })"
+            (focus)="hovered.set({ kind: 'role', id: role.id })"
+            (blur)="hovered.set(null)"
+            (click)="toggle('role', role.id)"
+          >
+            <span class="node__company">{{ role.company }}</span>
+            <span class="node__meta mono">{{ i18n.t(role.role) }} · {{ years(role) }}</span>
+          </button>
+        </li>
+      }
+    </ol>
+  </div>
+
+  <div class="readout" aria-live="polite">
+    @if (readout(); as r) {
+      <p class="readout__title">
+        <strong>{{ r.title }}</strong>
+        @if (r.meta) {
+          <span class="chip">{{ r.meta }}</span>
+        }
+      </p>
+      <p class="readout__list">
+        <span class="mono">{{ r.label }} →</span>
+        @for (item of r.items; track item) {
+          <span class="chip chip--lit">{{ item }}</span>
+        }
+      </p>
+      @if (selected()) {
+        <button type="button" class="readout__reset mono" (click)="selected.set(null)">{{ ui.reset }} ×</button>
+      }
+    } @else {
+      <p class="readout__hint mono">{{ ui.pick }}</p>
+    }
+  </div>
+
+  <div class="approach" appReveal>
+    <h3>{{ ui.approachTitle }}</h3>
+    <ol>
+      @for (item of ui.approach; track $index) {
+        <li [appReveal]="$index * 60">
+          <span class="approach__n mono">{{ i18n.num('0' + ($index + 1)) }}</span>
+          {{ item }}
+        </li>
+      }
+    </ol>
+  </div>
+</section>
