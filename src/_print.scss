@@ -1,1 +1,276 @@
-/* Print stylesheet — filled in by the "print as CV" step. */
+/* ==========================================================================
+   Print: the whole site collapses into a clean, ink-friendly CV.
+   Decorative layers, canvases and interactive chrome are hidden; every
+   collapsed detail is expanded; colours drop to black on white.
+   ========================================================================== */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 14mm 16mm;
+  }
+
+  :root,
+  :root[data-theme] {
+    --c-bg: #fff;
+    --c-bg-2: #fff;
+    --c-surface: transparent;
+    --c-surface-2: transparent;
+    --c-line: #d8d8de;
+    --c-line-strong: #b8b8c2;
+    --c-text: #111;
+    --c-muted: #333;
+    --c-faint: #666;
+    --c-sun: #9a6200;
+    --c-rose: #b3123d;
+    --c-violet: #4b2bb8;
+    color-scheme: light;
+  }
+
+  html {
+    font-size: 10.5pt;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* Chrome and decoration. */
+  .backdrop,
+  .skip-link,
+  app-nav,
+  app-command-palette,
+  app-terminal,
+  app-particle-monogram,
+  .hero__visual,
+  .hero__cta,
+  .hero__scroll,
+  .hero__badge .pulse,
+  .hero__role,
+  .about__portrait figcaption,
+  .graph,
+  .readout,
+  app-project-cover,
+  .commit__toggle,
+  .form,
+  .email__copy,
+  .socials__arrow,
+  .footer__actions,
+  .footer__tips,
+  .kicker::before {
+    display: none !important;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .reveal,
+  .ch {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .gradient-text,
+  .word.gradient-text .ch,
+  .commit__title .company {
+    background: none !important;
+    color: #111 !important;
+    -webkit-text-fill-color: #111;
+  }
+
+  .section {
+    padding-block: 10pt !important;
+  }
+
+  .section-title {
+    margin-top: 2pt;
+    font-size: 15pt !important;
+    max-width: none;
+  }
+
+  .section-lead {
+    margin-top: 4pt;
+    font-size: 10pt;
+  }
+
+  .kicker {
+    font-size: 8pt;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  .card,
+  .commit,
+  .school,
+  .project,
+  .fact {
+    break-inside: avoid;
+    border-color: #d8d8de !important;
+    background: none !important;
+  }
+
+  /* Hero becomes the CV header. */
+  .hero {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 0 0 6pt !important;
+  }
+
+  .hero__title {
+    margin-top: 4pt;
+  }
+
+  .hero__name {
+    font-size: 26pt !important;
+  }
+
+  .hero__lead {
+    margin-top: 6pt;
+    max-width: none;
+  }
+
+  .hero__stats {
+    margin-top: 8pt;
+  }
+
+  .stat dd {
+    font-size: 16pt !important;
+  }
+
+  /* About: no portrait column. */
+  .about__grid {
+    display: block !important;
+    margin-top: 6pt !important;
+  }
+
+  .about__portrait {
+    display: none !important;
+  }
+
+  .about__body {
+    gap: 6pt !important;
+  }
+
+  .about__body .lead {
+    font-size: 11pt !important;
+  }
+
+  .facts {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6pt !important;
+  }
+
+  .fact {
+    padding: 6pt !important;
+  }
+
+  /* Skills print as the "How I work" list only. */
+  .approach {
+    margin-top: 6pt !important;
+    grid-template-columns: 1fr !important;
+    gap: 4pt !important;
+
+    li {
+      padding: 3pt 0 !important;
+    }
+  }
+
+  /* Experience: every commit expanded. */
+  .commit__more {
+    grid-template-rows: 1fr !important;
+  }
+
+  .commit {
+    padding: 8pt 10pt !important;
+  }
+
+  .row {
+    padding-bottom: 6pt !important;
+  }
+
+  .row--merge,
+  .row--init {
+    padding-bottom: 10pt !important;
+  }
+
+  .log {
+    margin-top: 8pt !important;
+  }
+
+  /* Projects as a compact two-column list. */
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8pt !important;
+    margin-top: 8pt !important;
+
+    > li,
+    > li.is-featured,
+    > li.is-featured:first-child {
+      grid-column: span 1 !important;
+    }
+
+    > li.is-featured:first-child .project {
+      display: flex !important;
+    }
+  }
+
+  .project {
+    transform: none !important;
+  }
+
+  .project__body {
+    padding: 8pt !important;
+    gap: 3pt !important;
+  }
+
+  .project__desc {
+    font-size: 9pt;
+  }
+
+  .layout,
+  .contact {
+    display: block !important;
+  }
+
+  .langs {
+    margin-top: 8pt;
+  }
+
+  /* Show destinations of external links. */
+  .project__links a[href^='http']::after,
+  .school__link::after,
+  .socials a::after {
+    content: ' ' attr(href);
+    font-family: var(--f-mono);
+    font-size: 8pt;
+    color: #555;
+  }
+
+  .socials a {
+    grid-template-columns: auto auto 1fr !important;
+    padding: 3pt 0 !important;
+  }
+
+  .socials__handle {
+    display: none;
+  }
+
+  app-footer {
+    border: 0 !important;
+  }
+
+  .footer {
+    padding-block: 6pt !important;
+  }
+}
