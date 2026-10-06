@@ -1,0 +1,40 @@
+<dialog #dialog class="term" aria-label="Terminal" dir="ltr" (close)="onClosed()">
+  <div class="term__bar">
+    <button type="button" class="dot dot--close" (click)="close()" aria-label="Close terminal"></button>
+    <span class="dot dot--min" aria-hidden="true"></span>
+    <span class="dot dot--max" aria-hidden="true"></span>
+    <p class="term__title">amir&#64;turin: ~</p>
+  </div>
+
+  <div class="term__screen" #screen (click)="focusInput()">
+    @for (entry of entries(); track entry.id) {
+      @if (entry.input !== undefined) {
+        <p class="cmd"><span class="ps1">amir&#64;turin:~$</span> {{ entry.input }}</p>
+      }
+      @for (line of entry.lines; track $index) {
+        @if (line.href) {
+          <p [class]="'line line--' + line.kind">
+            <a [href]="line.href" target="_blank" rel="noopener">{{ line.text }}</a>
+          </p>
+        } @else {
+          <p [class]="'line line--' + line.kind">{{ line.text }}</p>
+        }
+      }
+    }
+
+    <form class="prompt" (submit)="submit($event)">
+      <label for="term-input" class="ps1">amir&#64;turin:~$</label>
+      <input
+        #input
+        id="term-input"
+        type="text"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        [value]="value()"
+        (input)="value.set($any($event.target).value)"
+        (keydown)="onKey($event)"
+      />
+    </form>
+  </div>
+</dialog>

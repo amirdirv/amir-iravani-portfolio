@@ -1,0 +1,51 @@
+@let ui = i18n.ui().palette;
+
+<dialog #dialog class="palette" [attr.aria-label]="i18n.ui().common.commandHint" (close)="onClosed()" (click)="backdropClick($event)">
+  <div class="palette__box">
+    <div class="palette__search">
+      <app-icon name="command" [size]="18" />
+      <input
+        #input
+        type="text"
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="palette-list"
+        aria-autocomplete="list"
+        [attr.aria-activedescendant]="results().length ? 'cmd-' + cursor() : null"
+        [placeholder]="ui.placeholder"
+        [value]="query()"
+        (input)="onInput($any($event.target).value)"
+        (keydown)="onKey($event)"
+        spellcheck="false"
+        autocomplete="off"
+      />
+      <kbd class="mono">Esc</kbd>
+    </div>
+
+    <ul class="palette__list" id="palette-list" role="listbox">
+      @for (item of view(); track item.c.id) {
+        @if (item.header) {
+          <li class="palette__group mono" role="presentation">{{ item.c.group }}</li>
+        }
+        <li
+          role="option"
+          class="palette__item"
+          [id]="'cmd-' + item.i"
+          [attr.aria-selected]="item.i === cursor()"
+          (mousemove)="cursor.set(item.i)"
+          (click)="run(item.c)"
+        >
+          <app-icon [name]="item.c.icon" [size]="16" />
+          <span class="palette__label">{{ item.c.label }}</span>
+          @if (item.c.hint) {
+            <span class="palette__hint mono" dir="ltr">{{ item.c.hint }}</span>
+          }
+        </li>
+      } @empty {
+        <li class="palette__empty mono" role="presentation">{{ ui.empty }}</li>
+      }
+    </ul>
+
+    <p class="palette__foot mono">{{ ui.hint }}</p>
+  </div>
+</dialog>

@@ -1,0 +1,119 @@
+.palette {
+  width: min(640px, calc(100% - 32px));
+  max-height: min(560px, calc(100vh - 120px));
+  margin: 12vh auto auto;
+  padding: 0;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  backdrop-filter: blur(24px) saturate(1.5);
+  color: var(--c-text);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+
+  &::backdrop {
+    background: rgb(0 0 0 / 0.45);
+    backdrop-filter: blur(4px);
+  }
+
+  &[open] {
+    animation: pop 0.25s var(--ease-out);
+  }
+}
+
+.palette__box {
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
+}
+
+.palette__search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--c-line);
+  color: var(--c-muted);
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    font-size: 17px;
+    color: var(--c-text);
+    outline: none;
+  }
+}
+
+kbd {
+  padding: 2px 8px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--c-faint);
+}
+
+.palette__list {
+  flex: 1;
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.palette__group {
+  padding: 12px 10px 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-faint);
+}
+
+.palette__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--c-muted);
+  cursor: pointer;
+
+  &[aria-selected='true'] {
+    background: var(--c-surface-2);
+    color: var(--c-text);
+
+    app-icon {
+      color: var(--c-sun);
+    }
+  }
+}
+
+.palette__label {
+  flex: 1;
+}
+
+.palette__hint {
+  font-size: 12px;
+  color: var(--c-faint);
+}
+
+.palette__empty {
+  padding: 28px;
+  text-align: center;
+  color: var(--c-faint);
+}
+
+.palette__foot {
+  padding: 10px 18px;
+  border-top: 1px solid var(--c-line);
+  font-size: 11px;
+  color: var(--c-faint);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
