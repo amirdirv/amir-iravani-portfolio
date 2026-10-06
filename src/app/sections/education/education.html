@@ -1,0 +1,63 @@
+@let ui = i18n.ui().education;
+
+<section class="section container" id="education" aria-labelledby="education-title">
+  <p class="kicker" appReveal>{{ ui.kicker }}</p>
+  <h2 class="section-title" id="education-title" appReveal="80">{{ ui.title }}</h2>
+
+  <div class="layout">
+    <ol class="schools">
+      @for (school of schools; track school.id) {
+        <li class="school card" [appReveal]="$index * 100">
+          <app-icon name="cap" [size]="26" class="school__icon" />
+          <p class="school__range mono">
+            {{ range(school) }}
+            @if (!school.end) {
+              <span class="live" aria-hidden="true"></span>
+            }
+          </p>
+          <h3 class="school__degree">{{ i18n.t(school.degree) }}</h3>
+          <p class="school__name">{{ i18n.t(school.school) }} · {{ i18n.t(school.city) }}</p>
+          <a class="school__link mono" [href]="school.url" target="_blank" rel="noopener">
+            {{ host(school.url) }} <app-icon name="external" [size]="13" />
+          </a>
+        </li>
+      }
+    </ol>
+
+    <div class="langs card" appReveal="160">
+      <h3>{{ ui.languagesTitle }}</h3>
+      <ul>
+        @for (language of languages; track language.level) {
+          <li class="lang">
+            <div class="lang__head">
+              <strong>{{ i18n.t(language.name) }}</strong>
+              <span class="mono level">{{ language.level === 'native' ? ui.native : language.level }}</span>
+            </div>
+            <div
+              class="meter"
+              role="meter"
+              aria-valuemin="1"
+              aria-valuemax="6"
+              [attr.aria-valuenow]="level(language.level)"
+              [attr.aria-label]="i18n.t(language.name)"
+            >
+              @for (step of scale; track step) {
+                <span [class.on]="$index < level(language.level)"></span>
+              }
+            </div>
+            @if (language.detail; as detail) {
+              <dl class="cefr mono">
+                @for (skill of ui.cefr; track $index) {
+                  <div>
+                    <dt>{{ skill }}</dt>
+                    <dd>{{ detail[$index] }}</dd>
+                  </div>
+                }
+              </dl>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
