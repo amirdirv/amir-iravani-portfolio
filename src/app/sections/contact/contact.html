@@ -1,0 +1,68 @@
+@let ui = i18n.ui().contact;
+
+<section class="section container contact" id="contact" aria-labelledby="contact-title">
+  <div class="contact__intro">
+    <p class="kicker" appReveal>{{ ui.kicker }}</p>
+    <h2 class="section-title" id="contact-title" appReveal="80">{{ ui.title }}</h2>
+    <p class="section-lead" appReveal="140">{{ ui.lead }}</p>
+
+    <div class="email" appReveal="200">
+      <a class="email__address gradient-text" [href]="'mailto:' + email">{{ email }}</a>
+      <button type="button" class="email__copy" (click)="copy()" [attr.aria-label]="ui.copy">
+        <app-icon [name]="copied() ? 'check' : 'copy'" [size]="18" />
+        <span aria-live="polite">{{ copied() ? ui.copied : ui.copy }}</span>
+      </button>
+    </div>
+
+    <div class="socials" appReveal="260">
+      <p class="mono socials__label">{{ ui.elsewhere }}</p>
+      <ul>
+        @for (s of socials; track s.id) {
+          <li>
+            <a [href]="s.url" target="_blank" rel="noopener me">
+              <app-icon [name]="s.id" [size]="20" />
+              <span class="socials__name">{{ s.label }}</span>
+              <span class="socials__handle mono" dir="ltr">&#64;{{ s.handle }}</span>
+              <app-icon name="external" [size]="14" class="socials__arrow" />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <form class="form card" (submit)="send($event)" novalidate appReveal="160">
+    <div class="form__bar mono" aria-hidden="true">
+      <span></span><span></span><span></span>
+      <em>new-message.md</em>
+    </div>
+
+    <label class="field">
+      <span>{{ ui.name }}</span>
+      <input type="text" name="name" autocomplete="name" required [ngModel]="name()" (ngModelChange)="name.set($event)" />
+    </label>
+    <label class="field">
+      <span>{{ ui.company }}</span>
+      <input
+        type="text"
+        name="company"
+        autocomplete="organization"
+        [ngModel]="company()"
+        (ngModelChange)="company.set($event)"
+      />
+    </label>
+    <label class="field">
+      <span>{{ ui.message }}</span>
+      <textarea name="message" rows="5" required [ngModel]="message()" (ngModelChange)="message.set($event)"></textarea>
+    </label>
+
+    @if (error()) {
+      <p class="form__error" role="alert">{{ ui.required }}</p>
+    }
+
+    <button type="submit" class="btn btn--primary form__send">
+      {{ ui.send }}
+      <app-icon name="arrow" [size]="18" class="flip-rtl" />
+    </button>
+  </form>
+</section>

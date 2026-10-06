@@ -1,0 +1,100 @@
+@let ui = i18n.ui().experience;
+
+<section class="section container" id="experience" aria-labelledby="experience-title">
+  <p class="kicker" appReveal>{{ ui.kicker }}</p>
+  <h2 class="section-title mono-title" id="experience-title" appReveal="80" dir="ltr">
+    <span class="dollar" aria-hidden="true">$</span> {{ ui.title }}
+  </h2>
+  <p class="section-lead" appReveal="140">{{ ui.lead }}</p>
+
+  <ol class="log">
+    @for (row of rows; track row.key) {
+      <li class="row" [class]="'row row--' + row.kind + ' lane-' + row.lane" appReveal>
+        <div class="gutter" aria-hidden="true">
+          <span class="line line--0" [class]="'line line--0 ' + row.lines[0]"></span>
+          <span class="line line--1" [class]="'line line--1 ' + row.lines[1]"></span>
+          @if (row.kind === 'merge') {
+            <svg class="curve" viewBox="0 0 64 48" preserveAspectRatio="none">
+              <path d="M18 0 C18 26 46 18 46 48" />
+            </svg>
+          }
+          <span class="dot"></span>
+        </div>
+
+        @switch (row.kind) {
+          @case ('head') {
+            <p class="meta-line mono">
+              <span class="hash">{{ row.hash }}</span>
+              <span class="ref ref--head">{{ ui.head }}</span>
+            </p>
+          }
+          @case ('merge') {
+            <p class="meta-line mono">
+              <span class="hash">{{ row.hash }}</span>
+              <span class="date">{{ mergeDate() }}</span>
+            </p>
+            <p class="merge-msg">{{ ui.merge }}</p>
+          }
+          @case ('init') {
+            <p class="meta-line mono">
+              <span class="hash">{{ row.hash }}</span>
+              <span class="date">{{ initDate() }}</span>
+            </p>
+            <p class="merge-msg">{{ ui.init }}</p>
+          }
+          @default {
+            @if (row.job; as job) {
+              <article class="commit card" [class.is-open]="expanded().has(job.id)">
+                <header class="commit__head">
+                  <p class="meta-line mono">
+                    <span class="hash">{{ row.hash }}</span>
+                    <span class="ref" [class]="'ref ref--' + job.branch">{{ job.branch }}</span>
+                    <span class="date">{{ range(job) }}</span>
+                    <span class="dur">· {{ duration(job) }}</span>
+                  </p>
+                  <h3 class="commit__title">
+                    {{ i18n.t(job.role) }}
+                    <span class="at">&#64;</span>
+                    <span class="company">{{ job.company }}</span>
+                  </h3>
+                  <p class="commit__sub">
+                    <span>{{ i18n.t(job.city) }}</span>
+                    <span class="chip">{{ i18n.t(job.kind) }}</span>
+                  </p>
+                </header>
+
+                <p class="commit__summary">{{ i18n.t(job.summary) }}</p>
+
+                <div class="commit__more" [id]="'job-' + job.id" [attr.aria-hidden]="!expanded().has(job.id)">
+                  <div>
+                    <ul class="highlights">
+                      @for (h of job.highlights[i18n.lang()]; track $index) {
+                        <li>{{ h }}</li>
+                      }
+                    </ul>
+                    <p class="stack">
+                      @for (s of job.stack; track s) {
+                        <span class="chip">{{ skill(s) }}</span>
+                      }
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="commit__toggle mono"
+                  [attr.aria-expanded]="expanded().has(job.id)"
+                  [attr.aria-controls]="'job-' + job.id"
+                  (click)="toggle(job.id)"
+                >
+                  {{ expanded().has(job.id) ? ui.collapse : ui.expand }}
+                  <app-icon name="arrowDown" [size]="14" />
+                </button>
+              </article>
+            }
+          }
+        }
+      </li>
+    }
+  </ol>
+</section>
