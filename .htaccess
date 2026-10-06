@@ -1,0 +1,41 @@
+# Apache config for the cPanel host (ignored by GitHub Pages).
+# The document root is a git checkout of the `deploy` branch, so the
+# repository metadata must never be served.
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Never expose git metadata.
+  RewriteRule (^|/)\.git(/|$) - [F,L]
+
+  # HTTPS + bare domain: http://, www. → https://amir-iravani.it
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Hashed bundles never change → cache for a year; HTML always revalidates.
+  <FilesMatch "-[A-Z0-9]{8}\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|webmanifest|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(png|jpg|webp|svg|ico)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/manifest+json text/xml text/plain
+</IfModule>
+
+AddType application/manifest+json .webmanifest
