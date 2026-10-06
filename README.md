@@ -9,7 +9,7 @@
 The personal site of Amir Mohammad Iravani, front-end engineer (Angular · React · Vue) in Turin, Italy.<br/>
 Built with **Angular 22**: zoneless, signals everywhere, in **English, Italiano and فارسی** with full RTL.
 
-[**Live site →**](https://amirdirv.github.io/amir-iravani-portfolio/) &nbsp;·&nbsp;
+[**Live site →**](https://amir-iravani.it/) &nbsp;·&nbsp;
 [LinkedIn](https://www.linkedin.com/in/amirmohammad-iravani/) &nbsp;·&nbsp;
 [Email](mailto:amirmohammad76@yahoo.com)
 
@@ -85,7 +85,7 @@ docs/                         # architecture, content guide, deployment, brand
 | --- | --- |
 | [Architecture](docs/ARCHITECTURE.md) | How state, i18n, rendering and the interactive pieces fit together |
 | [Editing content](docs/CONTENT.md) | Adding a job, a project, a skill or a translation |
-| [Deployment](docs/DEPLOYMENT.md) | GitHub Pages, a custom domain (`amir-iravani.com`), other hosts |
+| [Deployment](docs/DEPLOYMENT.md) | cPanel host via the `deploy` branch, GitHub Pages mirror, daily projects |
 | [Brand](docs/BRAND.md) | The Ai monogram, palette, typography and asset generation |
 | [راهنمای فارسی](docs/README.fa.md) | A short Persian guide for day-to-day updates |
 | [Changelog](CHANGELOG.md) | Release notes |

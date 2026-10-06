@@ -1,4 +1,8 @@
-name: Deploy to GitHub Pages
+name: Deploy
+
+# One build pipeline, two targets:
+#  1. `deploy` branch → pulled by the cPanel host that serves https://amir-iravani.it
+#  2. GitHub Pages    → https://amirdirv.github.io/amir-iravani-portfolio/ (mirror)
 
 on:
   push:
@@ -6,13 +10,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: deploy
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -26,17 +30,30 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test -- --watch=false
-      # Project pages live under /<repo>/; a custom domain (public/CNAME) is served from /.
-      - name: Build
-        run: |
-          if [ -f public/CNAME ]; then BASE=/; else BASE="/${GITHUB_REPOSITORY#*/}/"; fi
-          npx ng build --base-href "$BASE"
+
+      # Host build: served from the domain root.
+      - name: Build for amir-iravani.it
+        run: npx ng build --base-href / --output-path dist/host
+
+      - name: Publish to the deploy branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: deploy
+          publish_dir: dist/host/browser
+          commit_message: 'deploy: ${{ github.event.head_commit.message }}'
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+
+      # Pages build: project pages live under /<repo>/.
+      - name: Build for GitHub Pages
+        run: npx ng build --base-href "/${GITHUB_REPOSITORY#*/}/" --output-path dist/pages
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/amir-iravani-portfolio/browser
+          path: dist/pages/browser
 
-  deploy:
-    name: Deploy
+  pages:
+    name: GitHub Pages
     needs: build
     runs-on: ubuntu-latest
     environment:
