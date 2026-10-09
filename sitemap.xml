@@ -1,11 +1,305 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://amir-iravani.it/fa</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/" />
+    <image:image><image:loc>https://amir-iravani.it/og-image.png</image:loc></image:image>
+    <image:image><image:loc>https://amir-iravani.it/images/amir-iravani.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects/biu</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/biu" />
+    <image:image><image:loc>https://amir-iravani.it/og/biu.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects/diar</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/diar" />
+    <image:image><image:loc>https://amir-iravani.it/og/diar.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects/gharamatgate</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/gharamatgate" />
+    <image:image><image:loc>https://amir-iravani.it/og/gharamatgate.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects" />
+    <image:image><image:loc>https://amir-iravani.it/og-image.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects/pharma</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/pharma" />
+    <image:image><image:loc>https://amir-iravani.it/og/pharma.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects/portfolio</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/portfolio" />
+    <image:image><image:loc>https://amir-iravani.it/og/portfolio.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects/tulero</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/tulero" />
+    <image:image><image:loc>https://amir-iravani.it/og/tulero.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/fa/projects/vue-search</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/vue-search" />
+    <image:image><image:loc>https://amir-iravani.it/og/vue-search.png</image:loc></image:image>
+  </url>
   <url>
     <loc>https://amir-iravani.it/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/?lang=it" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/?lang=fa" />
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/" />
+    <image:image><image:loc>https://amir-iravani.it/og-image.png</image:loc></image:image>
+    <image:image><image:loc>https://amir-iravani.it/images/amir-iravani.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/" />
+    <image:image><image:loc>https://amir-iravani.it/og-image.png</image:loc></image:image>
+    <image:image><image:loc>https://amir-iravani.it/images/amir-iravani.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects/biu</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/biu" />
+    <image:image><image:loc>https://amir-iravani.it/og/biu.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects/diar</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/diar" />
+    <image:image><image:loc>https://amir-iravani.it/og/diar.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects/gharamatgate</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/gharamatgate" />
+    <image:image><image:loc>https://amir-iravani.it/og/gharamatgate.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects" />
+    <image:image><image:loc>https://amir-iravani.it/og-image.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects/pharma</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/pharma" />
+    <image:image><image:loc>https://amir-iravani.it/og/pharma.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects/portfolio</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/portfolio" />
+    <image:image><image:loc>https://amir-iravani.it/og/portfolio.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects/tulero</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/tulero" />
+    <image:image><image:loc>https://amir-iravani.it/og/tulero.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/it/projects/vue-search</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/vue-search" />
+    <image:image><image:loc>https://amir-iravani.it/og/vue-search.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/biu</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/biu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/biu" />
+    <image:image><image:loc>https://amir-iravani.it/og/biu.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/diar</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/diar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/diar" />
+    <image:image><image:loc>https://amir-iravani.it/og/diar.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/gharamatgate</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/gharamatgate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/gharamatgate" />
+    <image:image><image:loc>https://amir-iravani.it/og/gharamatgate.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects" />
+    <image:image><image:loc>https://amir-iravani.it/og-image.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/pharma</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/pharma" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/pharma" />
+    <image:image><image:loc>https://amir-iravani.it/og/pharma.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/portfolio</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/portfolio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/portfolio" />
+    <image:image><image:loc>https://amir-iravani.it/og/portfolio.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/tulero</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/tulero" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/tulero" />
+    <image:image><image:loc>https://amir-iravani.it/og/tulero.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/vue-search</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/vue-search" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/vue-search" />
+    <image:image><image:loc>https://amir-iravani.it/og/vue-search.png</image:loc></image:image>
   </url>
 </urlset>

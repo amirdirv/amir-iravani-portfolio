@@ -1,0 +1,34 @@
+# Amir Iravani
+
+> Front-end engineer in Turin with 10+ years in Angular, React and Vue. Digital Horizons IT programme at ENAIP Piemonte; open to full-time roles in Italy.
+
+Amir Mohammad Iravani is a front-end engineer based in Turin (Torino), Italy, with over ten years of experience building web interfaces, mainly with Angular, as well as React and Vue. He has worked as a sole front-end developer on a B2B marketplace, as a CTO, and as co-founder of a web agency, and now builds startup MVPs. He speaks Persian (native), English (C1) and Italian (B1), and holds an unrestricted Italian work permit for full-time roles.
+
+The site is available in English (root), Italian (/it) and Persian (/fa). Contact: amirmohammad76@yahoo.com.
+
+## Pages
+
+- [Home](https://amir-iravani.it/): Front-end engineer in Turin with 10+ years in Angular, React and Vue. Digital Horizons IT programme at ENAIP Piemonte; open to full-time roles in Italy.
+- [Projects](https://amir-iravani.it/projects): Selected work by front-end engineer Amir Iravani: a ten-language AI news platform, a B2B auto-parts marketplace, startup MVPs, e-commerce and open source.
+
+## Projects
+
+- [BIU Startup MVPs](https://amir-iravani.it/projects/biu): From pitch deck to product for the next wave of Turin startups. Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torino × ESCP…
+- [DIAR Media](https://amir-iravani.it/projects/diar): A community news platform with an AI newsroom that never sleeps. The news outlet of Associazione DIAR. Persian-first, ten-language news site where…
+- [Gharamatgate](https://amir-iravani.it/projects/gharamatgate): An open investigative archive of the Iran–US compensation cases. Persian-language research database that documents lawsuits, US court judgments and…
+- [Medical & Pharma Commerce](https://amir-iravani.it/projects/pharma): Online stores and sites for clinics, labs and pharma distributors. A portfolio of WooCommerce/PHP builds delivered through Vira Tarfand Arad, the agency…
+- [This Portfolio](https://amir-iravani.it/projects/portfolio): Angular 22, zoneless, signals all the way down — in three languages. A live signal graph of my skills, a git-log career timeline, a command palette, a…
+- [Tulero](https://amir-iravani.it/projects/tulero): A B2B marketplace that puts half a million car parts one search away. Italian repair shops order spare parts straight from distribution platforms across…
+- [Vue Repository Search](https://amir-iravani.it/projects/vue-search): A lean GitHub repository explorer built with Vue. Searches the GitHub API as you type and presents results in a clean, responsive list — a small study in…
+
+## Other languages
+
+- [Italiano](https://amir-iravani.it/it): versione italiana del sito
+- [فارسی](https://amir-iravani.it/fa): نسخهٔ فارسی سایت
+
+## Optional
+
+- [Full text of every English page](https://amir-iravani.it/llms-full.txt)
+- [LinkedIn](https://www.linkedin.com/in/amirmohammad-iravani/)
+- [GitHub](https://github.com/amirdirv)
+- [Source code of this site](https://github.com/amirdirv/amir-iravani-portfolio)
