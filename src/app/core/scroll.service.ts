@@ -1,4 +1,5 @@
 import { DOCUMENT, Injectable, inject, signal } from '@angular/core';
+import { prefersReducedMotion } from './motion';
 
 export const SECTION_IDS = [
   'about',
@@ -11,8 +12,9 @@ export const SECTION_IDS = [
 export type SectionId = (typeof SECTION_IDS)[number];
 
 /**
- * Tracks scroll progress and which section is on screen, as signals.
- * One passive listener + one IntersectionObserver for the whole page.
+ * Scroll state as signals (progress, scroll-spy) and in-page section jumps.
+ * Pages are real documents, so back/forward and `#anchor` scrolling are the
+ * browser's own; this only adds smooth scrolling and focus management.
  */
 @Injectable({ providedIn: 'root' })
 export class ScrollService {
@@ -39,34 +41,51 @@ export class ScrollService {
       const max = el.scrollHeight - el.clientHeight;
       this.progress.set(max > 0 ? Math.min(1, el.scrollTop / max) : 0);
       this.scrolled.set(el.scrollTop > 24);
+      this.active.set(this.sectionAt(win.innerHeight * 0.45));
     };
     win.addEventListener('scroll', () => (frame ||= win.requestAnimationFrame(update)), {
       passive: true,
     });
     update();
 
-    if (typeof IntersectionObserver === 'undefined') return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) this.active.set(entry.target.id as SectionId);
-        }
-      },
-      { rootMargin: '-45% 0px -50% 0px' },
-    );
-    for (const id of SECTION_IDS) {
-      const section = this.document.getElementById(id);
-      if (section) observer.observe(section);
-    }
+    // From now on in-page #anchor links animate (the landing jump stayed instant).
+    win.requestAnimationFrame(() => this.document.documentElement.classList.add('smooth-scroll'));
+
+    // Native #anchor jumps (links, back/forward): move focus to the section too.
+    win.addEventListener('hashchange', () => this.focusSection(win.location.hash.slice(1)));
   }
 
-  scrollTo(id: string): void {
-    const target = id === 'top' ? this.document.body : this.document.getElementById(id);
-    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Move focus for keyboard and screen-reader users without a second jump.
-    if (target && id !== 'top') {
-      target.setAttribute('tabindex', '-1');
-      target.focus({ preventScroll: true });
+  scrollTo(id: string, behavior: ScrollBehavior = 'smooth'): void {
+    const win = this.document.defaultView;
+    if (id === 'top') {
+      win?.scrollTo({ top: 0, behavior: this.motion(behavior) });
+      return;
     }
+    const target = this.document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: this.motion(behavior), block: 'start' });
+    this.focusSection(id);
+  }
+
+  /** Moves focus for keyboard and screen-reader users without a second jump. */
+  private focusSection(id: string): void {
+    const target = id ? this.document.getElementById(id) : null;
+    if (!target) return;
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  }
+
+  /** The last section whose top has passed `line` px from the viewport top. */
+  private sectionAt(line: number): SectionId | null {
+    let current: SectionId | null = null;
+    for (const id of SECTION_IDS) {
+      const el = this.document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= line) current = id;
+    }
+    return current;
+  }
+
+  private motion(behavior: ScrollBehavior): ScrollBehavior {
+    return prefersReducedMotion() ? 'instant' : behavior;
   }
 }

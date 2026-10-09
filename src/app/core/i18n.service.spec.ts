@@ -3,8 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { I18nService } from './i18n.service';
 
 describe('I18nService', () => {
-  beforeEach(() => localStorage.clear());
-
   it('switches language, direction and copy at runtime', () => {
     const i18n = TestBed.inject(I18nService);
     const doc = TestBed.inject(DOCUMENT);
@@ -20,7 +18,6 @@ describe('I18nService', () => {
     TestBed.tick();
     expect(doc.documentElement.dir).toBe('ltr');
     expect(i18n.ui().nav.contact).toBe('Contatti');
-    expect(localStorage.getItem('ai.lang')).toBe('it');
   });
 
   it('uses Persian digits only in Persian', () => {

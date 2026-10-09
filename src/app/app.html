@@ -1,4 +1,6 @@
-<a class="skip-link" href="#main">{{ i18n.ui().common.skip }}</a>
+<a class="skip-link" [href]="skipHref()" (click)="skipToMain($event)">{{
+  i18n.ui().common.skip
+}}</a>
 
 <div class="backdrop" aria-hidden="true">
   <div class="backdrop__aurora"></div>
@@ -9,16 +11,40 @@
 <app-nav />
 
 <main id="main" tabindex="-1">
-  <app-hero />
-  <app-about />
-  <app-signal-graph />
-  <app-experience />
-  <app-projects />
-  <app-education />
-  <app-contact />
+  <!--
+    Each page ships its own JS chunk: the prerendered HTML is shown at once,
+    the matching chunk is fetched immediately and hydrates it.
+  -->
+  @switch (page.route.kind) {
+    @case ('home') {
+      @defer (on immediate; hydrate on immediate) {
+        <app-home-page />
+      }
+    }
+    @case ('projects') {
+      @defer (on immediate; hydrate on immediate) {
+        <app-projects-page />
+      }
+    }
+    @case ('project') {
+      @defer (on immediate; hydrate on immediate) {
+        <app-project-page />
+      }
+    }
+    @default {
+      @defer (on immediate; hydrate on immediate) {
+        <app-not-found-page />
+      }
+    }
+  }
 </main>
 
 <app-footer />
 
-<app-command-palette />
-<app-terminal />
+<!-- Keyboard overlays: their code is fetched the first time they are opened. -->
+@defer (when commands.paletteOpen(); prefetch on idle) {
+  <app-command-palette />
+}
+@defer (when commands.terminalOpen(); prefetch on idle) {
+  <app-terminal />
+}

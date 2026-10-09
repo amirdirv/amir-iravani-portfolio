@@ -422,6 +422,7 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     id: 'tulero',
+    experience: 'meyler',
     name: 'Tulero',
     year: '2023–24',
     featured: true,
@@ -445,6 +446,7 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     id: 'biu',
+    experience: 'biu',
     name: 'BIU Startup MVPs',
     year: '2025–',
     featured: true,
@@ -464,6 +466,7 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     id: 'pharma',
+    experience: 'vira',
     name: 'Medical & Pharma Commerce',
     year: '2018–21',
     palette: ['#00A6A6', '#0B2945'],

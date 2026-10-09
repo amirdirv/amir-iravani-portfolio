@@ -8,14 +8,15 @@
     </p>
 
     <h1 class="hero__title" id="hero-title">
-      <span class="hero__hello">{{ ui.hello }}</span>
-      <span class="hero__name" translate="no">
+      <!-- &ngsp; keeps real spaces in the heading text ("Hi, I’m Amir Iravani")
+           even though every letter is its own animated span. -->
+      <span class="hero__hello">{{ ui.hello }}</span
+      >&ngsp;<span class="hero__name" translate="no">
         <span class="word">
           @for (ch of letters().first; track $index) {
             <span class="ch" [style.--i]="$index">{{ ch }}</span>
-          }
-        </span>
-        <span class="word gradient-text">
+          }</span
+        >&ngsp;<span class="word gradient-text">
           @for (ch of letters().last; track $index) {
             <span class="ch" [style.--i]="$index + 4">{{ ch }}</span>
           }
@@ -26,18 +27,19 @@
     <p class="hero__role mono" aria-live="off">
       <span class="prompt" aria-hidden="true">&gt;</span>
       <span class="typed">{{ typed() }}</span
-      ><span class="caret" aria-hidden="true"></span>
-      <span class="visually-hidden">{{ ui.roles.join(', ') }}</span>
+      ><span class="caret" aria-hidden="true"></span>&ngsp;<span class="visually-hidden">{{
+        ui.roles.join(', ')
+      }}</span>
     </p>
 
     <p class="hero__lead">{{ ui.lead }}</p>
 
     <div class="hero__cta">
-      <a class="btn btn--primary" href="#projects" (click)="go('projects', $event)">
+      <a class="btn btn--primary" [href]="nav.section('projects')">
         {{ ui.ctaWork }}
         <app-icon name="arrow" [size]="18" class="flip-rtl" />
       </a>
-      <a class="btn" href="#contact" (click)="go('contact', $event)">{{ ui.ctaContact }}</a>
+      <a class="btn" [href]="nav.section('contact')">{{ ui.ctaContact }}</a>
     </div>
   </div>
 
@@ -59,7 +61,7 @@
     }
   </dl>
 
-  <a class="hero__scroll mono" href="#about" (click)="go('about', $event)">
+  <a class="hero__scroll mono" [href]="nav.section('about')">
     {{ ui.scroll }}
     <app-icon name="arrowDown" [size]="16" />
   </a>

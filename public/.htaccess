@@ -1,8 +1,15 @@
-# Apache config for the cPanel host (ignored by GitHub Pages).
-# The document root is a git checkout of the `deploy` branch, so the
-# repository metadata must never be served.
+# Apache config for the cPanel host that serves https://amir-iravani.it
+# The document root is a git checkout of the `deploy` branch.
 
 Options -Indexes
+DirectoryIndex index.html
+
+# Clean URLs: /it/projects/diar is served from /it/projects/diar/index.html
+# without Apache's automatic redirect to a trailing slash.
+DirectorySlash Off
+
+# Custom 404 page (prerendered, noindex) with a real 404 status.
+ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -10,20 +17,38 @@ Options -Indexes
   # Never expose git metadata.
   RewriteRule (^|/)\.git(/|$) - [F,L]
 
-  # HTTPS + bare domain: http://, www. → https://amir-iravani.it
+  # One canonical host and scheme: http://, www. → https://amir-iravani.it
   RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} ^www\. [NC]
   RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
-  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L,NE]
+
+  # Old language links (?lang=it / ?lang=fa / ?lang=en) → language URLs.
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=(it|fa)(?:&|$)
+  RewriteRule ^(.*)$ /%1/$1? [R=301,L]
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=en(?:&|$)
+  RewriteRule ^(.*)$ /$1? [R=301,L]
+
+  # One URL per page: drop "index.html" and trailing slashes.
+  RewriteCond %{THE_REQUEST} \s/+(.*?/)?index\.html[\s?]
+  RewriteRule ^ /%1 [R=301,L]
+  RewriteCond %{REQUEST_URI} !^/$
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+  # Serve the prerendered page for a clean URL.
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.+)$ $1/index.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
 
   # Hashed bundles never change → cache for a year; HTML always revalidates.
-  <FilesMatch "-[A-Z0-9]{8}\.(js|css)$">
+  <FilesMatch "^(chunk|main|styles|polyfills)-[A-Za-z0-9_-]{8}\.(js|css)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <FilesMatch "\.(html|webmanifest|xml|txt)$">
@@ -35,7 +60,9 @@ Options -Indexes
 </IfModule>
 
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/manifest+json text/xml text/plain
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json image/svg+xml application/manifest+json text/xml application/xml text/plain
 </IfModule>
 
 AddType application/manifest+json .webmanifest
+AddType text/plain .txt
+AddDefaultCharset utf-8

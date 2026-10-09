@@ -83,7 +83,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-h) + 16px);
   -webkit-text-size-adjust: 100%;
 }
@@ -139,6 +138,13 @@ h4 {
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+/* Persian script is cursive: tracking pulls joined letters apart, and it has no
+   upper case. Labels that are tracked/uppercased in Latin stay natural here. */
+:root[lang='fa'] * {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
 }
 
 :root[lang='fa'] :is(h1, h2, h3, h4) {
@@ -306,8 +312,14 @@ p {
   }
 }
 
+/* Smooth in-page jumps, enabled after load (ScrollService) so that arriving
+   at /#contact from another page lands instantly instead of animating. */
+html.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html.smooth-scroll {
     scroll-behavior: auto;
   }
 

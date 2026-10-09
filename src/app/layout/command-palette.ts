@@ -10,7 +10,9 @@ import {
 } from '@angular/core';
 import { CommandsService } from '../core/commands.service';
 import { I18nService, LANGS } from '../core/i18n.service';
-import { SECTION_IDS, ScrollService } from '../core/scroll.service';
+import { SECTION_IDS } from '../core/scroll.service';
+import { SiteNav } from '../core/site-nav.service';
+import { PROJECTS } from '../data/profile';
 import { ThemeService } from '../core/theme.service';
 import { PERSON, SOCIALS } from '../data/profile';
 import { copyText } from '../shared/clipboard';
@@ -66,7 +68,7 @@ export class CommandPalette {
   protected readonly i18n = inject(I18nService);
   private readonly commands = inject(CommandsService);
   private readonly theme = inject(ThemeService);
-  private readonly scroll = inject(ScrollService);
+  private readonly nav = inject(SiteNav);
 
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private readonly input = viewChild.required<ElementRef<HTMLInputElement>>('input');
@@ -83,8 +85,27 @@ export class CommandPalette {
       label: ui.nav[id],
       icon: 'arrow',
       hint: '#' + id,
-      run: () => this.scroll.scrollTo(id),
+      run: () => this.nav.goToSection(id),
     }));
+    // Every project page is one keystroke away.
+    const pages: Command[] = [
+      {
+        id: 'page-projects',
+        group: p.navigate,
+        label: ui.project.allProjects,
+        icon: 'briefcase',
+        hint: '/projects',
+        run: () => this.nav.go(this.nav.projects()),
+      },
+      ...PROJECTS.map((proj): Command => ({
+        id: 'page-' + proj.id,
+        group: p.navigate,
+        label: proj.name,
+        icon: 'arrow',
+        hint: '/projects/' + proj.id,
+        run: () => this.nav.go(this.nav.project(proj.id)),
+      })),
+    ];
     const actions: Command[] = [
       {
         id: 'terminal',
@@ -121,7 +142,7 @@ export class CommandPalette {
         label: `${p.switchLang} ${l.native}`,
         icon: 'globe',
         hint: l.label,
-        run: () => this.i18n.set(l.code),
+        run: () => this.nav.switchLang(l.code),
       })),
     ];
     const links: Command[] = SOCIALS.map((s) => ({
@@ -132,7 +153,7 @@ export class CommandPalette {
       hint: s.id === 'email' ? s.handle : '@' + s.handle,
       run: () => window.open(s.url, s.id === 'email' ? '_self' : '_blank', 'noopener'),
     }));
-    return [...go, ...actions, ...links];
+    return [...go, ...pages, ...actions, ...links];
   });
 
   protected readonly results = computed(() => {

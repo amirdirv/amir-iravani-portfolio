@@ -13,80 +13,18 @@
     <meta name="theme-color" content="#07070c" />
     <meta name="color-scheme" content="dark light" />
 
-    <!-- Canonical URL + languages (the app switches language at runtime via ?lang=). -->
-    <link rel="canonical" href="https://amir-iravani.it/" />
-    <link rel="alternate" hreflang="en" href="https://amir-iravani.it/?lang=en" />
-    <link rel="alternate" hreflang="it" href="https://amir-iravani.it/?lang=it" />
-    <link rel="alternate" hreflang="fa" href="https://amir-iravani.it/?lang=fa" />
-    <link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/" />
-
-    <!-- Social previews -->
-    <meta property="og:type" content="profile" />
+    <!-- Per-page title, description, robots, canonical, hreflang, Open Graph and JSON-LD
+         are written by SeoService during prerendering (src/app/core/seo.service.ts). -->
     <meta property="og:site_name" content="Amir Iravani" />
-    <meta property="og:title" content="Amir Iravani — Front-End Engineer (Angular) in Turin" />
-    <meta
-      property="og:description"
-      content="10+ years building fast, accessible interfaces with Angular, React and Vue. Available full-time in Italy."
-    />
-    <meta property="og:url" content="https://amir-iravani.it/" />
-    <meta property="og:image" content="https://amir-iravani.it/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Ai monogram — Amir Iravani, front-end engineer" />
-    <meta property="og:locale" content="en_GB" />
-    <meta property="og:locale:alternate" content="it_IT" />
-    <meta property="og:locale:alternate" content="fa_IR" />
-    <meta property="profile:first_name" content="Amir Mohammad" />
-    <meta property="profile:last_name" content="Iravani" />
-    <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Structured data for search engines. -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Amir Mohammad Iravani",
-        "alternateName": "Amir Iravani",
-        "jobTitle": "Front-End Engineer",
-        "description": "Front-end engineer specialised in Angular, React and Vue, based in Turin, Italy.",
-        "url": "https://amir-iravani.it/",
-        "image": "https://amir-iravani.it/images/amir-iravani.jpg",
-        "email": "mailto:amirmohammad76@yahoo.com",
-        "address": { "@type": "PostalAddress", "addressLocality": "Turin", "addressCountry": "IT" },
-        "alumniOf": [
-          {
-            "@type": "CollegeOrUniversity",
-            "name": "Politecnico di Torino",
-            "url": "https://www.polito.it"
-          },
-          {
-            "@type": "CollegeOrUniversity",
-            "name": "Islamic Azad University, West Tehran Branch",
-            "url": "https://www.wtiau.ir"
-          }
-        ],
-        "knowsLanguage": ["fa", "en", "it"],
-        "knowsAbout": [
-          "Angular",
-          "TypeScript",
-          "React",
-          "Vue.js",
-          "Node.js",
-          "Front-end development",
-          "Web accessibility"
-        ],
-        "sameAs": [
-          "https://www.linkedin.com/in/amirmohammad-iravani/",
-          "https://github.com/amirdirv",
-          "https://www.instagram.com/amirmohammadirv/"
-        ]
-      }
-    </script>
-
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -109,12 +47,5 @@
   </head>
   <body>
     <app-root></app-root>
-    <noscript>
-      <p style="padding: 24px; font-family: system-ui">
-        Amir Mohammad Iravani — Front-end engineer (Angular, React, Vue) in Turin, Italy.
-        <a href="mailto:amirmohammad76@yahoo.com">amirmohammad76@yahoo.com</a> ·
-        <a href="https://www.linkedin.com/in/amirmohammad-iravani/">LinkedIn</a>
-      </p>
-    </noscript>
   </body>
 </html>

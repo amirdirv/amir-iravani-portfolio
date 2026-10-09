@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   afterNextRender,
   computed,
   effect,
@@ -10,7 +9,7 @@ import {
 } from '@angular/core';
 import { I18nService } from '../../core/i18n.service';
 import { prefersReducedMotion } from '../../core/motion';
-import { ScrollService } from '../../core/scroll.service';
+import { SiteNav } from '../../core/site-nav.service';
 import { EXPERIENCES, PERSON, SPOKEN_LANGUAGES } from '../../data/profile';
 import { Icon } from '../../shared/icon';
 import { ParticleMonogram } from './particle-monogram';
@@ -28,13 +27,10 @@ const HOLD_MS = 1800;
 })
 export class Hero {
   protected readonly i18n = inject(I18nService);
-  private readonly scroll = inject(ScrollService);
-  private readonly destroyRef = inject(DestroyRef);
+  protected readonly nav = inject(SiteNav);
 
   /** Text currently shown by the role typewriter. */
   protected readonly typed = signal('');
-  /** 0 → 1 progress of the stat counters. */
-  private readonly countUp = signal(0);
 
   private readonly stats = [
     { value: new Date().getFullYear() - PERSON.careerStart, suffix: '+', key: 'statYears' },
@@ -45,9 +41,9 @@ export class Hero {
 
   protected readonly statView = computed(() => {
     const ui = this.i18n.ui().hero;
-    const k = this.countUp();
+    // Real numbers in the HTML: crawlers and no-JS visitors see the facts.
     return this.stats.map((s) => ({
-      value: this.i18n.num(Math.round(s.value * k)) + s.suffix,
+      value: this.i18n.num(s.value) + s.suffix,
       label: ui[s.key],
     }));
   });
@@ -62,9 +58,7 @@ export class Hero {
 
   constructor() {
     afterNextRender(() => {
-      const reduced = prefersReducedMotion();
-      this.animateCounters(reduced);
-      if (reduced) this.typed.set(this.i18n.ui().hero.roles[0] ?? '');
+      if (prefersReducedMotion()) this.typed.set(this.i18n.ui().hero.roles[0] ?? '');
     });
 
     // Restart the typewriter whenever the language changes.
@@ -103,27 +97,5 @@ export class Hero {
       timer = window.setTimeout(tick, 600);
       onCleanup(() => clearTimeout(timer));
     });
-  }
-
-  protected go(id: string, event: Event): void {
-    event.preventDefault();
-    this.scroll.scrollTo(id);
-  }
-
-  private animateCounters(reduced: boolean): void {
-    if (reduced) {
-      this.countUp.set(1);
-      return;
-    }
-    const start = performance.now() + 700;
-    const duration = 1600;
-    let frame = 0;
-    const step = (now: number) => {
-      const t = Math.min(1, Math.max(0, (now - start) / duration));
-      this.countUp.set(1 - Math.pow(1 - t, 4));
-      if (t < 1) frame = requestAnimationFrame(step);
-    };
-    frame = requestAnimationFrame(step);
-    this.destroyRef.onDestroy(() => cancelAnimationFrame(frame));
   }
 }

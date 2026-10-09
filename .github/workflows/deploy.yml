@@ -1,8 +1,9 @@
 name: Deploy
 
-# One build pipeline, two targets:
-#  1. `deploy` branch → pulled by the cPanel host that serves https://amir-iravani.it
-#  2. GitHub Pages    → https://amirdirv.github.io/amir-iravani-portfolio/ (mirror)
+# push to main → test → prerender → SEO audit → publish
+#  1. `deploy` branch → pulled every 5 min by the cPanel host serving https://amir-iravani.it
+#  2. GitHub Pages    → a redirect stub, so old amirdirv.github.io links land on the domain
+#                       (and search engines see a single canonical site)
 
 on:
   push:
@@ -20,7 +21,7 @@ concurrency:
 
 jobs:
   build:
-    name: Test & build
+    name: Test, build & audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,30 +31,51 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test -- --watch=false
-
-      # Host build: served from the domain root.
-      - name: Build for amir-iravani.it
-        run: npx ng build --base-href / --output-path dist/host
+      - name: Build (prerender every page + sitemap, llms.txt, 404)
+        run: npm run build
+      - name: SEO audit (fails the deploy on any error)
+        run: npm run seo:check
 
       - name: Publish to the deploy branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: deploy
-          publish_dir: dist/host/browser
+          publish_dir: dist/amir-iravani-portfolio/browser
           commit_message: 'deploy: ${{ github.event.head_commit.message }}'
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
 
-      # Pages build: project pages live under /<repo>/.
-      - name: Build for GitHub Pages
-        run: npx ng build --base-href "/${GITHUB_REPOSITORY#*/}/" --output-path dist/pages
+      - name: Build the GitHub Pages redirect stub
+        run: |
+          mkdir -p pages
+          cat > pages/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <title>Amir Iravani — moved to amir-iravani.it</title>
+              <meta name="robots" content="noindex" />
+              <link rel="canonical" href="https://amir-iravani.it/" />
+              <meta http-equiv="refresh" content="0; url=https://amir-iravani.it/" />
+              <script>
+                // Keep the path: /amir-iravani-portfolio/it/projects/diar → amir-iravani.it/it/projects/diar
+                var rest = location.pathname.replace(/^\/[^/]+/, '') || '/';
+                location.replace('https://amir-iravani.it' + rest + location.search + location.hash);
+              </script>
+            </head>
+            <body>
+              <p>This site now lives at <a href="https://amir-iravani.it/">amir-iravani.it</a>.</p>
+            </body>
+          </html>
+          HTML
+          cp pages/index.html pages/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/pages/browser
+          path: pages
 
   pages:
-    name: GitHub Pages
+    name: GitHub Pages redirect
     needs: build
     runs-on: ubuntu-latest
     environment:

@@ -5,7 +5,7 @@
 ></div>
 
 <nav class="bar container" [attr.aria-label]="i18n.ui().common.menu">
-  <a class="brand" href="#top" (click)="go('top', $event)">
+  <a class="brand" [href]="nav.home()" (click)="menuOpen.set(false)">
     <app-logo [size]="34" [animated]="true" />
     <span class="brand__name" translate="no">Amir&nbsp;Iravani</span>
   </a>
@@ -14,10 +14,10 @@
     @for (link of links(); track link.id) {
       <li>
         <a
-          [href]="'#' + link.id"
-          [class.is-active]="scroll.active() === link.id"
-          [attr.aria-current]="scroll.active() === link.id ? 'true' : null"
-          (click)="go(link.id, $event)"
+          [href]="nav.section(link.id)"
+          [class.is-active]="isHome && scroll.active() === link.id"
+          [attr.aria-current]="isHome && scroll.active() === link.id ? 'location' : null"
+          (click)="menuOpen.set(false)"
           >{{ link.label }}</a
         >
       </li>
@@ -37,16 +37,16 @@
 
     <div class="langs" role="group" [attr.aria-label]="i18n.ui().common.language">
       @for (l of langs; track l.code) {
-        <button
-          type="button"
+        <a
+          [href]="nav.langLink(l.code)"
+          (click)="nav.onLangClick($event, l.code)"
           [class.is-active]="i18n.lang() === l.code"
-          [attr.aria-pressed]="i18n.lang() === l.code"
+          [attr.aria-current]="i18n.lang() === l.code ? 'true' : null"
+          [attr.hreflang]="l.code"
           [attr.lang]="l.code"
           [title]="l.native"
-          (click)="i18n.set(l.code)"
+          >{{ l.label }}</a
         >
-          {{ l.label }}
-        </button>
       }
     </div>
 

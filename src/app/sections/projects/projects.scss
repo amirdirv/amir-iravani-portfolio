@@ -187,3 +187,29 @@
     aspect-ratio: 5 / 3;
   }
 }
+
+.project__title-link {
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
+  transition: background-size 0.3s var(--ease-out);
+
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 2px;
+  }
+}
+
+.link--strong {
+  color: var(--c-sun);
+}
+
+.all {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+:host-context([dir='rtl']) .flip-rtl {
+  transform: scaleX(-1);
+}

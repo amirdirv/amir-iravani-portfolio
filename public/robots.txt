@@ -1,4 +1,7 @@
+# https://amir-iravani.it — every page is public and meant to be found.
 User-agent: *
 Allow: /
+
+# AI assistants: a curated summary lives at /llms.txt (full text: /llms-full.txt).
 
 Sitemap: https://amir-iravani.it/sitemap.xml

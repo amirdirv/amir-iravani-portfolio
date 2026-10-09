@@ -50,6 +50,8 @@ export interface Project {
   readonly stack: readonly string[];
   readonly url?: string;
   readonly repo?: string;
+  /** Id of the experience this project was built in, for cross-linking. */
+  readonly experience?: string;
   /** Two CSS colours used for the card's generative cover. */
   readonly palette: readonly [string, string];
   readonly featured?: boolean;

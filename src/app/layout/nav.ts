@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommandsService } from '../core/commands.service';
 import { I18nService, LANGS } from '../core/i18n.service';
-import { SECTION_IDS, ScrollService, SectionId } from '../core/scroll.service';
+import { SECTION_IDS, ScrollService } from '../core/scroll.service';
+import { SiteNav } from '../core/site-nav.service';
 import { ThemeService } from '../core/theme.service';
 import { Icon } from '../shared/icon';
 import { Logo } from '../shared/logo';
@@ -19,6 +20,10 @@ export class Nav {
   protected readonly theme = inject(ThemeService);
   protected readonly scroll = inject(ScrollService);
   protected readonly commands = inject(CommandsService);
+  protected readonly nav = inject(SiteNav);
+
+  /** Scroll-spy highlighting only makes sense on the homepage. */
+  protected readonly isHome = this.nav.isHome;
 
   protected readonly langs = LANGS;
   protected readonly menuOpen = signal(false);
@@ -31,10 +36,4 @@ export class Nav {
   /** ⌘ on Apple platforms, Ctrl elsewhere — only used for the hint label. */
   protected readonly modKey =
     typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl';
-
-  protected go(id: SectionId | 'top', event?: Event): void {
-    event?.preventDefault();
-    this.menuOpen.set(false);
-    this.scroll.scrollTo(id);
-  }
 }

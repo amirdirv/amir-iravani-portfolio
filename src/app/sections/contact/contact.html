@@ -44,8 +44,8 @@
         name="name"
         autocomplete="name"
         required
-        [ngModel]="name()"
-        (ngModelChange)="name.set($event)"
+        [value]="name()"
+        (input)="name.set($any($event.target).value)"
       />
     </label>
     <label class="field">
@@ -54,8 +54,8 @@
         type="text"
         name="company"
         autocomplete="organization"
-        [ngModel]="company()"
-        (ngModelChange)="company.set($event)"
+        [value]="company()"
+        (input)="company.set($any($event.target).value)"
       />
     </label>
     <label class="field">
@@ -64,8 +64,8 @@
         name="message"
         rows="5"
         required
-        [ngModel]="message()"
-        (ngModelChange)="message.set($event)"
+        [value]="message()"
+        (input)="message.set($any($event.target).value)"
       ></textarea>
     </label>
 
