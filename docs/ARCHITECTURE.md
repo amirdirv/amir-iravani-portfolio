@@ -1,6 +1,6 @@
 # Architecture
 
-A single-page Angular 22 application with no router, no backend and no runtime dependencies beyond Angular. Everything is a standalone `OnPush` component; change detection is **zoneless** and driven entirely by signals.
+A **prerendered multi-page site** built with Angular 22: every URL is a static HTML file generated at build time and then hydrated in the browser. There is no router, no backend and no runtime dependency beyond Angular. Everything is a standalone `OnPush` component; change detection is **zoneless** and driven entirely by signals.
 
 ```
             ┌──────────────── data/ (pure TS) ────────────────┐
@@ -13,12 +13,28 @@ A single-page Angular 22 application with no router, no backend and no runtime d
    │ ThemeService  theme                    │      │ CommandPalette   │
    │ ScrollService progress · active        │      │ Terminal (+shell)│
    │ CommandsService paletteOpen · terminal │      └──────────────────┘
-   │ dates.ts · motion.ts · storage.ts      │      ┌──── sections/ ───┐
+   │ PageService · SeoService · SiteNav     │      ┌──── sections/ ───┐
    └────────────────────────────────────────┘◄─────│ Hero · About ·   │
                                                    │ SignalGraph ·    │
                                                    │ Experience · ... │
                                                    └──────────────────┘
 ```
+
+## Pages, prerendering and hydration
+
+| URL | Page | Count |
+| --- | --- | --- |
+| `/`, `/it`, `/fa` | `HomePage` (the one-page portfolio) | 3 |
+| `/projects`, `/it/projects`, `/fa/projects` | `ProjectsPage` | 3 |
+| `/projects/:id` (+ `/it`, `/fa`) | `ProjectPage`, one per project | 21 |
+| `/404` → `404.html` | `NotFoundPage` (noindex) | 1 |
+
+- `tools/routes.mjs` writes `routes.txt` from the project ids in `profile.ts`; the builder prerenders exactly those URLs (`prerender.routesFile`), so a new project gets its three pages automatically.
+- **No client router.** `PageService.resolveRoute()` maps the URL the document was loaded with to a page, identically on the server and in the browser. Links between pages are ordinary `<a href>` page loads of static files; back/forward and `#anchors` are native. This removed ~95 kB of router code.
+- Each page is its own lazy chunk (`@defer (on immediate; hydrate on immediate)` in `app.html`), and below-the-fold home sections hydrate only when scrolled into view (`hydrate on viewport`, incremental hydration). The command palette and terminal load the first time they are opened.
+- `SeoService` writes the per-page `<head>` during prerendering: title, description, robots, canonical, `hreflang` alternates, Open Graph/Twitter and one JSON-LD `@graph` (built in `core/schema.ts`: WebSite, ProfilePage, Person, ProfessionalService, CollectionPage, WebPage, CreativeWork/SoftwareSourceCode, BreadcrumbList).
+- `tools/postbuild.mjs` turns `/404` into `404.html` and generates `sitemap.xml` (with alternates and images), `llms.txt` and `llms-full.txt` from the prerendered pages themselves.
+- `tools/seo-check.mjs` audits the output like a crawler (titles, descriptions, one h1, heading order, canonical/hreflang reciprocity, JSON-LD, breadcrumbs, alt text, every internal link and `#fragment`, sitemap coverage, robots, favicons, llms.txt, `.htaccess` rules). CI and the deploy fail on any error.
 
 ## State: signals only
 
@@ -36,7 +52,7 @@ Components only *read* shared signals and call service methods to change them. S
 
 - `data/ui.ts` is a tree of `{ en, it, fa }` leaves. `I18nService.ui()` is a `computed` that resolves the whole tree for the current language, so templates write `i18n.ui().hero.lead`, typed end to end via the `Resolve<T>` mapped type.
 - Content in `data/profile.ts` uses the same `Localized` shape and is read with `i18n.t(value)`.
-- Initial language: `?lang=` → `localStorage` → browser language → English.
+- The language is part of the URL: English at `/`, Italian at `/it`, Persian at `/fa`. Each language is its own prerendered page, so all three are indexable. Old `?lang=` links are 301-redirected by the host.
 - Persian: `dir="rtl"` on `<html>`, Vazirmatn font, Persian digits through `i18n.num()`, and the **Gregorian** calendar (`Intl` with `calendar: 'gregory'`) so dates match the CV.
 - Layout uses logical properties (`inset-inline-start`, `margin-inline-*`, `padding-inline-*`), so RTL needs very few overrides (mostly mirroring arrows and the merge curve).
 - A unit test walks the whole `UI` tree and fails if any key is missing in any language.
@@ -70,8 +86,9 @@ Both are native `<dialog>`s opened with `showModal()` from an `effect` on `Comma
 - Zoneless + `OnPush` + signals means change detection runs only where a signal changed.
 - Canvas loops stop off-screen; ambient effects are CSS-only.
 - Google Fonts load with `media="print"` → `all`, so they never block bootstrap.
-- No third-party runtime: the initial transfer is about 93 KB.
+- Content is in the HTML: first paint and LCP never wait for JavaScript.
+- No router and no third-party runtime: ~83 kB gzip of shared JS, plus a 1–7 kB chunk for the page you are on; home sections below the fold (~38 kB raw) load only when scrolled to.
 
 ## Testing
 
-`npm test` runs Vitest in jsdom via `@angular/build:unit-test`. `src/test-setup.ts` stubs what jsdom lacks (`IntersectionObserver`, `ResizeObserver`, `dialog.showModal`, canvas). The suites cover data integrity and translation completeness, dates, i18n, the shell, palette ranking, signal-graph propagation and the app shell's shortcuts.
+`npm test` runs Vitest in jsdom via `@angular/build:unit-test`. `src/test-setup.ts` stubs what jsdom lacks (`IntersectionObserver`, `ResizeObserver`, `dialog.showModal`, canvas). The suites cover data integrity and translation completeness, URLs and page routing, the SEO head and JSON-LD, dates, i18n, the shell, palette ranking, signal-graph propagation and the app shell's shortcuts. `npm run seo:check` then audits the built HTML.
