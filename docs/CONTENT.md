@@ -29,13 +29,15 @@ Add an object at the **top** of `EXPERIENCES` (newest first):
 },
 ```
 
-Only one experience may have no `end`. When a new job starts, give the previous one an `end`.
+Roles without an `end` are shown as current ("Present"). When a role finishes, give it an `end`.
 
 Everything else updates automatically: the hero's "roles" counter, the signal graph, the git log, the terminal's `experience` command and the printed CV.
 
 ## Add a project
 
-Add to `PROJECTS`. `featured: true` makes the card larger, and the first featured project spans the full width. `palette` is two colours for the generative cover. Give `url` and/or `repo`; if you give neither, the card says "Private / client work".
+Each project automatically gets three pages (`/projects/<id>`, `/it/projects/<id>`, `/fa/projects/<id>`) with their own title, description, breadcrumbs and structured data, and is added to the sitemap and `llms.txt`. Run `npm run assets` once to generate its share image (`public/og/<id>.png`). Use `experience: '<job id>'` to link the project to the role it was built in.
+
+Add to `PROJECTS`. `featured: true` makes the card larger, and the first featured project spans the full width. `palette` is two colours for the generative cover. Give `url` and/or `repo` for the external links; every card also links to the project's own page.
 
 ## Add a skill
 

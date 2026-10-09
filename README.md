@@ -29,9 +29,10 @@ Built with **Angular 22**: zoneless, signals everywhere, in **English, Italiano 
 | **Halftone portrait** | The photo is redrawn as brand-coloured halftone dots from its luminance, and "develops" into the real photo on hover. | [`sections/about`](src/app/sections/about) |
 | **Command palette** | <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>K</kbd> (or <kbd>/</kbd>): fuzzy search over sections, actions and links. | [`layout/command-palette.ts`](src/app/layout/command-palette.ts) |
 | **Terminal** | Press <kbd>`</kbd> for a working shell: `help`, `whoami`, `experience`, `goto`, `lang fa`, tab completion, history… and `sudo hire-amir`. | [`layout/terminal`](src/app/layout/terminal) |
-| **Three languages, one URL** | Runtime EN / IT / FA switching with no reload, `dir="rtl"` for Persian, Persian digits, Gregorian dates to match the CV. | [`core/i18n.service.ts`](src/app/core/i18n.service.ts) |
+| **Three languages** | English, Italiano and فارسی, each at its own URL (`/`, `/it`, `/fa`) with full RTL for Persian, Persian digits and Gregorian dates to match the CV. | [`core/i18n.service.ts`](src/app/core/i18n.service.ts) |
 | **Prints as a CV** | <kbd>Ctrl</kbd> + <kbd>P</kbd> turns the site into a clean one-column A4 résumé. | [`src/_print.scss`](src/_print.scss) |
 | **Generative covers** | Each project cover is seeded art made from the project's own palette, so it is identical on every visit. | [`project-cover.ts`](src/app/sections/projects/project-cover.ts) |
+| **SEO-ready static pages** | Every page in every language is its own prerendered URL with unique title, description, h1, canonical, `hreflang`, Open Graph card, breadcrumbs and schema.org JSON-LD (Person, ProfessionalService, ProfilePage, CreativeWork, BreadcrumbList). Sitemap, robots, `llms.txt` and a custom 404 are generated from the build, and an audit script blocks the deploy on any regression. | [`core/seo.service.ts`](src/app/core/seo.service.ts), [`tools/`](tools) |
 
 Also included: dark and light themes, scroll-spy navigation, reveal-on-scroll, 3D tilt cards, a `mailto:` contact composer (no backend, no tracking), Open Graph and JSON-LD, a PWA manifest, and a greeting in DevTools.
 
@@ -44,15 +45,17 @@ Also included: dark and light themes, scroll-spy navigation, reveal-on-scroll, 3
 - **No runtime dependencies** beyond Angular: no UI kit, animation library or icon font
 - **GitHub Actions → GitHub Pages** for CI/CD
 
-Initial bundle: **≈ 93 KB** transferred (JS + CSS, gzip).
+Every page is **prerendered HTML** (28 pages: 3 languages × home, projects list and 7 project pages, plus a 404), hydrated by **≈ 83 kB** of shared JS (gzip) and a small per-page chunk.
 
 ## Quick start
 
 ```bash
 npm install
-npm start            # http://localhost:4200
+npm start            # dev server, http://localhost:4200
 npm test             # unit tests (Vitest)
-npm run build        # production build → dist/amir-iravani-portfolio/browser
+npm run build        # prerender every page + 404.html, sitemap.xml, llms.txt
+npm run seo:check    # audit the built HTML like a crawler
+npm run serve:dist   # serve the build like the host does, http://localhost:4400
 ```
 
 Requires Node.js 22.13+ (24 recommended).
