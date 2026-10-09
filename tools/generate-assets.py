@@ -6,8 +6,9 @@ re-created after any change to the logo or palette:
     python tools/generate-assets.py [path/to/portrait.png]
 
 Outputs: favicon.ico, apple-touch-icon.png, icons/icon-192.png,
-icons/icon-512.png, icons/icon-maskable-512.png, og-image.png and (when a
-portrait is passed) images/amir-iravani.webp.
+icons/icon-512.png, icons/icon-maskable-512.png, og-image.png, one
+og/<project-id>.png card per project (read from src/app/data/profile.ts)
+and, when a portrait is passed, images/amir-iravani.{webp,jpg}.
 
 The geometry mirrors public/favicon.svg and src/app/shared/logo.ts
 (64×64 viewBox).
@@ -15,6 +16,7 @@ The geometry mirrors public/favicon.svg and src/app/shared/logo.ts
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -124,6 +126,80 @@ def og_image() -> Image.Image:
     return img
 
 
+def hex_rgb(value: str) -> tuple[int, int, int]:
+    value = value.lstrip("#")
+    return tuple(int(value[i : i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
+
+
+def read_projects() -> list[dict[str, str]]:
+    """Pulls id, name, English tagline and palette out of the PROJECTS array."""
+    source = (ROOT / "src/app/data/profile.ts").read_text(encoding="utf-8")
+    block = source[source.index("export const PROJECTS") : source.index("export const EDUCATION")]
+    projects = []
+    for chunk in re.split(r"\n  \{\n", block)[1:]:
+        pid = re.search(r"id: '([^']+)'", chunk)
+        name = re.search(r"name: '([^']+)'", chunk)
+        palette = re.search(r"palette: \['(#[0-9A-Fa-f]{6})', '(#[0-9A-Fa-f]{6})'\]", chunk)
+        tagline = re.search(r"tagline: \{\s*en: '((?:[^'\\]|\\.)*)'", chunk)
+        if pid and name and palette and tagline:
+            projects.append(
+                {
+                    "id": pid.group(1),
+                    "name": name.group(1),
+                    "tagline": tagline.group(1).replace("\\'", "'"),
+                    "a": palette.group(1),
+                    "b": palette.group(2),
+                }
+            )
+    return projects
+
+
+def wrap(draw: ImageDraw.ImageDraw, text: str, fnt: ImageFont.FreeTypeFont, width: int) -> list[str]:
+    lines: list[str] = []
+    line = ""
+    for word in text.split():
+        trial = f"{line} {word}".strip()
+        if draw.textlength(trial, font=fnt) <= width:
+            line = trial
+        else:
+            lines.append(line)
+            line = word
+    return lines + [line] if line else lines
+
+
+def og_project(project: dict[str, str]) -> Image.Image:
+    """1200×630 share card: project palette, name, tagline and the Ai mark."""
+    w, h = 1200, 630
+    a, b = hex_rgb(project["a"]), hex_rgb(project["b"])
+    img = Image.new("RGB", (w, h))
+    px = img.load()
+    for y in range(h):
+        for x in range(w):
+            t = (x / w) * 0.7 + (y / h) * 0.3
+            px[x, y] = lerp(a, b, t)
+    shade = Image.new("RGB", (w, h), (0, 0, 0))
+    img = Image.blend(img, shade, 0.45)
+
+    d = ImageDraw.Draw(img)
+    for r in range(80, 900, 70):
+        d.ellipse((900 - r, 120 - r, 900 + r, 120 + r), outline=(255, 255, 255), width=1)
+    img = Image.blend(img, Image.new("RGB", (w, h), (0, 0, 0)), 0.15)
+
+    img.paste(logo := monogram(96), (80, 70), logo)
+    d = ImageDraw.Draw(img)
+    bold = ["segoeuib.ttf", "arialbd.ttf", "DejaVuSans-Bold.ttf"]
+    regular = ["segoeui.ttf", "arial.ttf", "DejaVuSans.ttf"]
+    mono = ["consola.ttf", "cour.ttf", "DejaVuSansMono.ttf"]
+    d.text((80, 240), project["name"], font=font(bold, 84), fill=(255, 255, 255))
+    y = 360
+    for line in wrap(d, project["tagline"], font(regular, 38), 1000)[:3]:
+        d.text((84, y), line, font=font(regular, 38), fill=(236, 234, 244))
+        y += 50
+    d.text((84, 540), "amir-iravani.it/projects/" + project["id"], font=font(mono, 26), fill=SUN)
+    img.paste(brand_gradient(1200).resize((w, 8)), (0, h - 8))
+    return img
+
+
 def main() -> None:
     (PUBLIC / "icons").mkdir(parents=True, exist_ok=True)
     monogram(256).save(PUBLIC / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48), (64, 64)])
@@ -132,6 +208,11 @@ def main() -> None:
     monogram(512).save(PUBLIC / "icons" / "icon-512.png")
     monogram(512, padding=0.14).save(PUBLIC / "icons" / "icon-maskable-512.png")
     og_image().save(PUBLIC / "og-image.png", optimize=True)
+
+    (PUBLIC / "og").mkdir(exist_ok=True)
+    for project in read_projects():
+        og_project(project).save(PUBLIC / "og" / f"{project['id']}.png", optimize=True)
+        print("og card:", project["id"])
 
     if len(sys.argv) > 1:
         (PUBLIC / "images").mkdir(exist_ok=True)

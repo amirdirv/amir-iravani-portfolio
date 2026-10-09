@@ -1,0 +1,131 @@
+@if (project(); as p) {
+  @let ui = i18n.ui().project;
+  @let lang = i18n.lang();
+
+  <article class="container">
+    <header class="page-head">
+      <app-breadcrumbs [crumbs]="crumbs()" />
+      <p class="kicker">{{ i18n.num(p.year) }} · {{ p.role[lang] }}</p>
+      <h1 class="page-title">{{ p.name }}</h1>
+      <p class="tagline">{{ p.tagline[lang] }}</p>
+      <p class="actions">
+        @if (p.url) {
+          <a class="btn btn--primary" [href]="p.url" target="_blank" rel="noopener">
+            {{ i18n.ui().projects.visit }} <app-icon name="external" [size]="18" />
+          </a>
+        }
+        @if (p.repo) {
+          <a class="btn" [href]="p.repo" target="_blank" rel="noopener">
+            <app-icon name="github" [size]="18" /> {{ i18n.ui().projects.code }}
+          </a>
+        }
+        <a class="btn" [href]="nav.section('contact')">{{ ui.ctaButton }}</a>
+      </p>
+    </header>
+
+    <app-project-cover class="cover card" [id]="p.id" [palette]="p.palette" />
+
+    <div class="layout">
+      <section class="body" aria-labelledby="overview-title">
+        <h2 id="overview-title">{{ ui.overview }}</h2>
+        <p class="lead">{{ p.description[lang] }}</p>
+
+        @if (job(); as j) {
+          <section class="job card" aria-labelledby="job-title">
+            <h2 id="job-title">{{ ui.relatedRole }}</h2>
+            <p class="job__role">
+              <strong>{{ j.role[lang] }}</strong> · {{ j.company }}
+            </p>
+            <p class="job__meta mono">{{ jobRange() }} · {{ j.city[lang] }}</p>
+            <p>{{ j.summary[lang] }}</p>
+            <ul class="job__list">
+              @for (h of j.highlights[lang]; track $index) {
+                <li>{{ h }}</li>
+              }
+            </ul>
+            <a class="more-link" [href]="nav.section('experience')">
+              {{ ui.seeExperience }} <app-icon name="arrow" [size]="16" class="flip-rtl" />
+            </a>
+          </section>
+        }
+      </section>
+
+      <aside class="facts card" aria-labelledby="facts-title">
+        <h2 id="facts-title">{{ ui.facts }}</h2>
+        <dl>
+          <div>
+            <dt>{{ ui.year }}</dt>
+            <dd>{{ i18n.num(p.year) }}</dd>
+          </div>
+          <div>
+            <dt>{{ ui.role }}</dt>
+            <dd>{{ p.role[lang] }}</dd>
+          </div>
+          <div>
+            <dt>{{ ui.stack }}</dt>
+            <dd class="chips">
+              @for (s of p.stack; track s) {
+                <span class="chip">{{ skill(s) }}</span>
+              }
+            </dd>
+          </div>
+          @if (p.url || p.repo) {
+            <div>
+              <dt>{{ ui.links }}</dt>
+              <dd class="links">
+                @if (p.url) {
+                  <a [href]="p.url" target="_blank" rel="noopener" dir="ltr">{{
+                    p.url.replace('https://', '')
+                  }}</a>
+                }
+                @if (p.repo) {
+                  <a [href]="p.repo" target="_blank" rel="noopener" dir="ltr">{{
+                    p.repo.replace('https://', '')
+                  }}</a>
+                }
+              </dd>
+            </div>
+          }
+        </dl>
+      </aside>
+    </div>
+
+    <section class="cta card" aria-labelledby="cta-title">
+      <h2 id="cta-title">{{ ui.ctaTitle }}</h2>
+      <a class="btn btn--primary" [href]="nav.section('contact')">
+        {{ ui.ctaButton }} <app-icon name="arrow" [size]="18" class="flip-rtl" />
+      </a>
+    </section>
+
+    <nav class="more" aria-labelledby="more-title">
+      <h2 id="more-title">{{ ui.more }}</h2>
+      <div class="pager">
+        <a class="pager__link card" [href]="nav.project(neighbours().prev.id)" rel="prev">
+          <span class="mono">{{ i18n.dir() === 'rtl' ? '→' : '←' }} {{ ui.previous }}</span>
+          <strong>{{ neighbours().prev.name }}</strong>
+        </a>
+        <a
+          class="pager__link pager__link--next card"
+          [href]="nav.project(neighbours().next.id)"
+          rel="next"
+        >
+          <span class="mono">{{ ui.next }} {{ i18n.dir() === 'rtl' ? '←' : '→' }}</span>
+          <strong>{{ neighbours().next.name }}</strong>
+        </a>
+      </div>
+      <ul class="others">
+        @for (o of others(); track o.id) {
+          <li>
+            <a [href]="nav.project(o.id)">{{ o.name }}</a>
+            <span>{{ o.tagline[lang] }}</span>
+          </li>
+        }
+      </ul>
+      <a class="more-link" [href]="nav.projects()">
+        {{ ui.allProjects }} <app-icon name="arrow" [size]="16" class="flip-rtl" />
+      </a>
+    </nav>
+  </article>
+} @else {
+  <app-not-found-view />
+}

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { I18nService } from '../../core/i18n.service';
 import { PERSON, SOCIALS } from '../../data/profile';
 import { Icon } from '../../shared/icon';
@@ -13,7 +12,7 @@ import { copyText } from '../../shared/clipboard';
 @Component({
   selector: 'app-contact',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, Icon, Reveal],
+  imports: [Icon, Reveal],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })

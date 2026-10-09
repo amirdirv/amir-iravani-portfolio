@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { CommandsService } from '../../core/commands.service';
 import { I18nService } from '../../core/i18n.service';
-import { ScrollService } from '../../core/scroll.service';
+import { SiteNav } from '../../core/site-nav.service';
 import { ThemeService } from '../../core/theme.service';
 import { Line, ShellEffect, complete, runShell } from './shell';
 
@@ -33,7 +33,7 @@ const BANNER: Line[] = [
 export class Terminal {
   protected readonly i18n = inject(I18nService);
   private readonly commands = inject(CommandsService);
-  private readonly scroll = inject(ScrollService);
+  private readonly nav = inject(SiteNav);
   private readonly theme = inject(ThemeService);
 
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
@@ -124,11 +124,11 @@ export class Terminal {
       case 'goto':
         setTimeout(() => {
           this.close();
-          this.scroll.scrollTo(effect.section);
+          this.nav.goToSection(effect.section);
         }, 450);
         break;
       case 'lang':
-        this.i18n.set(effect.lang);
+        this.nav.switchLang(effect.lang);
         break;
       case 'theme':
         this.theme.toggle();

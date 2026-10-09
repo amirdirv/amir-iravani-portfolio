@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { I18nService } from '../core/i18n.service';
+import { I18nService, LANGS } from '../core/i18n.service';
+import { SiteNav } from '../core/site-nav.service';
+import { PROJECTS } from '../data/profile';
 import { ScrollService } from '../core/scroll.service';
 import { Icon } from '../shared/icon';
 import { Logo } from '../shared/logo';
@@ -10,6 +12,8 @@ import { Logo } from '../shared/logo';
   imports: [Logo, Icon],
   template: `
     @let ui = i18n.ui().footer;
+    @let site = i18n.ui().site;
+    @let crumbs = i18n.ui().crumbs;
     <footer class="container footer">
       <div class="footer__brand">
         <app-logo [size]="44" [tile]="true" />
@@ -31,10 +35,45 @@ import { Logo } from '../shared/logo';
         >
           <app-icon name="github" [size]="16" /> {{ ui.source }}
         </a>
-        <a class="footer__btn" href="#top" (click)="top($event)">
+        <button type="button" class="footer__btn" (click)="top()">
           <app-icon name="arrowDown" [size]="16" class="up" /> {{ ui.top }}
-        </a>
+        </button>
       </div>
+
+      <nav class="footer__sitemap" [attr.aria-label]="site.pages">
+        <div>
+          <p class="footer__label mono">{{ site.pages }}</p>
+          <ul>
+            <li>
+              <a [href]="nav.home()">{{ crumbs.home }}</a>
+            </li>
+            <li>
+              <a [href]="nav.projects()">{{ crumbs.projects }}</a>
+            </li>
+            @for (p of projects; track p.id) {
+              <li>
+                <a [href]="nav.project(p.id)">{{ p.name }}</a>
+              </li>
+            }
+          </ul>
+        </div>
+        <div>
+          <p class="footer__label mono">{{ site.languages }}</p>
+          <ul>
+            @for (l of langs; track l.code) {
+              <li>
+                <a
+                  [href]="nav.langLink(l.code)"
+                  (click)="nav.onLangClick($event, l.code)"
+                  [attr.hreflang]="l.code"
+                  [attr.lang]="l.code"
+                  >{{ l.native }}</a
+                >
+              </li>
+            }
+          </ul>
+        </div>
+      </nav>
 
       <p class="footer__tips mono">{{ ui.tips }}</p>
       <p class="footer__copy mono">© {{ i18n.num(year) }} Amir Iravani</p>
@@ -94,6 +133,37 @@ import { Logo } from '../shared/logo';
     .up {
       transform: rotate(180deg);
     }
+    .footer__sitemap {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--c-line);
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 18px;
+        margin: 8px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      a {
+        font-size: 14px;
+        color: var(--c-muted);
+        text-decoration: none;
+        &:hover {
+          color: var(--c-text);
+          text-decoration: underline;
+        }
+      }
+    }
+    .footer__label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-faint);
+    }
     .footer__tips,
     .footer__copy {
       font-size: 12px;
@@ -115,14 +185,16 @@ import { Logo } from '../shared/logo';
 export class Footer {
   protected readonly i18n = inject(I18nService);
   private readonly scroll = inject(ScrollService);
+  protected readonly nav = inject(SiteNav);
+  protected readonly projects = PROJECTS;
+  protected readonly langs = LANGS;
   protected readonly year = new Date().getFullYear();
 
   protected print(): void {
     window.print();
   }
 
-  protected top(event: Event): void {
-    event.preventDefault();
+  protected top(): void {
     this.scroll.scrollTo('top');
   }
 }

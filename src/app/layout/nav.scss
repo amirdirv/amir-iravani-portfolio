@@ -124,11 +124,15 @@
   border-radius: 999px;
   background: var(--c-surface);
 
-  button {
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     height: 30px;
     min-width: 34px;
     padding: 0 8px;
     border: 0;
+    text-decoration: none;
     border-radius: 999px;
     background: transparent;
     color: var(--c-muted);

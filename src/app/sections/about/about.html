@@ -8,7 +8,7 @@
 
   <div class="about__grid">
     <figure class="about__portrait" appReveal="120">
-      <app-halftone-portrait [src]="person.photo" [alt]="person.name" />
+      <app-halftone-portrait [src]="person.photo" [alt]="i18n.ui().meta.portraitAlt" />
       <figcaption class="mono">
         <span class="dot" aria-hidden="true"></span>{{ ui.portraitHint }}
       </figcaption>

@@ -15,7 +15,9 @@
   max-width: none;
   text-align: start;
 
-  .dollar {
+  /* Prompt drawn by CSS so it is not part of the heading text. */
+  &::before {
+    content: '$ ';
     color: var(--c-sun);
   }
 

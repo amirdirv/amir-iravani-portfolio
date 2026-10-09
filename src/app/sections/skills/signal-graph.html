@@ -2,9 +2,7 @@
 
 <section class="section container" id="skills" aria-labelledby="skills-title">
   <p class="kicker" appReveal>{{ ui.kicker }}</p>
-  <h2 class="section-title" id="skills-title" appReveal="80">
-    <span class="mono code">signal(</span>{{ ui.title }}<span class="mono code">)</span>
-  </h2>
+  <h2 class="section-title signal-title" id="skills-title" appReveal="80">{{ ui.title }}</h2>
   <p class="section-lead" appReveal="140">{{ ui.lead }}</p>
 
   <div class="graph card" #graph appReveal="200" (mouseleave)="hovered.set(null)">

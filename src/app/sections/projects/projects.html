@@ -1,9 +1,18 @@
 @let ui = i18n.ui().projects;
+@let pui = i18n.ui().project;
 
-<section class="section container" id="projects" aria-labelledby="projects-title">
-  <p class="kicker" appReveal>{{ ui.kicker }}</p>
-  <h2 class="section-title" id="projects-title" appReveal="80">{{ ui.title }}</h2>
-  <p class="section-lead" appReveal="140">{{ ui.lead }}</p>
+<section
+  class="container"
+  [class.section]="!asPage()"
+  [id]="asPage() ? 'project-list' : 'projects'"
+  [attr.aria-labelledby]="asPage() ? null : 'projects-title'"
+  [attr.aria-label]="asPage() ? pui.allProjects : null"
+>
+  @if (!asPage()) {
+    <p class="kicker" appReveal>{{ ui.kicker }}</p>
+    <h2 class="section-title" id="projects-title" appReveal="80">{{ ui.title }}</h2>
+    <p class="section-lead" appReveal="140">{{ ui.lead }}</p>
+  }
 
   <ul class="grid">
     @for (project of projects; track project.id) {
@@ -18,7 +27,19 @@
                 <span class="badge">★ {{ ui.featured }}</span>
               }
             </p>
-            <h3 class="project__name">{{ project.name }}</h3>
+            @if (asPage()) {
+              <h2 class="project__name">
+                <a class="project__title-link" [href]="nav.project(project.id)">{{
+                  project.name
+                }}</a>
+              </h2>
+            } @else {
+              <h3 class="project__name">
+                <a class="project__title-link" [href]="nav.project(project.id)">{{
+                  project.name
+                }}</a>
+              </h3>
+            }
             <p class="project__tagline">{{ i18n.t(project.tagline) }}</p>
             <p class="project__desc">{{ i18n.t(project.description) }}</p>
 
@@ -30,18 +51,21 @@
             </p>
 
             <p class="project__links">
+              <a class="link link--strong" [href]="nav.project(project.id)">
+                {{ pui.details }} <app-icon name="arrow" [size]="15" class="flip-rtl" />
+                <span class="visually-hidden">: {{ project.name }}</span>
+              </a>
               @if (project.url) {
                 <a class="link" [href]="project.url" target="_blank" rel="noopener">
                   {{ ui.visit }} <app-icon name="external" [size]="15" />
+                  <span class="visually-hidden">{{ project.name }}</span>
                 </a>
               }
               @if (project.repo) {
                 <a class="link" [href]="project.repo" target="_blank" rel="noopener">
                   <app-icon name="github" [size]="15" /> {{ ui.code }}
+                  <span class="visually-hidden">{{ project.name }}</span>
                 </a>
-              }
-              @if (!project.url && !project.repo) {
-                <span class="private mono">{{ ui.private }}</span>
               }
             </p>
           </div>
@@ -49,4 +73,12 @@
       </li>
     }
   </ul>
+
+  @if (!asPage()) {
+    <p class="all" appReveal>
+      <a class="btn" [href]="nav.projects()">
+        {{ pui.allProjects }} <app-icon name="arrow" [size]="18" class="flip-rtl" />
+      </a>
+    </p>
+  }
 </section>

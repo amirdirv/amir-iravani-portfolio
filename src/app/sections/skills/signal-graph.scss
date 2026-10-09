@@ -2,6 +2,25 @@
   display: block;
 }
 
+/* Decoration via pseudo-elements, so the heading text stays clean for crawlers. */
+.signal-title::before,
+.signal-title::after {
+  font-family: var(--f-mono);
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--c-faint);
+  vertical-align: 0.35em;
+  letter-spacing: 0;
+}
+
+.signal-title::before {
+  content: 'signal(';
+}
+
+.signal-title::after {
+  content: ')';
+}
+
 .code {
   font-size: 0.5em;
   font-weight: 400;

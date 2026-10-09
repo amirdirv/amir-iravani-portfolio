@@ -117,7 +117,8 @@ export class ParticleMonogram {
     // Re-read brand colours when the theme flips (light theme uses deeper tones).
     effect(() => {
       this.theme.theme();
-      queueMicrotask(() => this.readColors());
+      // Browser only: there are no computed styles while prerendering.
+      if (this.size) queueMicrotask(() => this.readColors());
     });
   }
 

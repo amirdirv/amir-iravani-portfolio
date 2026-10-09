@@ -1,20 +1,13 @@
 import { DOCUMENT, Injectable, computed, effect, inject, signal } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { Lang, Localized } from './models';
 import { ResolvedUi, UI } from '../data/ui';
-import { readStorage, writeStorage } from './storage';
+import { parsePath } from './site';
 
 export const LANGS: readonly { code: Lang; label: string; native: string }[] = [
   { code: 'en', label: 'EN', native: 'English' },
   { code: 'it', label: 'IT', native: 'Italiano' },
   { code: 'fa', label: 'FA', native: 'فارسی' },
 ];
-
-const STORAGE_KEY = 'ai.lang';
-
-function isLang(value: unknown): value is Lang {
-  return value === 'en' || value === 'it' || value === 'fa';
-}
 
 /** Walks the `UI` tree and replaces every localized leaf with the string for `lang`. */
 function resolve(node: unknown, lang: Lang): unknown {
@@ -27,30 +20,24 @@ function resolve(node: unknown, lang: Lang): unknown {
 }
 
 /**
- * Runtime, signal-based i18n. Switching language re-renders instantly with no
- * reload, flips `dir` for Persian and keeps `<title>`/meta description in sync.
- *
- * Initial language: `?lang=` → saved choice → browser language → English.
+ * Signal-based i18n. The language is part of the URL (`/`, `/it`, `/fa`), so
+ * each language is a separate, indexable page. It is read from the URL the
+ * document was loaded with, and `<html lang dir>` follows it — on the
+ * server during prerendering as well as in the browser.
  */
 @Injectable({ providedIn: 'root' })
 export class I18nService {
   private readonly document = inject(DOCUMENT);
-  private readonly title = inject(Title);
-  private readonly meta = inject(Meta);
 
-  readonly lang = signal<Lang>(this.initialLang());
+  readonly lang = signal<Lang>(this.langFromLocation());
   readonly dir = computed(() => (this.lang() === 'fa' ? 'rtl' : 'ltr'));
   readonly ui = computed(() => resolve(UI, this.lang()) as ResolvedUi);
 
   constructor() {
     effect(() => {
-      const lang = this.lang();
       const html = this.document.documentElement;
-      html.lang = lang;
+      html.lang = this.lang();
       html.dir = this.dir();
-      writeStorage(STORAGE_KEY, lang);
-      this.title.setTitle(this.ui().meta.title);
-      this.meta.updateTag({ name: 'description', content: this.ui().meta.description });
     });
   }
 
@@ -69,13 +56,9 @@ export class I18nService {
     return this.lang() === 'fa' ? text.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[+d]) : text;
   }
 
-  private initialLang(): Lang {
-    const view = this.document.defaultView;
-    const fromQuery = view ? new URLSearchParams(view.location.search).get('lang') : null;
-    if (isLang(fromQuery)) return fromQuery;
-    const saved = readStorage(STORAGE_KEY);
-    if (isLang(saved)) return saved;
-    const browser = view?.navigator.language.slice(0, 2);
-    return isLang(browser) ? browser : 'en';
+  /** First paint (and prerender) must already be in the right language. */
+  private langFromLocation(): Lang {
+    const pathname = this.document.location?.pathname ?? '/';
+    return parsePath(pathname).lang;
   }
 }

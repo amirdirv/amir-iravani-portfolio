@@ -19,9 +19,10 @@ import { ThemeService } from '../../core/theme.service';
 @Component({
   selector: 'app-halftone-portrait',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class.is-ready]': 'ready()', tabindex: '0', role: 'img', '[attr.aria-label]': 'alt()' },
+  // Focusable so keyboard users can "develop" the photo too; the <img> carries the alt text.
+  host: { '[class.is-ready]': 'ready()', tabindex: '0' },
   template: `
-    <img [src]="src()" alt="" width="250" height="250" loading="lazy" decoding="async" />
+    <img [src]="src()" [alt]="alt()" width="250" height="250" loading="lazy" decoding="async" />
     <canvas #canvas aria-hidden="true"></canvas>
   `,
   styles: `

@@ -1,35 +1,39 @@
-import { ChangeDetectionStrategy, Component, afterNextRender, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DOCUMENT,
+  afterNextRender,
+  computed,
+  inject,
+} from '@angular/core';
 import { CommandsService } from './core/commands.service';
 import { I18nService } from './core/i18n.service';
+import { PageService } from './core/page.service';
 import { ScrollService } from './core/scroll.service';
+import { SeoService } from './core/seo.service';
+import { isLang, localizedPath } from './core/site';
 import { ThemeService } from './core/theme.service';
 import { CommandPalette } from './layout/command-palette';
 import { Footer } from './layout/footer';
 import { Nav } from './layout/nav';
 import { Terminal } from './layout/terminal/terminal';
-import { About } from './sections/about/about';
-import { Contact } from './sections/contact/contact';
-import { EducationSection } from './sections/education/education';
-import { ExperienceSection } from './sections/experience/experience';
-import { Hero } from './sections/hero/hero';
-import { Projects } from './sections/projects/projects';
-import { SignalGraph } from './sections/skills/signal-graph';
+import { HomePage } from './pages/home-page';
+import { NotFoundPage } from './pages/not-found-page';
+import { ProjectPage } from './pages/project-page';
+import { ProjectsPage } from './pages/projects-page';
 
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     Nav,
-    Hero,
-    About,
-    SignalGraph,
-    ExperienceSection,
-    Projects,
-    EducationSection,
-    Contact,
     Footer,
     CommandPalette,
     Terminal,
+    HomePage,
+    ProjectsPage,
+    ProjectPage,
+    NotFoundPage,
   ],
   host: { '(document:keydown)': 'onKeydown($event)' },
   templateUrl: './app.html',
@@ -39,11 +43,37 @@ export class App {
   protected readonly i18n = inject(I18nService);
   // Injected eagerly so the theme effect runs before first paint.
   protected readonly theme = inject(ThemeService);
+  protected readonly commands = inject(CommandsService);
   private readonly scroll = inject(ScrollService);
-  private readonly commands = inject(CommandsService);
+  private readonly seo = inject(SeoService);
+  protected readonly page = inject(PageService);
+  private readonly document = inject(DOCUMENT);
+
+  /** `<base href="/">` would turn a bare `#main` into a link to the homepage. */
+  protected readonly skipHref = computed(() => {
+    const page = this.seo.page();
+    return (page ? localizedPath(page.lang, page.path) : '/') + '#main';
+  });
 
   constructor() {
-    afterNextRender(() => this.scroll.start());
+    afterNextRender(() => {
+      this.redirectLegacyLangQuery();
+      this.scroll.start();
+    });
+  }
+
+  protected skipToMain(event: Event): void {
+    event.preventDefault();
+    this.document.getElementById('main')?.focus();
+  }
+
+  /** Old links used `?lang=it`; languages now have their own URLs (the host also 301s these). */
+  private redirectLegacyLangQuery(): void {
+    const location = this.document.defaultView?.location;
+    if (!location) return;
+    const lang = new URLSearchParams(location.search).get('lang');
+    if (!isLang(lang)) return;
+    location.replace(localizedPath(lang, this.page.route.path) + location.hash);
   }
 
   /** Global shortcuts: Cmd/Ctrl+K (or /) for the palette, ` for the terminal. */

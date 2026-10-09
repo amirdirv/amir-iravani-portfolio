@@ -15,7 +15,8 @@ export class ThemeService {
   constructor() {
     effect(() => {
       const theme = this.theme();
-      this.document.documentElement.dataset['theme'] = theme;
+      // setAttribute, not dataset: the prerender DOM has no `dataset`.
+      this.document.documentElement.setAttribute('data-theme', theme);
       this.document
         .querySelector('meta[name="theme-color"]')
         ?.setAttribute('content', theme === 'dark' ? '#07070c' : '#f6f4ef');
