@@ -233,8 +233,15 @@ if (!existsSync(join(OUT, 'llms-full.txt'))) fail('/llms-full.txt', 'missing');
 const htaccess = existsSync(join(OUT, '.htaccess'))
   ? readFileSync(join(OUT, '.htaccess'), 'utf8')
   : '';
-for (const rule of ['ErrorDocument 404 /404.html', 'DirectorySlash Off', '\\.git'])
+for (const rule of [
+  'ErrorDocument 404 /404.html',
+  'RewriteRule ^ /404.php',
+  'DirectorySlash Off',
+  '\\.git',
+])
   if (!htaccess.includes(rule)) fail('/.htaccess', `missing "${rule}"`);
+// The host ignores ErrorDocument, so missing URLs are routed to this script.
+if (!existsSync(join(OUT, '404.php'))) fail('/404.php', 'missing');
 
 // ---- report ----------------------------------------------------------------
 console.log(
