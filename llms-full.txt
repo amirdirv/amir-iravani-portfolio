@@ -1,6 +1,6 @@
 # Amir Iravani — full site text
 
-Generated from the prerendered English pages of https://amir-iravani.it on 2026-10-09.
+Generated from the prerendered English pages of https://amir-iravani.it on 2026-10-20.
 
 ---
 
@@ -70,7 +70,7 @@ Back-end
 Craft & tooling
 
 - ENAIP Piemonte · Digital HorizonsIT Trainee · 2026–
-- Build It Up (BIU)Web Developer · 2025–
+- Build It Up (BIU)Web Developer · 2025–2026
 - Meyler SrlFront-End Developer · 2023–2024
 - Bistoon BasparFront-End Developer · 2022
 - IRIS Vira VisionSoftware Development Intern · 2021–2022
@@ -94,7 +94,7 @@ Thirteen years as a commit history. Two branches — Tehran and Turin — merged
 
 - HEADHEAD → open to new roles
 - 9503181turinSept 2026 — Present· 2 mo IT Trainee @ENAIP Piemonte · Digital HorizonsTurin, ItalyTraining & work contractSelected for Digital Horizons, a European IT training and job-placement programme run by International Rescue Committee Italia with ENAIP Piemonte, Powercoders and Agenzia Piemonte Lavoro, funded by the Villum Foundation (European VET 2024).Full-time intensive course at ENAIP Turin (via del Ridotto): five hours a day, Monday to Friday, September 2026 – spring 2027.IT skills shaped around what Piedmont’s tech companies hire for, taught with Powercoders’ industry-led method.Leads into a paid placement with an IT company in Piedmont.JavaScriptTypeScriptHTML & SCSSGit Hide details
-- 61cae3cturinOct 2025 — Present· 1 yr 1 mo Web Developer @Build It Up (BIU)Turin, ItalyVolunteer · FreelanceFront-end lead for websites and MVPs of early-stage startups in the Politecnico di Torino × ESCP Business School acceleration programme.Turns founders’ pitch decks into working Angular/TypeScript products in weeks, not months.Works inside a non-profit accelerator network alongside business-school mentors.Sets up reusable component foundations so each new MVP starts from day ten, not day zero.AngularTypeScriptHTML & SCSSResponsive UI / UXGit Hide details
+- 61cae3cturinOct 2025 — Sept 2026· 1 yr Web Developer @Build It Up (BIU)Turin, ItalyVolunteer · FreelanceFront-end lead for websites and MVPs of early-stage startups in the Politecnico di Torino × ESCP Business School acceleration programme.Turns founders’ pitch decks into working Angular/TypeScript products in weeks, not months.Works inside a non-profit accelerator network alongside business-school mentors.Sets up reusable component foundations so each new MVP starts from day ten, not day zero.AngularTypeScriptHTML & SCSSResponsive UI / UXGit Hide details
 - e4030c9turinApr 2023 — Nov 2024· 1 yr 8 mo Front-End Developer @Meyler SrlTurin, ItalyFull-timeThe only front-end developer on Tulero — a B2B auto-parts marketplace — and its admin dashboard, from first wireframe to production.Designed and built the full marketplace UI: search, catalogue, cart and ordering flows for repair shops.Shipped the internal admin dashboard for catalogue, orders and customers.Moved fluently across Angular, React and Vue on a Node.js + MongoDB backend.AngularReactVue.jsTypeScriptNode.jsMongoDBRxJS & SignalsHTML & SCSSResponsive UI / UXGit Show details
 - 27a5bccSept 2022Merge branch “tehran” into “turin” — relocated to Italy for Master’s studies at Politecnico di Torino
 - 7c72c33tehranFeb 2022 — Sept 2022· 8 mo Front-End Developer @Bistoon BasparTehran, IranFull-timeBuilt and maintained responsive web interfaces for Iran’s leading maker of eco-friendly disposable tableware.Delivered responsive product and company pages across desktop and mobile.Integrated back-end REST APIs into the front end end-to-end.JavaScriptTypeScriptHTML & SCSSResponsive UI / UXGit Show details
@@ -112,7 +112,7 @@ Products I designed, built or led — each card’s cover is generated from the 
 - 2026★ FeaturedDIAR MediaA community news platform with an AI newsroom that never sleeps.The news outlet of Associazione DIAR. Persian-first, ten-language news site where readers submit, vote and discuss links while an autonomous agent drafts stories from 20 sources for human editors to approve from an installable PWA with push notifications. Built from zero: auth and roles, moderation, structured-data SEO, sitemaps and IndexNow.Full-stack · soloNext.jsReactTypeScriptNode.jsSQL Read the case study : DIAR Media Visit DIAR Media
 - 2025★ FeaturedGharamatgateAn open investigative archive of the Iran–US compensation cases.Persian-language research database that documents lawsuits, US court judgments and compensation payments involving the Islamic Republic — from the 1979 embassy hostage crisis and the Algiers Accords to today’s claims worth tens of billions of dollars. Searchable case files, topic categories and filters by person, year and organisation; independent and non-profit.Site admin · developer · contributing writerPHP & WooCommerceJavaScriptHTML & SCSSSQLResponsive UI / UX Read the case study : Gharamatgate Visit Gharamatgate
 - 2023–24★ FeaturedTuleroA B2B marketplace that puts half a million car parts one search away.Italian repair shops order spare parts straight from distribution platforms across the country — no middle dealer. As the only front-end engineer I designed and built the buyer-facing marketplace and the admin dashboard behind it.Sole front-end engineerAngularReactVue.jsNode.jsMongoDB Read the case study : Tulero
-- 2025–★ FeaturedBIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torino × ESCP acceleration programme — fast enough to test with real users, solid enough to grow into the real thing.Front-end developerAngularTypeScriptHTML & SCSSResponsive UI / UX Read the case study : BIU Startup MVPs
+- 2025–26★ FeaturedBIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torino × ESCP acceleration programme — fast enough to test with real users, solid enough to grow into the real thing.Front-end developerAngularTypeScriptHTML & SCSSResponsive UI / UX Read the case study : BIU Startup MVPs
 - 2018–21Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.A portfolio of WooCommerce/PHP builds delivered through Vira Tarfand Arad, the agency I co-founded — from brief and design to hosting and long-term support.Co-founder · tech leadPHP & WooCommerceJavaScriptHTML & SCSSSQL Read the case study : Medical & Pharma Commerce
 - 2025Vue Repository SearchA lean GitHub repository explorer built with Vue.Searches the GitHub API as you type and presents results in a clean, responsive list — a small study in reactive state and API ergonomics.Open sourceVue.jsJavaScriptHTML & SCSS Read the case study : Vue Repository Search Code Vue Repository Search
 - 2026This PortfolioAngular 22, zoneless, signals all the way down — in three languages.A live signal graph of my skills, a git-log career timeline, a command palette, a working terminal and runtime EN/IT/FA switching with full RTL — and it prints as a one-page CV.Design & buildAngularTypeScriptRxJS & SignalsHTML & SCSSResponsive UI / UX Read the case study : This Portfolio Code This Portfolio
@@ -157,7 +157,7 @@ Every product I designed, built or led — from first commit to production. Open
 - 2026★ FeaturedDIAR MediaA community news platform with an AI newsroom that never sleeps.The news outlet of Associazione DIAR. Persian-first, ten-language news site where readers submit, vote and discuss links while an autonomous agent drafts stories from 20 sources for human editors to approve from an installable PWA with push notifications. Built from zero: auth and roles, moderation, structured-data SEO, sitemaps and IndexNow.Full-stack · soloNext.jsReactTypeScriptNode.jsSQL Read the case study : DIAR Media Visit DIAR Media
 - 2025★ FeaturedGharamatgateAn open investigative archive of the Iran–US compensation cases.Persian-language research database that documents lawsuits, US court judgments and compensation payments involving the Islamic Republic — from the 1979 embassy hostage crisis and the Algiers Accords to today’s claims worth tens of billions of dollars. Searchable case files, topic categories and filters by person, year and organisation; independent and non-profit.Site admin · developer · contributing writerPHP & WooCommerceJavaScriptHTML & SCSSSQLResponsive UI / UX Read the case study : Gharamatgate Visit Gharamatgate
 - 2023–24★ FeaturedTuleroA B2B marketplace that puts half a million car parts one search away.Italian repair shops order spare parts straight from distribution platforms across the country — no middle dealer. As the only front-end engineer I designed and built the buyer-facing marketplace and the admin dashboard behind it.Sole front-end engineerAngularReactVue.jsNode.jsMongoDB Read the case study : Tulero
-- 2025–★ FeaturedBIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torino × ESCP acceleration programme — fast enough to test with real users, solid enough to grow into the real thing.Front-end developerAngularTypeScriptHTML & SCSSResponsive UI / UX Read the case study : BIU Startup MVPs
+- 2025–26★ FeaturedBIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torino × ESCP acceleration programme — fast enough to test with real users, solid enough to grow into the real thing.Front-end developerAngularTypeScriptHTML & SCSSResponsive UI / UX Read the case study : BIU Startup MVPs
 - 2018–21Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.A portfolio of WooCommerce/PHP builds delivered through Vira Tarfand Arad, the agency I co-founded — from brief and design to hosting and long-term support.Co-founder · tech leadPHP & WooCommerceJavaScriptHTML & SCSSSQL Read the case study : Medical & Pharma Commerce
 - 2025Vue Repository SearchA lean GitHub repository explorer built with Vue.Searches the GitHub API as you type and presents results in a clean, responsive list — a small study in reactive state and API ergonomics.Open sourceVue.jsJavaScriptHTML & SCSS Read the case study : Vue Repository Search Code Vue Repository Search
 - 2026This PortfolioAngular 22, zoneless, signals all the way down — in three languages.A live signal graph of my skills, a git-log career timeline, a command palette, a working terminal and runtime EN/IT/FA switching with full RTL — and it prints as a one-page CV.Design & buildAngularTypeScriptRxJS & SignalsHTML & SCSSResponsive UI / UX Read the case study : This Portfolio Code This Portfolio
@@ -170,7 +170,7 @@ Title: BIU Startup MVPs — project by Amir Iravani
 - Home
 - Projects
 - BIU Startup MVPs
-2025– · Front-end developer
+2025–26 · Front-end developer
 
 # BIU Startup MVPs
 
@@ -186,7 +186,7 @@ Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torin
 
 Web Developer · Build It Up (BIU)
 
-Oct 2025 — Present · Turin, Italy
+Oct 2025 — Sept 2026 · Turin, Italy
 
 Front-end lead for websites and MVPs of early-stage startups in the Politecnico di Torino × ESCP Business School acceleration programme.
 
@@ -197,7 +197,7 @@ Front-end lead for websites and MVPs of early-stage startups in the Politecnico 
 ## At a glance
 
 **Year**
-2025–
+2025–26
 
 **My role**
 Front-end developer
