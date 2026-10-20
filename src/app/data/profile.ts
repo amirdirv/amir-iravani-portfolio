@@ -117,6 +117,7 @@ export const EXPERIENCES: readonly Experience[] = [
     company: 'Build It Up (BIU)',
     branch: 'turin',
     start: '2025-10',
+    end: '2026-09',
     role: {
       en: 'Web Developer',
       it: 'Sviluppatore Web',
@@ -448,7 +449,7 @@ export const PROJECTS: readonly Project[] = [
     id: 'biu',
     experience: 'biu',
     name: 'BIU Startup MVPs',
-    year: '2025–',
+    year: '2025–26',
     featured: true,
     palette: ['#7C4DFF', '#00C2A8'],
     tagline: {
