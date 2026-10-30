@@ -1,5 +1,6 @@
 import { DOCUMENT, Injectable, inject, signal } from '@angular/core';
 import { prefersReducedMotion } from './motion';
+import { SmoothMotionService } from './smooth-motion.service';
 
 export const SECTION_IDS = [
   'about',
@@ -19,6 +20,7 @@ export type SectionId = (typeof SECTION_IDS)[number];
 @Injectable({ providedIn: 'root' })
 export class ScrollService {
   private readonly document = inject(DOCUMENT);
+  private readonly smooth = inject(SmoothMotionService);
 
   /** 0 → 1 across the whole document. */
   readonly progress = signal(0);
@@ -58,11 +60,16 @@ export class ScrollService {
   scrollTo(id: string, behavior: ScrollBehavior = 'smooth'): void {
     const win = this.document.defaultView;
     if (id === 'top') {
+      if (behavior === 'smooth' && this.smooth.scrollTo('top')) return;
       win?.scrollTo({ top: 0, behavior: this.motion(behavior) });
       return;
     }
     const target = this.document.getElementById(id);
     if (!target) return;
+    if (behavior === 'smooth' && this.smooth.scrollTo(target)) {
+      this.focusSection(id);
+      return;
+    }
     target.scrollIntoView({ behavior: this.motion(behavior), block: 'start' });
     this.focusSection(id);
   }

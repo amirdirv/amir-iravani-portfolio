@@ -3,6 +3,7 @@
 <dialog
   #dialog
   class="palette"
+  data-lenis-prevent
   [attr.aria-label]="i18n.ui().common.commandHint"
   (close)="onClosed()"
   (click)="backdropClick($event)"

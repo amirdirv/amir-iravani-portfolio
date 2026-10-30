@@ -1,4 +1,11 @@
-<dialog #dialog class="term" aria-label="Terminal" dir="ltr" (close)="onClosed()">
+<dialog
+  #dialog
+  class="term"
+  data-lenis-prevent
+  aria-label="Terminal"
+  dir="ltr"
+  (close)="onClosed()"
+>
   <div class="term__bar">
     <button
       type="button"

@@ -11,6 +11,7 @@ import { I18nService } from './core/i18n.service';
 import { PageService } from './core/page.service';
 import { ScrollService } from './core/scroll.service';
 import { SeoService } from './core/seo.service';
+import { SmoothMotionService } from './core/smooth-motion.service';
 import { isLang, localizedPath } from './core/site';
 import { ThemeService } from './core/theme.service';
 import { CommandPalette } from './layout/command-palette';
@@ -45,6 +46,7 @@ export class App {
   protected readonly theme = inject(ThemeService);
   protected readonly commands = inject(CommandsService);
   private readonly scroll = inject(ScrollService);
+  private readonly smooth = inject(SmoothMotionService);
   private readonly seo = inject(SeoService);
   protected readonly page = inject(PageService);
   private readonly document = inject(DOCUMENT);
@@ -59,6 +61,7 @@ export class App {
     afterNextRender(() => {
       this.redirectLegacyLangQuery();
       this.scroll.start();
+      void this.smooth.start();
     });
   }
 
