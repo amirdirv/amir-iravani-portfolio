@@ -1,4 +1,5 @@
 import { DOCUMENT, Injectable, effect, inject, signal } from '@angular/core';
+import { prefersReducedMotion } from './motion';
 import { readStorage, writeStorage } from './storage';
 
 export type Theme = 'dark' | 'light';
@@ -23,10 +24,50 @@ export class ThemeService {
     });
   }
 
-  toggle(): void {
+  /**
+   * Switches theme. With a click event, the new theme grows out of the button
+   * as a circle (View Transitions API); elsewhere it simply cross-fades.
+   */
+  toggle(event?: MouseEvent): void {
     const next: Theme = this.theme() === 'dark' ? 'light' : 'dark';
-    this.theme.set(next);
-    writeStorage(STORAGE_KEY, next);
+    const apply = () => {
+      this.theme.set(next);
+      writeStorage(STORAGE_KEY, next);
+    };
+    const doc = this.document as Document & {
+      startViewTransition?: (cb: () => void) => {
+        ready: Promise<void>;
+        finished: Promise<void>;
+      };
+    };
+    if (!event || !doc.startViewTransition || prefersReducedMotion()) {
+      apply();
+      return;
+    }
+    const { clientX: x, clientY: y } = event;
+    const win = this.document.defaultView!;
+    const radius = Math.hypot(Math.max(x, win.innerWidth - x), Math.max(y, win.innerHeight - y));
+    const root = this.document.documentElement;
+    const transition = doc.startViewTransition(() => {
+      // Colour transitions off, so the "after" snapshot shows the final colours.
+      root.classList.add('theme-switching');
+      apply();
+      // Signals render asynchronously; set the attribute now so the snapshot is right.
+      root.setAttribute('data-theme', next);
+    });
+    transition.finished.finally(() => root.classList.remove('theme-switching'));
+    transition.ready
+      .then(() => {
+        this.document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          {
+            duration: 650,
+            easing: 'cubic-bezier(0.32, 0.72, 0, 1)',
+            pseudoElement: '::view-transition-new(root)',
+          },
+        );
+      })
+      .catch(() => {});
   }
 
   private initialTheme(): Theme {

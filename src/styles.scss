@@ -253,13 +253,22 @@ p {
   font-weight: 600;
   font-size: 15px;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
   transition:
-    transform 0.25s var(--ease-out),
+    transform 0.35s var(--ease-spring),
     border-color 0.25s,
-    background-color 0.25s;
+    background-color 0.25s,
+    box-shadow 0.35s var(--ease-out);
 
   &:hover {
     border-color: var(--c-text);
+    transform: translateY(-2px);
+  }
+
+  /* Press: a quick, physical squeeze; release springs back. */
+  &:active {
+    transform: scale(0.97);
+    transition-duration: 0.12s;
   }
 
   &--primary {
@@ -267,13 +276,20 @@ p {
     color: #fff;
     background: var(--grad-brand);
     background-size: 200% 100%;
-    box-shadow: 0 10px 40px -10px var(--c-rose);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.25),
+      0 10px 40px -10px var(--c-rose);
     transition:
-      transform 0.25s var(--ease-out),
+      transform 0.35s var(--ease-spring),
+      box-shadow 0.35s var(--ease-out),
       background-position 0.6s var(--ease-out);
 
     &:hover {
       background-position: 100% 0;
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.3),
+        0 16px 48px -12px var(--c-rose),
+        0 6px 18px -8px var(--c-violet);
     }
   }
 }
@@ -284,6 +300,27 @@ p {
   border-radius: var(--radius);
   background: var(--c-surface);
   backdrop-filter: blur(12px);
+  /* Soft depth: a hairline of light on the top edge plus a wide, quiet shadow. */
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 1px 2px rgb(0 0 0 / 0.12),
+    0 18px 40px -24px rgb(0 0 0 / 0.5);
+}
+
+:root[data-theme='light'] .card {
+  background: color-mix(in srgb, #fff 62%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.7),
+    0 1px 2px rgb(20 18 40 / 0.04),
+    0 4px 12px rgb(20 18 40 / 0.04),
+    0 18px 40px -20px rgb(20 18 40 / 0.14);
+}
+
+/* Numbers line up and read as data. */
+.hero__stats dd,
+.chip,
+time {
+  font-variant-numeric: tabular-nums;
 }
 
 .visually-hidden {
@@ -298,18 +335,61 @@ p {
   border: 0;
 }
 
-/* Elements marked with `appReveal` fade up as they enter the viewport. */
+/* Elements marked with `appReveal` rise out of a soft blur as they enter the viewport. */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(24px);
+  filter: blur(8px);
   transition:
     opacity 0.9s var(--ease-out),
-    transform 0.9s var(--ease-out);
+    transform 1s var(--ease-out),
+    filter 0.9s var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
 
   &.is-visible {
     opacity: 1;
     transform: none;
+    filter: none;
+  }
+
+  /* Section kickers: the gradient rule draws in after the label appears. */
+  &.kicker::before {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.9s var(--ease-out) calc(var(--reveal-delay, 0ms) + 0.25s);
+  }
+
+  &.kicker.is-visible::before {
+    transform: none;
+  }
+}
+
+[dir='rtl'] .reveal.kicker::before {
+  transform-origin: right;
+}
+
+/* Headings revealed word by word (`revealWords`): the block itself stays put. */
+.reveal--words {
+  opacity: 1;
+  transform: none;
+  filter: none;
+
+  .reveal-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(6px);
+    transition:
+      opacity 0.7s var(--ease-out),
+      transform 0.9s var(--ease-out),
+      filter 0.7s var(--ease-out);
+    transition-delay: calc(var(--reveal-delay, 0ms) + var(--w, 0) * 70ms);
+  }
+
+  &.is-visible .reveal-word {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
 
@@ -317,6 +397,28 @@ p {
    at /#contact from another page lands instantly instead of animating. */
 html.smooth-scroll {
   scroll-behavior: smooth;
+}
+
+/* Lenis (smooth scrolling) takes over once loaded; native smoothing would fight it. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -332,8 +434,31 @@ html.smooth-scroll {
     transition-duration: 0.001ms !important;
   }
 
-  .reveal {
+  .reveal,
+  .reveal .reveal-word {
     opacity: 1;
     transform: none;
+    filter: none;
   }
+
+  .reveal.kicker::before {
+    transform: none;
+  }
+
+  .btn:active,
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* Theme switch: the new theme is revealed by a circle (ThemeService.toggle). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.theme-switching,
+.theme-switching * {
+  transition: none !important;
 }
