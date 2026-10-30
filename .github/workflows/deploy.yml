@@ -36,15 +36,19 @@ jobs:
       - name: SEO audit (fails the deploy on any error)
         run: npm run seo:check
 
+      - name: Read the commit subject
+        id: msg
+        run: echo "subject=$(git log -1 --format=%s)" >> "$GITHUB_OUTPUT"
+
       - name: Publish to the deploy branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: deploy
           publish_dir: dist/amir-iravani-portfolio/browser
-          commit_message: 'deploy: ${{ github.event.head_commit.message }}'
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
+          commit_message: 'deploy: ${{ steps.msg.outputs.subject }}'
+          user_name: amirdirv
+          user_email: amirmohammad76@yahoo.com
 
       - name: Build the GitHub Pages redirect stub
         run: |
