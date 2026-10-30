@@ -48,6 +48,17 @@
     <image:image><image:loc>https://amir-iravani.it/og/gharamatgate.png</image:loc></image:image>
   </url>
   <url>
+    <loc>https://amir-iravani.it/fa/projects/hera</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/hera" />
+    <image:image><image:loc>https://amir-iravani.it/og/hera.png</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://amir-iravani.it/fa/projects</loc>
     <lastmod>2026-10-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -160,6 +171,17 @@
     <image:image><image:loc>https://amir-iravani.it/og/gharamatgate.png</image:loc></image:image>
   </url>
   <url>
+    <loc>https://amir-iravani.it/it/projects/hera</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/hera" />
+    <image:image><image:loc>https://amir-iravani.it/og/hera.png</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://amir-iravani.it/it/projects</loc>
     <lastmod>2026-10-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -246,6 +268,17 @@
     <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/gharamatgate" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/gharamatgate" />
     <image:image><image:loc>https://amir-iravani.it/og/gharamatgate.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amir-iravani.it/projects/hera</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amir-iravani.it/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://amir-iravani.it/it/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amir-iravani.it/fa/projects/hera" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amir-iravani.it/projects/hera" />
+    <image:image><image:loc>https://amir-iravani.it/og/hera.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://amir-iravani.it/projects</loc>

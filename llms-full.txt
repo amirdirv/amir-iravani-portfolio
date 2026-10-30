@@ -110,12 +110,13 @@ Thirteen years as a commit history. Two branches — Tehran and Turin — merged
 Products I designed, built or led — each card’s cover is generated from the project’s own palette.
 
 - 2026★ FeaturedDIAR MediaA community news platform with an AI newsroom that never sleeps.The news outlet of Associazione DIAR. Persian-first, ten-language news site where readers submit, vote and discuss links while an autonomous agent drafts stories from 20 sources for human editors to approve from an installable PWA with push notifications. Built from zero: auth and roles, moderation, structured-data SEO, sitemaps and IndexNow.Full-stack · soloNext.jsReactTypeScriptNode.jsSQL Read the case study : DIAR Media Visit DIAR Media
+- 2026★ FeaturedHERA AssociationA ten-language home for a new research association on environment and displacement.Website of HERA (Human, Environment, Resilience & Accountability), an independent, non-partisan Canadian not-for-profit that studies how environmental degradation drives human displacement. Persian-first static site in ten languages with full RTL, sourced statistics and photo credits, a membership form, smooth scrolling and scroll-driven motion — fast and accessible on plain shared hosting.Design & buildTypeScriptJavaScriptHTML & SCSSResponsive UI / UX Read the case study : HERA Association Visit HERA Association
 - 2025★ FeaturedGharamatgateAn open investigative archive of the Iran–US compensation cases.Persian-language research database that documents lawsuits, US court judgments and compensation payments involving the Islamic Republic — from the 1979 embassy hostage crisis and the Algiers Accords to today’s claims worth tens of billions of dollars. Searchable case files, topic categories and filters by person, year and organisation; independent and non-profit.Site admin · developer · contributing writerPHP & WooCommerceJavaScriptHTML & SCSSSQLResponsive UI / UX Read the case study : Gharamatgate Visit Gharamatgate
-- 2023–24★ FeaturedTuleroA B2B marketplace that puts half a million car parts one search away.Italian repair shops order spare parts straight from distribution platforms across the country — no middle dealer. As the only front-end engineer I designed and built the buyer-facing marketplace and the admin dashboard behind it.Sole front-end engineerAngularReactVue.jsNode.jsMongoDB Read the case study : Tulero
+- 2023–24★ FeaturedTuleroA B2B marketplace that puts half a million car parts one search away.Italian repair shops order spare parts straight from distribution platforms across the country — no middle dealer. As the only front-end engineer I designed and built the buyer-facing marketplace and the admin dashboard behind it.Sole front-end engineerAngularReactVue.jsNode.jsMongoDB Read the case study : Tulero Visit Tulero
 - 2025–26★ FeaturedBIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torino × ESCP acceleration programme — fast enough to test with real users, solid enough to grow into the real thing.Front-end developerAngularTypeScriptHTML & SCSSResponsive UI / UX Read the case study : BIU Startup MVPs
 - 2018–21Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.A portfolio of WooCommerce/PHP builds delivered through Vira Tarfand Arad, the agency I co-founded — from brief and design to hosting and long-term support.Co-founder · tech leadPHP & WooCommerceJavaScriptHTML & SCSSSQL Read the case study : Medical & Pharma Commerce
 - 2025Vue Repository SearchA lean GitHub repository explorer built with Vue.Searches the GitHub API as you type and presents results in a clean, responsive list — a small study in reactive state and API ergonomics.Open sourceVue.jsJavaScriptHTML & SCSS Read the case study : Vue Repository Search Code Vue Repository Search
-- 2026This PortfolioAngular 22, zoneless, signals all the way down — in three languages.A live signal graph of my skills, a git-log career timeline, a command palette, a working terminal and runtime EN/IT/FA switching with full RTL — and it prints as a one-page CV.Design & buildAngularTypeScriptRxJS & SignalsHTML & SCSSResponsive UI / UX Read the case study : This Portfolio Code This Portfolio
+- 2026This PortfolioAngular 22, zoneless, signals all the way down — in three languages.A live signal graph of my skills, a git-log career timeline, a command palette, a working terminal and runtime EN/IT/FA switching with full RTL — and it prints as a one-page CV.Design & buildAngularTypeScriptRxJS & SignalsHTML & SCSSResponsive UI / UX Read the case study : This Portfolio Visit This Portfolio Code This Portfolio
 All projects
 
 05 · Education
@@ -136,6 +137,8 @@ All projects
 
 I’m open to full-time front-end roles in Italy and selected freelance work. Write a few lines — the message opens in your own mail app, nothing is stored here.
 
+Alsoamirmohammad76@yahoo.com
+
 Elsewhere
 
 - LinkedIn@amirmohammad-iravani
@@ -155,12 +158,13 @@ Title: Projects by Amir Iravani — Angular, React & Vue work
 Every product I designed, built or led — from first commit to production. Open any project for the full story, the stack and links.
 
 - 2026★ FeaturedDIAR MediaA community news platform with an AI newsroom that never sleeps.The news outlet of Associazione DIAR. Persian-first, ten-language news site where readers submit, vote and discuss links while an autonomous agent drafts stories from 20 sources for human editors to approve from an installable PWA with push notifications. Built from zero: auth and roles, moderation, structured-data SEO, sitemaps and IndexNow.Full-stack · soloNext.jsReactTypeScriptNode.jsSQL Read the case study : DIAR Media Visit DIAR Media
+- 2026★ FeaturedHERA AssociationA ten-language home for a new research association on environment and displacement.Website of HERA (Human, Environment, Resilience & Accountability), an independent, non-partisan Canadian not-for-profit that studies how environmental degradation drives human displacement. Persian-first static site in ten languages with full RTL, sourced statistics and photo credits, a membership form, smooth scrolling and scroll-driven motion — fast and accessible on plain shared hosting.Design & buildTypeScriptJavaScriptHTML & SCSSResponsive UI / UX Read the case study : HERA Association Visit HERA Association
 - 2025★ FeaturedGharamatgateAn open investigative archive of the Iran–US compensation cases.Persian-language research database that documents lawsuits, US court judgments and compensation payments involving the Islamic Republic — from the 1979 embassy hostage crisis and the Algiers Accords to today’s claims worth tens of billions of dollars. Searchable case files, topic categories and filters by person, year and organisation; independent and non-profit.Site admin · developer · contributing writerPHP & WooCommerceJavaScriptHTML & SCSSSQLResponsive UI / UX Read the case study : Gharamatgate Visit Gharamatgate
-- 2023–24★ FeaturedTuleroA B2B marketplace that puts half a million car parts one search away.Italian repair shops order spare parts straight from distribution platforms across the country — no middle dealer. As the only front-end engineer I designed and built the buyer-facing marketplace and the admin dashboard behind it.Sole front-end engineerAngularReactVue.jsNode.jsMongoDB Read the case study : Tulero
+- 2023–24★ FeaturedTuleroA B2B marketplace that puts half a million car parts one search away.Italian repair shops order spare parts straight from distribution platforms across the country — no middle dealer. As the only front-end engineer I designed and built the buyer-facing marketplace and the admin dashboard behind it.Sole front-end engineerAngularReactVue.jsNode.jsMongoDB Read the case study : Tulero Visit Tulero
 - 2025–26★ FeaturedBIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.Landing pages, web apps and clickable MVPs for teams in the Politecnico di Torino × ESCP acceleration programme — fast enough to test with real users, solid enough to grow into the real thing.Front-end developerAngularTypeScriptHTML & SCSSResponsive UI / UX Read the case study : BIU Startup MVPs
 - 2018–21Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.A portfolio of WooCommerce/PHP builds delivered through Vira Tarfand Arad, the agency I co-founded — from brief and design to hosting and long-term support.Co-founder · tech leadPHP & WooCommerceJavaScriptHTML & SCSSSQL Read the case study : Medical & Pharma Commerce
 - 2025Vue Repository SearchA lean GitHub repository explorer built with Vue.Searches the GitHub API as you type and presents results in a clean, responsive list — a small study in reactive state and API ergonomics.Open sourceVue.jsJavaScriptHTML & SCSS Read the case study : Vue Repository Search Code Vue Repository Search
-- 2026This PortfolioAngular 22, zoneless, signals all the way down — in three languages.A live signal graph of my skills, a git-log career timeline, a command palette, a working terminal and runtime EN/IT/FA switching with full RTL — and it prints as a one-page CV.Design & buildAngularTypeScriptRxJS & SignalsHTML & SCSSResponsive UI / UX Read the case study : This Portfolio Code This Portfolio
+- 2026This PortfolioAngular 22, zoneless, signals all the way down — in three languages.A live signal graph of my skills, a git-log career timeline, a command palette, a working terminal and runtime EN/IT/FA switching with full RTL — and it prints as a one-page CV.Design & buildAngularTypeScriptRxJS & SignalsHTML & SCSSResponsive UI / UX Read the case study : This Portfolio Visit This Portfolio Code This Portfolio
 
 ---
 
@@ -210,6 +214,7 @@ AngularTypeScriptHTML & SCSSResponsive UI / UX
 ## More projects
 
 - DIAR MediaA community news platform with an AI newsroom that never sleeps.
+- HERA AssociationA ten-language home for a new research association on environment and displacement.
 - GharamatgateAn open investigative archive of the Iran–US compensation cases.
 - TuleroA B2B marketplace that puts half a million car parts one search away.
 - Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.
@@ -254,6 +259,7 @@ diarofficial.com
 
 ## More projects
 
+- HERA AssociationA ten-language home for a new research association on environment and displacement.
 - GharamatgateAn open investigative archive of the Iran–US compensation cases.
 - TuleroA B2B marketplace that puts half a million car parts one search away.
 - BIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.
@@ -300,6 +306,53 @@ www.gharamatgate.com
 ## More projects
 
 - DIAR MediaA community news platform with an AI newsroom that never sleeps.
+- HERA AssociationA ten-language home for a new research association on environment and displacement.
+- TuleroA B2B marketplace that puts half a million car parts one search away.
+- BIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.
+- Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.
+- Vue Repository SearchA lean GitHub repository explorer built with Vue.
+- This PortfolioAngular 22, zoneless, signals all the way down — in three languages.
+
+---
+
+URL: https://amir-iravani.it/projects/hera
+Title: HERA Association — project by Amir Iravani
+
+- Home
+- Projects
+- HERA Association
+2026 · Design & build
+
+# HERA Association
+
+A ten-language home for a new research association on environment and displacement.
+
+Visit Get in touch
+
+## Overview
+
+Website of HERA (Human, Environment, Resilience & Accountability), an independent, non-partisan Canadian not-for-profit that studies how environmental degradation drives human displacement. Persian-first static site in ten languages with full RTL, sourced statistics and photo credits, a membership form, smooth scrolling and scroll-driven motion — fast and accessible on plain shared hosting.
+
+## At a glance
+
+**Year**
+2026
+
+**My role**
+Design & build
+
+**Stack**
+TypeScriptJavaScriptHTML & SCSSResponsive UI / UX
+
+**Links**
+heraassociation.com
+
+## Want something like this for your team?
+
+## More projects
+
+- DIAR MediaA community news platform with an AI newsroom that never sleeps.
+- GharamatgateAn open investigative archive of the Iran–US compensation cases.
 - TuleroA B2B marketplace that puts half a million car parts one search away.
 - BIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.
 - Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.
@@ -354,6 +407,7 @@ PHP & WooCommerceJavaScriptHTML & SCSSSQL
 ## More projects
 
 - DIAR MediaA community news platform with an AI newsroom that never sleeps.
+- HERA AssociationA ten-language home for a new research association on environment and displacement.
 - GharamatgateAn open investigative archive of the Iran–US compensation cases.
 - TuleroA B2B marketplace that puts half a million car parts one search away.
 - BIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.
@@ -374,7 +428,7 @@ Title: This Portfolio — project by Amir Iravani
 
 Angular 22, zoneless, signals all the way down — in three languages.
 
-Code Get in touch
+Visit Code Get in touch
 
 ## Overview
 
@@ -392,13 +446,14 @@ Design & build
 AngularTypeScriptRxJS & SignalsHTML & SCSSResponsive UI / UX
 
 **Links**
-github.com/amirdirv/amir-iravani-portfolio
+amir-iravani.itgithub.com/amirdirv/amir-iravani-portfolio
 
 ## Want something like this for your team?
 
 ## More projects
 
 - DIAR MediaA community news platform with an AI newsroom that never sleeps.
+- HERA AssociationA ten-language home for a new research association on environment and displacement.
 - GharamatgateAn open investigative archive of the Iran–US compensation cases.
 - TuleroA B2B marketplace that puts half a million car parts one search away.
 - BIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.
@@ -419,7 +474,7 @@ Title: Tulero — project by Amir Iravani
 
 A B2B marketplace that puts half a million car parts one search away.
 
-Get in touch
+Visit Get in touch
 
 ## Overview
 
@@ -448,11 +503,15 @@ Sole front-end engineer
 **Stack**
 AngularReactVue.jsNode.jsMongoDB
 
+**Links**
+tulero.it
+
 ## Want something like this for your team?
 
 ## More projects
 
 - DIAR MediaA community news platform with an AI newsroom that never sleeps.
+- HERA AssociationA ten-language home for a new research association on environment and displacement.
 - GharamatgateAn open investigative archive of the Iran–US compensation cases.
 - BIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.
 - Medical & Pharma CommerceOnline stores and sites for clinics, labs and pharma distributors.
@@ -498,6 +557,7 @@ github.com/amirdirv/vue-repository-search
 ## More projects
 
 - DIAR MediaA community news platform with an AI newsroom that never sleeps.
+- HERA AssociationA ten-language home for a new research association on environment and displacement.
 - GharamatgateAn open investigative archive of the Iran–US compensation cases.
 - TuleroA B2B marketplace that puts half a million car parts one search away.
 - BIU Startup MVPsFrom pitch deck to product for the next wave of Turin startups.
