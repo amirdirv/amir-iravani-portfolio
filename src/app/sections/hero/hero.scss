@@ -157,6 +157,7 @@
 
 .orbit__ring {
   inset: 2%;
+  will-change: transform;
   border: 1px dashed var(--c-line-strong);
   animation: spin 60s linear infinite;
 
@@ -277,9 +278,10 @@
   }
 }
 
+/* Movement only, no opacity: the text is painted on the first frame, so it
+   counts as visible for Largest Contentful Paint right away. */
 @keyframes fade-up {
   from {
-    opacity: 0;
     transform: translateY(16px);
   }
 }

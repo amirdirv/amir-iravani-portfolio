@@ -27,6 +27,13 @@ export interface PageSeo {
 }
 
 const DEFAULT_IMAGE = '/og-image.png';
+
+/** Fonts the first screen needs, per language (see src/_fonts.scss). */
+const PRELOAD_FONTS: Record<Lang, string[]> = {
+  en: ['/fonts/unbounded-latin.woff2', '/fonts/inter-tight-latin.woff2'],
+  it: ['/fonts/unbounded-latin.woff2', '/fonts/inter-tight-latin.woff2'],
+  fa: ['/fonts/vazirmatn-arabic.woff2'],
+};
 const MANAGED = 'data-seo';
 
 /**
@@ -69,6 +76,9 @@ export class SeoService {
     this.setMeta('name', 'twitter:image', image);
 
     this.clearManaged();
+    for (const href of PRELOAD_FONTS[page.lang]) {
+      this.addLink({ rel: 'preload', as: 'font', type: 'font/woff2', href, crossorigin: '' });
+    }
     if (!page.noindex) {
       this.addLink({ rel: 'canonical', href: url });
       for (const lang of LANG_CODES) {
