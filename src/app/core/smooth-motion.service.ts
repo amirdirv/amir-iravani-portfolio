@@ -39,7 +39,14 @@ export class SmoothMotionService {
 
   async start(): Promise<void> {
     const win = this.document.defaultView;
-    if (this.started || !win || typeof win.requestAnimationFrame !== 'function') return;
+    // Real browsers only: test DOMs (jsdom) lack matchMedia, which GSAP needs.
+    if (
+      this.started ||
+      !win ||
+      typeof win.requestAnimationFrame !== 'function' ||
+      typeof win.matchMedia !== 'function'
+    )
+      return;
     this.started = true;
 
     const [{ default: LenisCtor }, { gsap }, { ScrollTrigger }] = await Promise.all([
