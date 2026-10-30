@@ -22,7 +22,7 @@ import { ThemeService } from '../../core/theme.service';
   // Focusable so keyboard users can "develop" the photo too; the <img> carries the alt text.
   host: { '[class.is-ready]': 'ready()', tabindex: '0' },
   template: `
-    <img [src]="src()" [alt]="alt()" width="250" height="250" loading="lazy" decoding="async" />
+    <img [src]="src()" [alt]="alt()" width="800" height="800" loading="lazy" decoding="async" />
     <canvas #canvas aria-hidden="true"></canvas>
   `,
   styles: `
@@ -104,13 +104,23 @@ export class HalftonePortrait {
     if (!ctx) return [];
     ctx.drawImage(img, 0, 0, n, n);
     const { data } = ctx.getImageData(0, 0, n, n);
+    const lumAt = (x: number, y: number) => {
+      const i = (y * n + x) * 4;
+      return (0.2126 * data[i]! + 0.7152 * data[i + 1]! + 0.0722 * data[i + 2]!) / 255;
+    };
+    // Backdrop brightness from the top row and the upper side columns (never the clothes),
+    // so a grey studio wall drops out as cleanly as a white one.
+    const edge: number[] = [];
+    for (let x = 0; x < n; x++) edge.push(lumAt(x, 0), lumAt(x, 1));
+    for (let y = 0; y < n / 2; y++) edge.push(lumAt(0, y), lumAt(n - 1, y));
+    edge.sort((a, b) => a - b);
+    const backdrop = Math.max(0.35, edge[Math.floor(edge.length / 2)] ?? 1);
     const cells = [];
     for (let y = 0; y < n; y++) {
       for (let x = 0; x < n; x++) {
-        const i = (y * n + x) * 4;
-        const lum = (0.2126 * data[i]! + 0.7152 * data[i + 1]! + 0.0722 * data[i + 2]!) / 255;
-        // Contrast curve so the light studio background drops out cleanly.
-        const ink = Math.pow(1 - lum, 1.35);
+        const lum = Math.min(1, lumAt(x, y) / backdrop);
+        // Small dead zone drops the wall's shading; the gain keeps skin tones visible.
+        const ink = Math.pow(Math.min(1, Math.max(0, (1 - lum - 0.05) * 1.8)), 0.9);
         if (ink > 0.06) cells.push({ x, y, r: ink, t: (x + (n - y)) / (2 * n) });
       }
     }

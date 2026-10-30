@@ -18,7 +18,13 @@
     @for (project of projects; track project.id) {
       <li [class.is-featured]="project.featured" [appReveal]="($index % 3) * 90">
         <article class="project card" appTilt>
-          <app-project-cover class="project__cover" [id]="project.id" [palette]="project.palette" />
+          <app-project-cover
+            class="project__cover"
+            [id]="project.id"
+            [palette]="project.palette"
+            [image]="project.cover"
+            [align]="project.coverAlign ?? 'center'"
+          />
 
           <div class="project__body">
             <p class="project__meta mono">

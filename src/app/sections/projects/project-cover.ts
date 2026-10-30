@@ -21,6 +21,18 @@ function rng(seed: string): () => number {
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'aria-hidden': 'true' },
   template: `
+    @if (image(); as src) {
+      <img
+        [src]="src"
+        alt=""
+        width="1280"
+        height="768"
+        [attr.loading]="eager() ? 'eager' : 'lazy'"
+        [attr.fetchpriority]="eager() ? 'high' : null"
+        decoding="async"
+        [style.object-position]="'top ' + align()"
+      />
+    } @else {
     <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
       <defs>
         <linearGradient [attr.id]="id() + '-bg'" x1="0" y1="0" x2="1" y2="1">
@@ -66,15 +78,33 @@ function rng(seed: string): () => number {
       />
       <circle [attr.cx]="art().sx" [attr.cy]="art().sy" r="9" fill="#fff" />
     </svg>
+    }
   `,
   styles: `
     :host {
       display: block;
+      position: relative;
       overflow: hidden;
+      background: var(--c-bg-2);
     }
     svg {
       width: 100%;
       height: 100%;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+    /* hairline inner edge so light screenshots don't bleed into the card */
+    :host:has(img)::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 0 1px rgb(127 127 127 / 0.14);
+      pointer-events: none;
     }
     .arc {
       transform-box: view-box;
@@ -91,6 +121,12 @@ function rng(seed: string): () => number {
 export class ProjectCover {
   readonly id = input.required<string>();
   readonly palette = input.required<readonly [string, string]>();
+  /** Homepage screenshot; when set it replaces the generative art. */
+  readonly image = input<string | undefined>(undefined);
+  /** Edge of the screenshot kept when the box crops it. */
+  readonly align = input<'left' | 'center' | 'right'>('center');
+  /** Above-the-fold use (project page header): load immediately. */
+  readonly eager = input(false);
 
   protected readonly art = computed(() => {
     const rand = rng(this.id());

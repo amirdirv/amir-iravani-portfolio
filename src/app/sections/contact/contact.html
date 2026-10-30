@@ -7,12 +7,26 @@
     <p class="section-lead" appReveal="140">{{ ui.lead }}</p>
 
     <div class="email" appReveal="200">
-      <a class="email__address gradient-text" [href]="'mailto:' + email">{{ email }}</a>
-      <button type="button" class="email__copy" (click)="copy()" [attr.aria-label]="ui.copy">
-        <app-icon [name]="copied() ? 'check' : 'copy'" [size]="18" />
-        <span aria-live="polite">{{ copied() ? ui.copied : ui.copy }}</span>
+      <a class="email__address gradient-text" [href]="'mailto:' + email"
+        >{{ emailUser }}<wbr />&#64;{{ emailDomain }}</a
+      >
+      <button type="button" class="email__copy" (click)="copy(email)" [attr.aria-label]="ui.copy">
+        <app-icon [name]="copied() === email ? 'check' : 'copy'" [size]="18" />
+        <span aria-live="polite">{{ copied() === email ? ui.copied : ui.copy }}</span>
       </button>
     </div>
+    <p class="email-alt" appReveal="230">
+      <span class="email-alt__label mono">{{ ui.altEmail }}</span>
+      <a class="email-alt__address" [href]="'mailto:' + altEmail">{{ altEmail }}</a>
+      <button
+        type="button"
+        class="email-alt__copy"
+        (click)="copy(altEmail)"
+        [attr.aria-label]="ui.copy + ': ' + altEmail"
+      >
+        <app-icon [name]="copied() === altEmail ? 'check' : 'copy'" [size]="15" />
+      </button>
+    </p>
 
     <div class="socials" appReveal="260">
       <p class="mono socials__label">{{ ui.elsewhere }}</p>

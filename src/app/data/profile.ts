@@ -18,7 +18,10 @@ export const PERSON = {
   name: 'Amir Mohammad Iravani',
   shortName: 'Amir Iravani',
   initials: 'AI',
-  email: 'amirmohammad76@yahoo.com',
+  /** Main inbox (checked most often). */
+  email: 'amirmohammadir76@gmail.com',
+  /** Second inbox, also shown on the contact section. */
+  altEmail: 'amirmohammad76@yahoo.com',
   location: { en: 'Turin, Italy', it: 'Torino, Italia', fa: 'تورین، ایتالیا' } satisfies Localized,
   /** First professional work (game-dev internship) — drives the "years of experience" counter. */
   careerStart: 2013,
@@ -42,8 +45,8 @@ export const SOCIALS: readonly SocialLink[] = [
   {
     id: 'email',
     label: 'Email',
-    handle: 'amirmohammad76@yahoo.com',
-    url: 'mailto:amirmohammad76@yahoo.com',
+    handle: 'amirmohammadir76@gmail.com',
+    url: 'mailto:amirmohammadir76@gmail.com',
   },
 ];
 
@@ -384,6 +387,8 @@ export const PROJECTS: readonly Project[] = [
     featured: true,
     url: 'https://diarofficial.com',
     palette: ['#155A8A', '#D4B038'],
+    cover: 'images/projects/diar.webp',
+    coverAlign: 'right',
     tagline: {
       en: 'A community news platform with an AI newsroom that never sleeps.',
       it: 'Una piattaforma di notizie partecipativa con una redazione AI sempre attiva.',
@@ -398,12 +403,36 @@ export const PROJECTS: readonly Project[] = [
     stack: ['nextjs', 'react', 'typescript', 'node', 'sql'],
   },
   {
+    id: 'hera',
+    name: 'HERA Association',
+    year: '2026',
+    featured: true,
+    url: 'https://heraassociation.com',
+    palette: ['#112C39', '#A8492A'],
+    cover: 'images/projects/hera.webp',
+    coverAlign: 'right',
+    tagline: {
+      en: 'A ten-language home for a new research association on environment and displacement.',
+      it: 'Un sito in dieci lingue per una nuova associazione di ricerca su ambiente e migrazioni forzate.',
+      fa: 'خانه‌ای ده‌زبانه برای انجمنی پژوهشی تازه دربارهٔ محیط زیست و جابه‌جایی انسان‌ها.',
+    },
+    description: {
+      en: 'Website of HERA (Human, Environment, Resilience & Accountability), an independent, non-partisan Canadian not-for-profit that studies how environmental degradation drives human displacement. Persian-first static site in ten languages with full RTL, sourced statistics and photo credits, a membership form, smooth scrolling and scroll-driven motion — fast and accessible on plain shared hosting.',
+      it: 'Il sito di HERA (Human, Environment, Resilience & Accountability), associazione canadese non-profit, indipendente e apartitica, che studia come il degrado ambientale spinga le persone a lasciare la propria terra. Sito statico in dieci lingue con il persiano come lingua principale, RTL completo, statistiche e foto con fonti, modulo di adesione, scorrimento fluido e animazioni legate allo scroll: veloce e accessibile anche su un normale hosting condiviso.',
+      fa: 'وب‌سایت انجمن هرا (انسان، محیط زیست، تاب‌آوری و پاسخ‌گویی)، نهادی غیرانتفاعی، مستقل و غیرحزبی در کانادا که بررسی می‌کند تخریب محیط زیست چگونه انسان‌ها را به جابه‌جایی وادار می‌کند. سایتی ایستا و ده‌زبانه با محوریت فارسی، پشتیبانی کامل راست‌به‌چپ، آمار و عکس‌های مستند به منبع، فرم عضویت، اسکرول نرم و انیمیشن‌های وابسته به اسکرول؛ سریع و دسترس‌پذیر حتی روی هاست اشتراکی ساده.',
+    },
+    role: { en: 'Design & build', it: 'Design e sviluppo', fa: 'طراحی و توسعه' },
+    stack: ['typescript', 'javascript', 'html-css', 'ux'],
+  },
+  {
     id: 'gharamatgate',
     name: 'Gharamatgate',
     year: '2025',
     featured: true,
     url: 'https://www.gharamatgate.com',
     palette: ['#8B1E1E', '#C9A227'],
+    cover: 'images/projects/gharamatgate.webp',
+    coverAlign: 'right',
     tagline: {
       en: 'An open investigative archive of the Iran–US compensation cases.',
       it: 'Un archivio investigativo aperto sui casi di risarcimento tra Iran e Stati Uniti.',
@@ -427,7 +456,9 @@ export const PROJECTS: readonly Project[] = [
     name: 'Tulero',
     year: '2023–24',
     featured: true,
+    url: 'https://tulero.it',
     palette: ['#E4002B', '#1F2937'],
+    cover: 'images/projects/tulero.webp',
     tagline: {
       en: 'A B2B marketplace that puts half a million car parts one search away.',
       it: 'Un marketplace B2B che mette mezzo milione di ricambi a portata di ricerca.',
@@ -511,8 +542,11 @@ export const PROJECTS: readonly Project[] = [
     id: 'portfolio',
     name: 'This Portfolio',
     year: '2026',
+    url: 'https://amir-iravani.it',
     repo: 'https://github.com/amirdirv/amir-iravani-portfolio',
     palette: ['#FF2E63', '#FFB300'],
+    cover: 'images/projects/portfolio.webp',
+    coverAlign: 'left',
     tagline: {
       en: 'Angular 22, zoneless, signals all the way down — in three languages.',
       it: 'Angular 22, zoneless, signal ovunque — in tre lingue.',

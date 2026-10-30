@@ -23,7 +23,14 @@
       </p>
     </header>
 
-    <app-project-cover class="cover card" [id]="p.id" [palette]="p.palette" />
+    <app-project-cover
+      class="cover card"
+      [id]="p.id"
+      [palette]="p.palette"
+      [image]="p.cover"
+      [align]="p.coverAlign ?? 'center'"
+      [eager]="true"
+    />
 
     <div class="layout">
       <section class="body" aria-labelledby="overview-title">

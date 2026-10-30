@@ -381,6 +381,7 @@ export const UI = {
     send: { en: 'Compose email', it: 'Scrivi l’email', fa: 'نوشتن ایمیل' },
     copy: { en: 'Copy address', it: 'Copia indirizzo', fa: 'کپی نشانی' },
     copied: { en: 'Copied!', it: 'Copiato!', fa: 'کپی شد!' },
+    altEmail: { en: 'Also', it: 'Anche', fa: 'یا' },
     subject: {
       en: 'Hello from your portfolio',
       it: 'Ciao dal tuo portfolio',

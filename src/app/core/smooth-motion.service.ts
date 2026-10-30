@@ -104,7 +104,7 @@ export class SmoothMotionService {
         gsap.to(visual, { yPercent: 8, scale: 0.94, ease: 'none', scrollTrigger: { ...trigger } });
     }
 
-    // Project covers drift a little inside their cards (parallax depth).
+    // Generative covers drift a little inside their cards (parallax depth).
     // Scaled up slightly so the moving art never shows an empty edge.
     for (const cover of this.document.querySelectorAll<SVGElement>('.project__cover > svg')) {
       gsap.fromTo(
@@ -115,6 +115,20 @@ export class SmoothMotionService {
           scale: 1.1,
           ease: 'none',
           scrollTrigger: { trigger: cover, start: 'top bottom', end: 'bottom top', scrub: 0.8 },
+        },
+      );
+    }
+
+    // Screenshots settle from a slight zoom as they scroll in. The zoom is anchored
+    // to the kept top corner, so the site's header and logo never get cropped.
+    for (const shot of this.document.querySelectorAll<HTMLImageElement>('.project__cover > img')) {
+      gsap.fromTo(
+        shot,
+        { scale: 1.07, transformOrigin: getComputedStyle(shot).objectPosition || 'top center' },
+        {
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: shot, start: 'top bottom', end: 'center center', scrub: 0.8 },
         },
       );
     }

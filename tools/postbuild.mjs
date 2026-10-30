@@ -73,7 +73,7 @@ const llms = `# Amir Iravani
 
 Amir Mohammad Iravani is a front-end engineer based in Turin (Torino), Italy, with over ten years of experience building web interfaces, mainly with Angular, as well as React and Vue. He has worked as a sole front-end developer on a B2B marketplace, as a CTO, and as co-founder of a web agency, and has built startup MVPs. He speaks Persian (native), English (C1) and Italian (B1), and holds an unrestricted Italian work permit for full-time roles.
 
-The site is available in English (root), Italian (/it) and Persian (/fa). Contact: amirmohammad76@yahoo.com.
+The site is available in English (root), Italian (/it) and Persian (/fa). Contact: amirmohammadir76@gmail.com (also amirmohammad76@yahoo.com).
 
 ## Pages
 

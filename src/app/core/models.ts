@@ -54,6 +54,10 @@ export interface Project {
   readonly experience?: string;
   /** Two CSS colours used for the card's generative cover. */
   readonly palette: readonly [string, string];
+  /** Screenshot of the live site's homepage (5:3); replaces the generative cover when set. */
+  readonly cover?: string;
+  /** Which edge of the screenshot to keep when a card crops it (logo side of RTL sites). */
+  readonly coverAlign?: 'left' | 'center' | 'right';
   readonly featured?: boolean;
 }
 

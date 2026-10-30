@@ -19,13 +19,18 @@ import { copyText } from '../../shared/clipboard';
 export class Contact {
   protected readonly i18n = inject(I18nService);
   protected readonly email = PERSON.email;
+  /** Split so a long address can only wrap before the "@", never mid-domain. */
+  protected readonly emailUser = PERSON.email.split('@')[0];
+  protected readonly emailDomain = PERSON.email.split('@')[1];
+  protected readonly altEmail = PERSON.altEmail;
   protected readonly socials = SOCIALS.filter((s) => s.id !== 'email');
 
   protected readonly name = signal('');
   protected readonly company = signal('');
   protected readonly message = signal('');
   protected readonly error = signal(false);
-  protected readonly copied = signal(false);
+  /** Address that was just copied (drives the "Copied!" feedback). */
+  protected readonly copied = signal<string | null>(null);
 
   protected send(event: Event): void {
     event.preventDefault();
@@ -42,10 +47,10 @@ export class Contact {
     window.location.href = `mailto:${this.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
-  protected async copy(): Promise<void> {
-    if (await copyText(this.email)) {
-      this.copied.set(true);
-      setTimeout(() => this.copied.set(false), 1800);
+  protected async copy(address: string = this.email): Promise<void> {
+    if (await copyText(address)) {
+      this.copied.set(address);
+      setTimeout(() => this.copied.set(null), 1800);
     }
   }
 }

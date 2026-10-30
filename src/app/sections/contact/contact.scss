@@ -19,10 +19,10 @@
 
 .email__address {
   font-family: var(--f-display);
-  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-size: clamp(1.1rem, 2.3vw, 1.7rem);
   font-weight: 600;
   text-decoration: none;
-  word-break: break-all;
+  overflow-wrap: anywhere;
   direction: ltr;
 }
 
@@ -40,6 +40,56 @@
   &:hover {
     color: var(--c-text);
     border-color: var(--c-line-strong);
+  }
+}
+
+.email-alt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin: 14px 0 0;
+  font-size: 15px;
+  color: var(--c-muted);
+}
+
+.email-alt__label {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.email-alt__address {
+  direction: ltr;
+  color: var(--c-text);
+  text-decoration: none;
+  word-break: break-all;
+  border-bottom: 1px solid var(--c-line);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: var(--c-line-strong);
+  }
+}
+
+.email-alt__copy {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--c-line);
+  border-radius: 50%;
+  background: var(--c-surface);
+  color: var(--c-muted);
+
+  &:hover {
+    color: var(--c-text);
+    border-color: var(--c-line-strong);
+  }
+
+  @media (pointer: coarse) {
+    width: 44px;
+    height: 44px;
   }
 }
 
