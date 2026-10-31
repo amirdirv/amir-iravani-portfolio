@@ -317,3 +317,11 @@
     transform: translateY(4px);
   }
 }
+
+/* Phones: the orbit rings stand still (decorative; saves the GPU work of two large rotating layers). */
+@media (hover: none), (pointer: coarse) {
+  .orbit__ring {
+    animation: none;
+    will-change: auto;
+  }
+}

@@ -78,7 +78,7 @@ let uid = 0;
         transform: scale(0);
         animation:
           rise 0.6s 0.9s var(--ease-spring) forwards,
-          pulse 3.2s 1.6s ease-in-out infinite;
+          pulse 3.2s 1.6s ease-in-out 4;
       }
     }
     @keyframes draw {

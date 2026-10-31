@@ -129,7 +129,7 @@
   .row--head & {
     background: var(--c-rose);
     box-shadow: 0 0 0 6px color-mix(in srgb, var(--c-rose) 20%, transparent);
-    animation: beat 2.4s ease-in-out infinite;
+    animation: beat 2.4s ease-in-out 5;
   }
 
   .row--merge & {
