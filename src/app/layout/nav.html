@@ -29,7 +29,7 @@
       class="kbd-btn"
       type="button"
       (click)="commands.openPalette()"
-      [attr.aria-label]="i18n.ui().common.commandHint"
+      [attr.aria-label]="modKey + ' K, ' + i18n.ui().common.commandHint"
     >
       <app-icon name="command" [size]="16" />
       <span class="kbd-btn__label mono">{{ modKey }} K</span>

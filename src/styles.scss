@@ -10,6 +10,7 @@
   /* Brand */
   --c-rose: #ff2e63;
   --c-violet: #8b5cf6;
+  --c-violet-ink: #9670f8; /* violet for small text: 4.5:1 on dark surfaces */
   --c-sun: #ffb300;
   --c-teal: #14d3b8;
   --grad-brand: linear-gradient(120deg, var(--c-rose), var(--c-violet) 55%, var(--c-sun));
@@ -23,7 +24,7 @@
   --c-line-strong: rgb(255 255 255 / 0.22);
   --c-text: #f4f2ee;
   --c-muted: #a4a3b2;
-  --c-faint: #6c6b7c;
+  --c-faint: #807f91;
   --c-tile: #0b0b14;
   --c-glow: rgb(139 92 246 / 0.35);
   --shadow-lg: 0 30px 80px -20px rgb(0 0 0 / 0.6);
@@ -56,10 +57,11 @@
   --c-line-strong: rgb(20 18 40 / 0.22);
   --c-text: #14121f;
   --c-muted: #55536a;
-  --c-faint: #8b899c;
+  --c-faint: #6b697d;
   --c-tile: #14121f;
   --c-rose: #e5194f;
   --c-violet: #6d3ff0;
+  --c-violet-ink: #6d3ff0;
   --c-sun: #e09a00;
   --c-teal: #0a9e8a;
   --c-glow: rgb(109 63 240 / 0.2);

@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  computed,
   Component,
   ElementRef,
   afterNextRender,
@@ -22,7 +23,17 @@ import { ThemeService } from '../../core/theme.service';
   // Focusable so keyboard users can "develop" the photo too; the <img> carries the alt text.
   host: { '[class.is-ready]': 'ready()', tabindex: '0' },
   template: `
-    <img [src]="src()" [alt]="alt()" width="800" height="800" loading="lazy" decoding="async" />
+    <img
+      #photo
+      [src]="src()"
+      [attr.srcset]="srcset()"
+      sizes="(max-width: 900px) min(100vw, 340px), 460px"
+      [alt]="alt()"
+      width="800"
+      height="800"
+      loading="lazy"
+      decoding="async"
+    />
     <canvas #canvas aria-hidden="true"></canvas>
   `,
   styles: `
@@ -73,22 +84,30 @@ export class HalftonePortrait {
   readonly src = input.required<string>();
   readonly alt = input('');
 
+  // A 480px copy sits next to each WebP portrait; the browser picks the size it needs.
+  protected readonly srcset = computed(() => {
+    const s = this.src();
+    return s.endsWith('.webp') ? `${s.replace(/\.webp$/, '-480.webp')} 480w, ${s} 800w` : null;
+  });
+
   protected readonly ready = signal(false);
   private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  private readonly photo = viewChild.required<ElementRef<HTMLImageElement>>('photo');
   private readonly theme = inject(ThemeService);
   private cells: { x: number; y: number; r: number; t: number }[] = [];
   private readonly grid = 46;
 
   constructor() {
+    // Sample the dots from the visible <img> itself, so the photo is downloaded only once.
     afterNextRender(() => {
-      const img = new Image();
-      img.decoding = 'async';
-      img.onload = () => {
+      const img = this.photo().nativeElement;
+      const start = () => {
         this.cells = this.sample(img);
         this.draw();
         this.ready.set(true);
       };
-      img.src = this.src();
+      if (img.complete && img.naturalWidth) start();
+      else img.addEventListener('load', start, { once: true });
     });
     effect(() => {
       this.theme.theme();
