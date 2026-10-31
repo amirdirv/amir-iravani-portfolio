@@ -34,10 +34,16 @@ export class Reveal implements OnDestroy {
 
   constructor() {
     afterNextRender(() => {
-      const node = this.el.nativeElement;
       if (typeof IntersectionObserver === 'undefined') return;
-      if (node.getBoundingClientRect().top < window.innerHeight) return;
+      enqueue(this);
+    });
+  }
 
+  /** Called by the batch below with this element's position (read for all elements in one layout pass). */
+  arm(belowFold: boolean): void {
+    if (!belowFold) return;
+    {
+      const node = this.el.nativeElement;
       const restore = this.words() ? this.splitWords(node) : null;
       node.classList.add('reveal');
       if (restore) node.classList.add('reveal--words');
@@ -52,12 +58,20 @@ export class Reveal implements OnDestroy {
         { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
       );
       this.observer.observe(node);
-    });
+    }
+  }
+
+  /** The element, for the batch's layout read. */
+  get node(): HTMLElement {
+    return this.el.nativeElement;
   }
 
   ngOnDestroy(): void {
+    this.destroyed = true;
     this.observer?.disconnect();
   }
+
+  destroyed = false;
 
   /**
    * Wraps each word of the element's text nodes in a span. Returns a function
@@ -96,4 +110,21 @@ export class Reveal implements OnDestroy {
       node.classList.remove('reveal--words');
     };
   }
+}
+
+// Every reveal on the page is set up in one batch: all positions are read first (one layout pass), then the
+// hiding classes are written. Reading and writing per element would force a layout for each heading and card.
+const queue: Reveal[] = [];
+let scheduled = false;
+function enqueue(reveal: Reveal): void {
+  queue.push(reveal);
+  if (scheduled) return;
+  scheduled = true;
+  requestAnimationFrame(() => {
+    scheduled = false;
+    const items = queue.splice(0).filter((r) => !r.destroyed);
+    const fold = window.innerHeight;
+    const below = items.map((r) => r.node.getBoundingClientRect().top >= fold);
+    items.forEach((r, i) => r.arm(below[i]!));
+  });
 }

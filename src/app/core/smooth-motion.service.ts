@@ -48,6 +48,16 @@ export class SmoothMotionService {
     )
       return;
     this.started = true;
+    // Phones and tablets keep their native touch scrolling: they never download or run Lenis/GSAP.
+    if (!win.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    // Wait until the page has loaded and the main thread is idle, so motion never delays the first paint.
+    await new Promise<void>((resolve) => {
+      const idle = (win as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number })
+        .requestIdleCallback;
+      const go = () => (idle ? idle(() => resolve(), { timeout: 2000 }) : setTimeout(resolve, 300));
+      if (this.document.readyState === 'complete') go();
+      else win.addEventListener('load', go, { once: true });
+    });
 
     const [{ default: LenisCtor }, { gsap }, { ScrollTrigger }] = await Promise.all([
       import('lenis'),

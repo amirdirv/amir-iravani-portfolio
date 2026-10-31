@@ -96,6 +96,17 @@ function sampleMonogram(density: number): { x: number; y: number; sun: boolean }
       width: 100%;
       height: 100%;
     }
+    @media not ((hover: hover) and (pointer: fine)) {
+      canvas {
+        animation: monogram-in 1s 0.2s var(--ease-out, ease-out) both;
+      }
+    }
+    @keyframes monogram-in {
+      from {
+        opacity: 0;
+        transform: scale(0.94);
+      }
+    }
   `,
 })
 export class ParticleMonogram {
@@ -111,6 +122,7 @@ export class ParticleMonogram {
   private dpr = 1;
   private frame = 0;
   private visible = true;
+  private started = false;
 
   constructor() {
     afterNextRender(() => this.init());
@@ -127,7 +139,11 @@ export class ParticleMonogram {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const win = window;
-    const reduced = prefersReducedMotion();
+    // Touch devices get the finished monogram at once (with a CSS fade): the fly-in costs a phone's CPU
+    // seconds of work during page load. Mouse users keep the full animation and the pointer repel.
+    const reduced =
+      prefersReducedMotion() ||
+      (typeof win.matchMedia === 'function' && !win.matchMedia('(hover: hover) and (pointer: fine)').matches);
     this.readColors();
 
     const resize = () => {
@@ -139,27 +155,49 @@ export class ParticleMonogram {
       ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
       this.layout(reduced);
       if (reduced) this.draw(ctx);
+      else if (this.started && this.visible && !this.frame) this.loop(ctx);
     };
     const ro = new ResizeObserver(resize);
     ro.observe(this.host.nativeElement);
 
+    // The loop sleeps once the monogram has settled; the pointer wakes it up again.
+    const wake = () => {
+      if (this.started && this.visible && !reduced && !this.frame) this.loop(ctx);
+    };
     const onMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       this.pointer = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      wake();
     };
-    const onLeave = () => (this.pointer = { x: -9999, y: -9999 });
+    const onLeave = () => {
+      this.pointer = { x: -9999, y: -9999 };
+      wake();
+    };
     canvas.addEventListener('pointermove', onMove);
     canvas.addEventListener('pointerleave', onLeave);
 
     const io = new IntersectionObserver(([entry]) => {
       this.visible = !!entry?.isIntersecting;
-      if (this.visible && !reduced && !this.frame) this.loop(ctx);
+      wake();
     });
     io.observe(canvas);
+
+    // The fly-in starts once the page has loaded and the main thread is free, so it never competes with the
+    // first paint or the first tap.
+    const begin = () => {
+      this.started = true;
+      wake();
+    };
+    const idle = (win as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number })
+      .requestIdleCallback;
+    const schedule = () => (idle ? idle(begin, { timeout: 1500 }) : setTimeout(begin, 200));
+    if (document.readyState === 'complete') schedule();
+    else win.addEventListener('load', schedule, { once: true });
 
     this.destroyRef.onDestroy(() => {
       ro.disconnect();
       io.disconnect();
+      win.removeEventListener('load', schedule);
       cancelAnimationFrame(this.frame);
       canvas.removeEventListener('pointermove', onMove);
       canvas.removeEventListener('pointerleave', onLeave);
@@ -200,6 +238,7 @@ export class ParticleMonogram {
       return;
     }
     const repel = this.size * 0.16;
+    let motion = 0;
     for (const p of this.particles) {
       const dx = p.x - this.pointer.x;
       const dy = p.y - this.pointer.y;
@@ -216,22 +255,39 @@ export class ParticleMonogram {
       p.vy *= 0.86;
       p.x += p.vx;
       p.y += p.vy;
+      motion = Math.max(motion, Math.abs(p.vx) + Math.abs(p.vy), Math.abs(p.tx - p.x) + Math.abs(p.ty - p.y));
     }
     this.draw(ctx);
+    // Settled (every particle home, nothing moving): stop until the pointer or a resize wakes it.
+    if (motion < 0.05) {
+      this.frame = 0;
+      return;
+    }
     this.frame = requestAnimationFrame(() => this.loop(ctx));
   }
 
   private draw(ctx: CanvasRenderingContext2D): void {
     ctx.clearRect(0, 0, this.size, this.size);
     const { rose, violet, sun } = this.colors;
+    // One path per colour instead of one fill per particle (a few dozen fills instead of hundreds).
+    const groups = new Map<string, Particle[]>();
     for (const p of this.particles) {
-      ctx.fillStyle = p.sun
+      const color = p.sun
         ? sun
         : p.hue < 0.5
           ? mix(rose, violet, p.hue / 0.5)
           : mix(violet, sun, (p.hue - 0.5) / 0.5);
+      let list = groups.get(color);
+      if (!list) groups.set(color, (list = []));
+      list.push(p);
+    }
+    for (const [color, list] of groups) {
+      ctx.fillStyle = color;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      for (const p of list) {
+        ctx.moveTo(p.x + p.size, p.y);
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      }
       ctx.fill();
     }
   }
