@@ -58,7 +58,10 @@ ErrorDocument 404 /404.html
   Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
   # Scripts only from this site. The host injects a third-party tracker (img1.wsimg.com/…/tccl.min.js) into every
   # page; it blocked rendering for ~0.8 s on phones and is not ours. Inline scripts (theme, Angular events) stay.
-  Header always set Content-Security-Policy "script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'"
+  # Everything else (styles, images, fonts, requests) also only from this site; no framing by other sites, no plugins.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header unset X-Powered-By
 
   # Hashed bundles never change → cache for a year; HTML always revalidates.
   <FilesMatch "^(chunk|main|styles|polyfills)-[A-Za-z0-9_-]{8}\.(js|css)$">
