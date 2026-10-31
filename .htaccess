@@ -56,6 +56,9 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+  # Scripts only from this site. The host injects a third-party tracker (img1.wsimg.com/…/tccl.min.js) into every
+  # page; it blocked rendering for ~0.8 s on phones and is not ours. Inline scripts (theme, Angular events) stay.
+  Header always set Content-Security-Policy "script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'"
 
   # Hashed bundles never change → cache for a year; HTML always revalidates.
   <FilesMatch "^(chunk|main|styles|polyfills)-[A-Za-z0-9_-]{8}\.(js|css)$">
